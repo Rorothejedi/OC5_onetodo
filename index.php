@@ -1,16 +1,11 @@
 <?php
 
 	//Autoloader loading
-	require 'model/router/RouterAutoloader.php';
-	RouterAutoloader::register();
-
-	function __autoload($class_name)
-	{
-	    require('./model/routeur/' . $class_name . '.php'); 
-	}
+	require 'model/Autoloader.php';
+	Autoloader::register();
 
 	$router = new Router($_GET['url']);
-	$router->get('/', function(){ echo "Homepage"; });
+	$router->get('/', "Public#displayHome");
 	$router->get('/dashboard', function(){ echo "Dashboard"; });
 
 
