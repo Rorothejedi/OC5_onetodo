@@ -1,5 +1,9 @@
 <?php 
 
+/**
+ * Class Autoloader
+ * Charge les fichiers correspondant aux différentes class lorsque celle-ci sont appellée
+ */
 class Autoloader
 {
     static function register()

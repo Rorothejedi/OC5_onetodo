@@ -1,5 +1,9 @@
 <?php 
 
+/**
+ * Class ControllerPublic
+ * Controller qui gère les views et les models de la partie public du site (page d'accueil, de connexion, d'inscription et les mentions légales) 
+ */
 class ControllerPublic
 {
 	public function displayHome()

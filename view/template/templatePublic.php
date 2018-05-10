@@ -69,14 +69,40 @@ Dernière mise à jour : 09/05/2018
 
 <body>
 
+	<header id="top" class="topHome">
+
+		<nav class="navbar navbar-light bg-light justify-content-around fixed-top public_navbar">
+			<a class="navbar-brand" href="./">
+				<img class="logoHome" src="./public/img/logo.png" alt="" height="64px" width="200px" srcset="./public/img/logo.svg">
+			</a>
+			<div class="btn-group">
+				<a href="connexion" class="btn btn-outline-secondary">Se connecter</a>
+			    <a href="inscription" class="btn btn-dark">Créer un compte</a>
+			</div>
+		</nav>
+
 	<?php 
 		echo $content;
 		include('alerts.php');
 	?>
+
+	<footer class="public_footer">
+		<div class="footer_element"></div>
+		<div class="footer_content">
+			<div class="container">
+				<div class="d-flex justify-content-between">
+					<a href="mentions_legales">Mentions légales</a>
+					<a href="https://www.linkedin.com/in/rodolphe-cabotiau-234824132/">Make with <i class="fas fa-heart"></i></a>
+					<a href="https://github.com/Rorothejedi/projet_5_openclassrooms">Venez contribuer au projet !</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
 	<!-- Scroll to top button -->
-	<a href="#top" class="top d-none d-md-block">
+	<!-- <a href="#top" class="top d-none d-md-block">
 		<i class="fas fa-arrow-circle-up fa-3x hidden"></i>
-	</a>
+	</a> -->
 
 	<!-- Call to CDN -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

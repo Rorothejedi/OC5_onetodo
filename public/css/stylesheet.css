@@ -1,0 +1,60 @@
+/*Colors used
+
+#222222 : Raisin Black
+#363636 : Jet
+#E8E8E8 : Platinum
+#4B9857 : Middle Green
+#306BA2 : Lapis Lazuli
+*/
+
+/*Test*/
+
+section {
+	min-height: 750px;
+	background-color: #e8e8e8;
+}
+/*------------------------------------------   Common   -------------------------------------------------*/
+.h1_title {
+	padding-top: 70px;
+	padding-bottom: 40px;
+}
+
+
+
+/*------------------------------------------   Homepage   -------------------------------------------------*/
+
+.public_navbar {
+	height: 80px;
+}
+.navbar-brand {
+	padding: 0px;	
+}
+.topHome {
+	background-color: #363636;  /* fallback for old browsers */
+    height: 750px;
+    margin-top: 80px;
+}
+/*Footer*/
+.footer_element {
+	background-color: #306ba2;
+	height: 60px;
+}
+.footer_content {
+	background-color: #222222;
+	height: 250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+/*---------------------------------------   Legal notice page   -------------------------------------------------*/
+
+.notice_content {
+	text-align: justify;
+}
+.notice_content h3 {
+	padding-top: 40px;
+}
+.notice_content:last-child {
+	padding-bottom: 120px;
+}

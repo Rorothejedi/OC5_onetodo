@@ -1,8 +1,11 @@
 <?php
 
+/**
+ * Class Route
+ * Permet de gérer le routage des url et l'appel aux différents controller
+ */
 class Route 
 {
-
 	private $path;
 	private $callable;
 	private $matches = [];
