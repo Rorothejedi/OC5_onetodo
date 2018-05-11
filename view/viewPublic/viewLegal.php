@@ -1,6 +1,7 @@
 <?php 
-	$title       = 'OneToDo | Mentions légales';
-	$current_url = './';
+	$title        = 'OneToDo | Mentions légales';
+	$header_class = 'topHome';
+	$current_url  = './';
 	ob_start();
 ?>
 
@@ -19,7 +20,7 @@
 					Le responsable publication est une personne physique.<br>
 					<strong>Webmaster</strong> : Rodolphe Cabotiau – rodolphe.cabotiau@gmail.com<br>
 					<strong>Hébergeur</strong> : PHPNET – 97-97 bis rue du Général Mangin 38100 GRENOBLE<br>
-					Le modèle de mentions légales est offert par Subdelirium.com <a target="_blank" href="https://www.subdelirium.com/generateur-de-mentions-legales/">Mentions légales</a></p>
+					Le modèle de mentions légales est offert par <a target="_blank" href="https://www.subdelirium.com/generateur-de-mentions-legales/">Subdelirium.com</a></p>
 				</div>
 				<div>
 					<h3>2. Conditions générales d’utilisation du site et des services proposés</h3>

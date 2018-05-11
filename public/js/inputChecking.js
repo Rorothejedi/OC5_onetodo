@@ -1,8 +1,7 @@
 function checkPseudo(input, text)
 {
-	input.change(function()
+	input.on('input', function()
 	{
-
 		if ($(this).val().length >= 2 && $(this).val().length <= 25)
 		{
 			$(this).addClass('is-valid').removeClass('is-invalid');
@@ -13,7 +12,6 @@ function checkPseudo(input, text)
 			$(this).addClass('is-invalid').removeClass('is-valid');
 			text.removeClass('text-muted').addClass('text-danger').removeClass('text-success');
 		}
-
 	});
 }
 
@@ -21,7 +19,7 @@ function checkEmail(input, text)
 {
 	var regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
-	input.change(function()
+	input.on('input', function()
 	{
 		if (regex.test(input.val()))
 		{
@@ -33,7 +31,6 @@ function checkEmail(input, text)
 			$(this).addClass('is-invalid').removeClass('is-valid');
 			text.removeClass('text-muted').addClass('text-danger').removeClass('text-success');
 		}
-
 	});
 }
 
@@ -41,7 +38,7 @@ function checkPass(input, confirmInput, text)
 {
 	var regex = /^(?:\d+[a-z]|[a-z]+\d)[a-z\d]*$/;
 
-	input.change(function()
+	input.on('input', function()
 	{
 		if ($(this).val().length >= 8 && regex.test(input.val()))
 		{
@@ -57,7 +54,7 @@ function checkPass(input, confirmInput, text)
 		}
 	});
 
-	confirmInput.change(function() 
+	confirmInput.on('input', function() 
 	{
 		if (input.val() === confirmInput.val()) 
 		{
@@ -74,6 +71,6 @@ function checkPass(input, confirmInput, text)
 	});
 }
 
-checkPseudo($('#pseudo'), $('.small-pseudo'));
-checkEmail($('#email'), $('.small-email'));
-checkPass($('#password'), $('#confirmPassword'), $('.small-pass'));
+checkPseudo($('#username'), $('.small_username'));
+checkEmail($('#email'), $('.small_email'));
+checkPass($('#password'), $('#confirm_password'), $('.small_pass'));

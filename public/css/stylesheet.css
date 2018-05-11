@@ -10,19 +10,39 @@
 /*Test*/
 
 section {
-	min-height: 750px;
-	background-color: #e8e8e8;
+	width: 100%;
+	height: 1500px;
+	background-color: #E8E8E8;
 }
+
 /*------------------------------------------   Common   -------------------------------------------------*/
+
+@font-face {
+	font-family: "Waterlily";
+	src: url('../fonts/Waterlily.ttf') format("truetype");
+	font-weight: normal;
+	font-style : normal;
+}
+
+.hidden {
+	display: none;
+}
 .h1_title {
 	padding-top: 70px;
 	padding-bottom: 40px;
 }
-
-
+a.top {
+   	position: fixed;
+   	bottom: 30px;
+   	right: 20px;
+   	color: #306BA2;
+}
 
 /*------------------------------------------   Homepage   -------------------------------------------------*/
 
+#top {
+	margin-top: 80px;
+}
 .public_navbar {
 	height: 80px;
 }
@@ -30,9 +50,8 @@ section {
 	padding: 0px;	
 }
 .topHome {
-	background-color: #363636;  /* fallback for old browsers */
+	background-color: #363636;
     height: 750px;
-    margin-top: 80px;
 }
 /*Footer*/
 .footer_element {
@@ -57,4 +76,142 @@ section {
 }
 .notice_content:last-child {
 	padding-bottom: 120px;
+}
+
+/*-----------------------------------   Connection/Registration page   ------------------------------------------*/
+
+.section_connection {
+	height: auto;
+}
+.section_connection h1 {
+	padding-top: 110px;
+}
+.section_connection label:first-child {
+	padding-top: 10px;
+}
+.section_connection button:last-child {
+	margin: 35px 0 120px 0;
+}
+.section_connection input[type="text"], input[type="email"], input[type="password"]  {
+	height: 42px;
+}
+
+/*---------------------------------------------   Dashboard   ---------------------------------------------------*/
+
+.nav-item {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 60px;
+}
+.navbar_private {
+	padding-top: 0;
+	height: 55px;
+	color: white;
+	background-color: #222222;				/*<--- First Color*/
+}
+.logoDashboard {
+	font-family: 'Waterlily', sans-serif;
+	color: #E8E8E8 !important;
+	font-size: 1.5em;
+}
+.fa-layers, .fa-user-circle, .fa-plus {
+	font-size: 28px;
+}
+.logoDashboard, .fa-plus, .fa-layers, .fa-user-circle {
+	transition: color 0.2s;
+}
+.logoDashboard:hover, .fa-plus:hover, .fa-layers:hover, .fa-user-circle:hover, .dropdown-item:hover {
+	color : #306BA2 !important;				/*<--- Third Color*/
+}
+.fa-layers-counter {
+	font-size: 35px;
+	background: #306BA2;
+}
+
+.navbar-nav > li > .dropdown-menu { 
+	background-color: #222222;				/*<--- First Color*/
+	margin-top: 3px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+.dropdown-toggle {
+	color : #E8E8E8 !important;
+}
+.fa-layers, .fa-plus {
+	color: #E8E8E8;
+}
+.dropdown-toggle::after {
+    display:none
+}
+/*Sidebar*/
+.wrapper {
+	display: flex;
+}
+#sidebar {
+	position: fixed;
+    top: 0;
+    left: 0;
+	margin-top: 55px;
+	min-width: 250px;
+    max-width: 250px;
+	height: calc(100vh - 55px);
+	background-color: #363636;				/*<--- Second Color*/
+	transition: margin 0.3s;
+}
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #363636;
+}
+
+#sidebar ul li a {
+	color: #E8E8E8;
+    padding: 10px 20px;
+    font-size: 1em;
+    display: block;
+}
+#sidebar.active {
+    margin-left: -250px;
+}
+/*Animation for caret icon*/
+.rotate.down {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+#content {
+    width: 100%;
+    padding: 40px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#content.active {
+    width: calc(100% - 250px);
+}
+
+@media (max-width: 768px) {
+  
+    .fa-layers, .fa-user-circle, .fa-plus {
+		font-size: 22px;
+	}
+	.nav-item {
+		width: 40px;
+	}
+	.logoDashboard {
+		display: none;
+	}
+}
+
+button:active, button:focus {
+  	outline: 0;
+  	border: none;
+  	-moz-outline-style: none
+}
+a:hover, a:focus {
+    text-decoration: none;
 }

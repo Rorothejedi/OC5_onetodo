@@ -1,5 +1,6 @@
 <?php 
 	$title = 'OneToDo | Gérez vos projets en toute simplicité !';
+	$header_class = 'topHome';
 	ob_start();
 ?>
 
@@ -17,7 +18,9 @@
 
 	</header>
 
-	<section></section>
+	<section>
+		<p><a href="dashboard">Tableau de bord</a></p>
+	</section>
 
 	
 
