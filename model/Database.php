@@ -2,7 +2,7 @@
 
 /**
  * Class Database
- * Permet la connexion à la base de données
+ * Permet la connexion à la base de données et l'exécution des requêtes de type query et prepare
  */
 class Database
 {
@@ -32,6 +32,11 @@ class Database
 		return $pdo;
 	}
 
+	/**
+	 * Permet d'effectuer une requête de type query et de renvoyer le résultat sous forme de tableau.
+	 * @param  string $request Requête à effectuer dans la base de données.
+	 * @return array           Tableau contenant les résultats de la requête.
+	 */
 	public function query($request)
 	{
 		$req = $this->getPDO()->query($request);
@@ -39,6 +44,13 @@ class Database
 		return $datas;
 	}
 
+	/**
+	 * Permet d'effectuer une requête de type prepare (qui permet de prévenir les failles XSS) et de renvoyer le résultat sous forme de tableau (fetch ou fetchAll).
+	 * @param  string  $request    Requête à effectuer dans la base de données.
+	 * @param  array   $attributes Attributs correspondants aux conditions de la requête.
+	 * @param  boolean $one        Par défaut, celui-ci est défini comme false, une fetchAll va alors être effectué sur le résultat de la requête. Lorsque celui-ci est true, c'est un fetch qui est effectué pour ne retourner que le premier résultat de la requête sous forme de tableau.
+	 * @return array               Tableau contenant les résultats de la requête (fetchAll) ou le premier résultat (fetch).
+	 */
 	public function prepare($request, $attributes, $one = false)
 	{
 		$req = $this->getPDO()->prepare($request);

@@ -44,7 +44,7 @@ class Route
 	public function with($param, $regex)
 	{
 	    $this->params[$param] = str_replace('(', '(?:', $regex);
-	    return $this; // On retourne tjrs l'objet pour enchainer les arguments
+	    return $this; // On retourne toujours l'objet pour enchainer les arguments
 	}
 
 	public function getUrl($params)

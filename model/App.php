@@ -2,7 +2,7 @@
 
 /**
  * Class App
- * Permet l'initialisation des constantes primaires de l'application
+ * Permet l'initialisation des constantes primaires de l'application (connexion à la base de données par exemple)
  */
 class App
 {

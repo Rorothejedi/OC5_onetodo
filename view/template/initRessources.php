@@ -1,4 +1,8 @@
 <?php 
+
+	/**
+	 * initRessources.php contient les varibales à intégrer aux templates. Celui-ci a pour but de centraliser tous les changements potentiels aux niveau des ressources visuels (css, favicon, etc), des CDN ou des appels aux scripts par exemple.
+	 */
 	
 	/*-----------------------------------   Medias and social networks --------------------------------------*/
 
