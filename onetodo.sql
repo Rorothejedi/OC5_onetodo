@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 10 mai 2018 à 11:55
+-- Généré le :  mar. 15 mai 2018 à 19:52
 -- Version du serveur :  10.1.30-MariaDB
 -- Version de PHP :  7.2.2
 
@@ -108,8 +108,17 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `confirm_register` tinyint(4) NOT NULL DEFAULT '0',
+  `token` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `confirm_register`, `token`) VALUES
+(1, 'Rorothejedi', 'rodolphe.cabotiau@laposte.com', '1324', 1, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -192,7 +201,7 @@ ALTER TABLE `todolist`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- Contraintes pour les tables déchargées
