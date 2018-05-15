@@ -1,5 +1,6 @@
 <?php 
-
+namespace App\model;
+use PDO;
 /**
  * Class Database
  * Permet la connexion à la base de données et l'exécution des requêtes de type query et prepare
@@ -24,12 +25,13 @@ class Database
 	{
 		if($this->pdo === null)
 		{
-			$pdo = new PDO('mysql:dbname=onetodo;host=localhost', 'root', '');
+			$pdo = new \PDO('mysql:dbname=onetodo;host=localhost', 'root', '');
+			// $pdo = new \PDO('mysql:dbname=' . $this->db_name . ';host=' . $this->db_host, $this->db_user, $this->db_pass);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->query("SET lc_time_names = 'fr_FR'");
 			$this->pdo = $pdo;
 		}
-		return $pdo;
+		return $this->pdo;
 	}
 
 	/**
@@ -37,11 +39,15 @@ class Database
 	 * @param  string $request Requête à effectuer dans la base de données.
 	 * @return array           Tableau contenant les résultats de la requête.
 	 */
-	public function query($request)
+	public function query($request, $fetch = false)
 	{
 		$req = $this->getPDO()->query($request);
-		$datas = $req->fetchAll(PDO::FETCH_OBJ);
-		return $datas;
+		if($fetch)
+		{
+			$data = $req->fetchAll(PDO::FETCH_OBJ);
+			$req->closeCursor(); 
+			return $data;
+		}
 	}
 
 	/**
@@ -51,19 +57,26 @@ class Database
 	 * @param  boolean $one        Par défaut, celui-ci est défini comme false, une fetchAll va alors être effectué sur le résultat de la requête. Lorsque celui-ci est true, c'est un fetch qui est effectué pour ne retourner que le premier résultat de la requête sous forme de tableau.
 	 * @return array               Tableau contenant les résultats de la requête (fetchAll) ou le premier résultat (fetch).
 	 */
-	public function prepare($request, $attributes, $one = false)
+	public function prepare($request, $attributes, $fetch = false, $one = false, $count = false)
 	{
 		$req = $this->getPDO()->prepare($request);
 		$req->execute($attributes);
-		if ($one) 
+		if($fetch)
 		{
-			$datas = $req->fetch(PDO::FETCH_OBJ);
+			if ($count)
+			{
+				$data = $req->rowCount();
+			}
+			elseif ($one) 
+			{
+				$data = $req->fetch(PDO::FETCH_OBJ);
+			}
+			else
+			{
+				$data = $req->fetchAll(PDO::FETCH_OBJ);
+			}
+			$req->closeCursor();
+			return $data;
 		}
-		else
-		{
-			$datas = $req->fetchAll(PDO::FETCH_OBJ);
-		}
-		return $datas;
 	}
-
 }

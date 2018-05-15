@@ -25,16 +25,19 @@
 
 	/*------------------------------------------   Head link   -------------------------------------------------*/
 
-	$linkBootstrapCSS = '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">';
+	$linkBootstrapCSS    = '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">';
 	
-	$linkFontAwesome  = '<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>';
+	$linkFontAwesome     = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">';
+	
+	$linkCustomScrollbar = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">';
 
 	//A définir !
 	$linkGoogleFont   = '';
 
 	// Development stylesheet and minify version
 	$stylesheet       = '<link href="./public/css/stylesheet.css" rel="stylesheet">'.
-						'<!-- <link href="./public/css/stylesheet.min.css" rel="stylesheet"> -->';
+						'<!-- <link href="./public/css/stylesheet.min.css" rel="stylesheet"> -->'.
+						'<link rel="stylesheet" href="./public/css/hamburger.css">';
 
 	$favicon          = '<!-- <link rel="shortcut icon" type="image/x-icon" href="./public/img/favicon.ico">  -->'.
 						'<!-- <link rel="icon" type="image/x-icon" href="./public/img/favicon.ico"> -->';
@@ -44,6 +47,7 @@
 	$cdnJQuery   = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>';
 	$cdnPopper   = '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>';
 	$cdnBoostrap = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>';
+	$cdnCustomScrollbar = '<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>';
 
 	/*------------------------------------   Javascript files  ------------------------------------------------*/
 
@@ -51,3 +55,4 @@
 	$scriptAlert         = '<script src="./public/js/alert.js"></script>';
 	$scriptInputChecking = '<script src="./public/js/inputChecking.js"></script>';
 	$scriptGlobal        = '<script src="./public/js/global.js"></script>';
+	$scriptSidebar		 = '<script src="./public/js/sidebar.js"></script>';

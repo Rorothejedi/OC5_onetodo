@@ -1,4 +1,5 @@
 <?php
+namespace App\model;
 
 /**
  * Class App

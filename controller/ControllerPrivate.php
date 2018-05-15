@@ -1,4 +1,5 @@
 <?php 
+namespace App\controller;
 
 /**
  * Class ControllerPrivate

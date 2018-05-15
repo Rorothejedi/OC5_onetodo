@@ -36,11 +36,11 @@ function checkEmail(input, text)
 
 function checkPass(input, confirmInput, text)
 {
-	var regex = /^(?:\d+[a-z]|[a-z]+\d)[a-z\d]*$/;
+	var regex = /^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/;
 
 	input.on('input', function()
 	{
-		if ($(this).val().length >= 8 && regex.test(input.val()))
+		if (regex.test(input.val()))
 		{
 			$(this).addClass('is-valid').removeClass('is-invalid');
 			confirmInput.addClass('is-valid').removeClass('is-invalid');

@@ -23,9 +23,14 @@ section {
 	font-weight: normal;
 	font-style : normal;
 }
-
 .hidden {
 	display: none;
+}
+.alert {
+	position: fixed;
+	top : 100px;
+	right: 40px;
+	max-width: 50%;
 }
 .h1_title {
 	padding-top: 70px;
@@ -94,6 +99,11 @@ a.top {
 }
 .section_connection input[type="text"], input[type="email"], input[type="password"]  {
 	height: 42px;
+}
+
+.section_confirm_registration {
+	padding: 250px 0;
+	min-height: auto;
 }
 
 /*---------------------------------------------   Dashboard   ---------------------------------------------------*/
@@ -171,6 +181,14 @@ a.top {
     padding: 10px 20px;
     font-size: 1em;
     display: block;
+    transition: background-color 0.1s;
+}
+#sidebar ul li {
+	list-style: none;
+
+}
+#sidebar ul li a:hover {
+	background-color: #306BA2; 	/*<--- Third Color*/
 }
 #sidebar.active {
     margin-left: -250px;
@@ -182,7 +200,8 @@ a.top {
     transform: rotate(180deg);
 }
 #content {
-    width: 100%;
+	width: calc(100% - 250px);
+    
     padding: 40px;
     min-height: 100vh;
     transition: all 0.3s;
@@ -191,7 +210,7 @@ a.top {
     right: 0;
 }
 #content.active {
-    width: calc(100% - 250px);
+    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -214,4 +233,27 @@ button:active, button:focus {
 }
 a:hover, a:focus {
     text-decoration: none;
+}
+
+/*Dashboard content*/
+
+.tiles_project {		
+	border-radius: 2px;
+	padding-bottom: 20px;
+	text-align: justify;
+}
+.tiles_project div {
+	background-color: #306BA2; 	/*<--- Third Color*/
+	color: white;
+	transition: opacity 0.2s;
+}
+.tiles_project div:hover {
+	opacity: 0.9;
+}
+.title_content {
+	color: #363636;
+	transition: opacity 0.2s;
+}
+.title_content:hover {
+	opacity: 0.7;
 }

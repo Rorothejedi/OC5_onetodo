@@ -21,7 +21,7 @@
 			if (count <= 0)
 			{
 			    clearInterval(counter);
-				document.location.href = "/projet_5_openclassrooms/";
+				document.location.href = "./";
 			 	return;
 			}
 			document.getElementById("timer").innerHTML = count;

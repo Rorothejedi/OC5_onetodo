@@ -1,28 +1,28 @@
 <?php
 
-if (!empty($_SESSION['alertSuccess'])) 
+if (!empty($_SESSION['alert_success'])) 
 {
 	echo '<div class="alert alert-success fade show" role="alert">' .
 
-		$_SESSION['alertSuccess'] . 
+		$_SESSION['alert_success'] . 
 
 		'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
+			<span aria-hidden="true">&times;</span>
+		</button>
 	</div>';
 
-	$_SESSION['alertSuccess'] = null;
+	$_SESSION['alert_success'] = null;
 } 
-elseif (!empty($_SESSION['alertFailure']))
+elseif (!empty($_SESSION['alert_failure']))
 {
 	echo '<div class="alert alert-danger fade show" role="alert">' .
 
-		$_SESSION['alertFailure'] . 
+		$_SESSION['alert_failure'] . 
 
 		'<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
+			<span aria-hidden="true">&times;</span>
+		</button>
 	</div>';
 
-	$_SESSION['alertFailure'] = null;
+	$_SESSION['alert_failure'] = null;
 }

@@ -6,7 +6,7 @@ Réalisé par Rodolphe Cabotiau
 Date de début de projet : 09/05/2018
 Date d'achèvement : ../../2018
 
-Dernière mise à jour : 11/05/2018 
+Dernière mise à jour : 14/05/2018 
 
 -->
 
@@ -53,8 +53,7 @@ Dernière mise à jour : 11/05/2018
 
 <body>
 
-	<header id="top" class="<?= $header_class ?>">
-
+	<header id="top" class="<?php if(isset($header_class)){echo $header_class;} ?>">
 		<nav class="navbar navbar-light bg-light justify-content-around fixed-top public_navbar">
 			<a class="navbar-brand" href="./">
 				<img class="logoHome" src="./public/img/logo.png" alt="" height="64px" width="200px" srcset="./public/img/logo.svg">
@@ -66,8 +65,8 @@ Dernière mise à jour : 11/05/2018
 		</nav>
 
 	<?php 
-		echo $content;
 		include('alerts.php');
+		echo $content;
 	?>
 
 	<footer class="public_footer">

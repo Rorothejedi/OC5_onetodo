@@ -1,4 +1,5 @@
 <?php 
+namespace App\model;
 
 /**
  * Class Autoloader
@@ -6,24 +7,34 @@
  */
 class Autoloader
 {
+
+    /**
+     * Enregistre l'autoloader
+     */
     static function register()
     {
         spl_autoload_register(array(__CLASS__, 'autoload'));
     }
 
+    /**
+     * Inclue le fichier correspondant à la classe transmise en paramètre
+     * @param  string $class Nom de la classe à charger
+     */
     static function autoload($class)
     {
-    	if ($class == 'Route' || $class == 'Router')
+        $class = str_replace('App\\', '', $class);
+        $class = str_replace('\\', '/', $class);
+    	if ($class == 'model/router/Route' || $class == 'model/router/Router')
     	{
-        	require './model/router/' . $class . '.php';
+        	require $class . '.php';
     	}
         elseif (preg_match("#controller#i", $class)) 
         {
-            require './controller/' . $class . '.php';
+            require $class . '.php';
         }
     	else
     	{
-        	require './model/' . $class . '.php';
+        	require $class . '.php';
     	}
     }
 }
