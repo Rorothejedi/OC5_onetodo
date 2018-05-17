@@ -13,6 +13,13 @@ class Database
 	private $db_host;
 	private $pdo;
 
+	/**
+	 * Constructeur de la classe Database
+	 * @param string $db_name Nom de la base de données
+	 * @param string $db_user Nom d'utilisateur de la base de données
+	 * @param string $db_pass Mot de passe de la base de données
+	 * @param string $db_host Hôte de connexion
+	 */
 	public function __construct($db_name, $db_user, $db_pass, $db_host)
 	{
 		$this->db_name = $db_name;
@@ -25,8 +32,7 @@ class Database
 	{
 		if($this->pdo === null)
 		{
-			$pdo = new \PDO('mysql:dbname=onetodo;host=localhost', 'root', '');
-			// $pdo = new \PDO('mysql:dbname=' . $this->db_name . ';host=' . $this->db_host, $this->db_user, $this->db_pass);
+			$pdo = new \PDO('mysql:dbname=' . $this->db_name . ';host=' . $this->db_host, $this->db_user, $this->db_pass);
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->query("SET lc_time_names = 'fr_FR'");
 			$this->pdo = $pdo;

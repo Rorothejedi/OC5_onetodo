@@ -4,12 +4,17 @@ var defilementFluide = {
     // Méthode pour initialiser le défilement fluide via les ancres
     init : function() {
 
-        $(document).on('click', 'a[href^="#"]', function (e) {
-            e.preventDefault();
+        // $(document).on('click', 'a[href^="#"]', function (e) {
+        //     e.preventDefault();
 
-            $('html, body').animate({
-                scrollTop: $($.attr(this, 'href')).offset().top
-            }, 650);
+        //     $('html, body').animate({
+        //         scrollTop: $($.attr(this, 'href')).offset().top
+        //     }, 500);
+        // });
+        
+        $("a[href='#top']").click(function() {
+            $("html, body").animate({ scrollTop: 0 }, 500);
+            return false;
         });
     }
 };

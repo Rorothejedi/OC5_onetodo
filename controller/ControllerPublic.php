@@ -125,11 +125,11 @@ class ControllerPublic extends Alert
 				    		{
 				    			// Hashage du mot de passe
 				    			$password = password_hash($password, PASSWORD_DEFAULT);
-				    			// Variable de session pour autoriser l'accès à la page de confirmation de l'inscription
-				    			// $_SESSION['new_user_register'] = true;
+
 				    			// Génération d'une clé aléatoire de 16 caractères
 				    			$length = 16;
 				    			$token = bin2hex(random_bytes($length));
+
 				    			// Ajout du nouvel utilisateur dans la base de données
 				    			$new_user = new \App\model\User([
 									'username' => $username,
@@ -178,6 +178,66 @@ class ControllerPublic extends Alert
 		{
 			$this->alert_failure('Les données transmissent ne sont pas valides', 'inscription');
 		}
+	}
+
+	/**
+	 * [processConnexion description]
+	 */
+	public function processConnexion()
+	{
+		if (isset($_POST['login']) && !empty($_POST['login']) && isset($_POST['password']) && !empty($_POST['password'])) 
+		{
+			$login    = htmlspecialchars($_POST['login']);
+			$password = htmlspecialchars($_POST['password']);
+
+			if (filter_var($login, FILTER_VALIDATE_EMAIL)) 
+			{
+				$newUser = new \App\model\User(['email' => $login]);
+			}
+			else
+			{
+				$newUser = new \App\model\User(['username' => $login]);
+			}
+
+			$userManager = new \App\model\UserManager();
+			$connectData = $userManager->getUser($newUser);
+		
+			if ($login == $connectData->username() || $login == $connectData->email()) 
+			{
+				$_SESSION['save_login'] = $login;
+
+				if (password_verify($password, $connectData->password())) 
+				{
+					$_SESSION['user_id']       = $connectData->id();
+					$_SESSION['user_username'] = $connectData->username();
+
+					// Si l'utilisateur a coché la case "Se souvenir de moi"
+					if (isset($_POST['remember'])) {
+						setcookie('auth', $connectData->id() . '---' . sha1($connectData->username() . $connectData->password() . $_SERVER['REMOTE_ADDR']), time() + 3600 * 24 * 365, null, null, false, true);
+					}
+					header('Location: ./dashboard');
+				}
+				else
+				{
+					$this->alert_failure('Mot de passe incorrect', 'connexion');
+				}
+			}
+			else
+			{
+				$this->alert_failure('Cet utilisateur n\'existe pas', 'connexion');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmissent ne sont pas valides', 'connexion');
+		}
+	}
+
+	public function disconnect()
+	{
+		session_destroy();
+		setcookie('auth', '', time() - 3600, null, null, false, true);
+		header('Location: ./');
 	}
 
 }

@@ -7,6 +7,12 @@ namespace App\model;
  */
 class UserManager
 {
+
+	/**
+	 * Permet d'obtenir toutes les données d'un utilisateur.
+	 * @param  User   $user Classe User contenant certaines données unique de l'utilisateur (id, username ou email).
+	 * @return object       Renvoi l'objet User avec toutes les données de l'utilisateur passé en paramètre.
+	 */
 	public function getUser(User $user)
 	{
 		$data = App::getDb()->prepare('
@@ -19,20 +25,9 @@ class UserManager
 		return new \App\model\User($data);
 	}
 
-	public function existUser($username, $email)
-	{
-		$data = App::getDb()->prepare('
-			SELECT * FROM user WHERE username = :username OR email = :email',
-			[':username' => $username,
-			':email'     => $email],
-		true, false, true);
-
-		return $data;
-	}
-
 	/**
-	 * Permet l'ajout d'un utilisateur dans la base de données
-	 * @param User $user Prends l'objet User en paramètre
+	 * Permet l'ajout d'un utilisateur dans la base de données.
+	 * @param User $user Prends l'objet User en paramètre.
 	 */
 	public function addUser(User $user)
 	{
@@ -46,86 +41,33 @@ class UserManager
 		false);
 	}
 
+	/**
+	 * Permet de vérifier si un nom d'utilisateur ou une adresse mail est déjà présente dans la base de données
+	 * @param  string $username Nom d'utilisateur renseigné lors d'une inscription
+	 * @param  string $email    Mot de passe renseigné lors d'une inscription
+	 * @return int          	Affiche le nombre de résultat obtenu. Pour poursuivre l'inscription, celui-ci doit être 0.
+	 */
+	public function existUser($username, $email)
+	{
+		$data = App::getDb()->prepare('
+			SELECT * FROM user WHERE username = :username OR email = :email',
+			[':username' => $username,
+			':email'     => $email],
+		true, false, true);
 
+		return $data;
+	}
+
+	/**
+	 * Permet la validation d'un utilisateur en modifiant le contenu du champ 'confirm_register' dans la base de données. 
+	 * (0: inactif; 1: actif)
+	 * @param  User   $user Classe User contenant au moins le nom d'utilisateur.
+	 */
 	public function validateUser(User $user)
 	{
 		$data = App::getDb()->prepare('
-			UPDATE user SET confirm_register = 1 WHERE username = :username', 
+			UPDATE user SET confirm_register = 1, token = null WHERE username = :username', 
 			[':username' => $user->username()],
 		false);
 	}
-
-	// public function deleteUser($userId)
- //    {
- //        $db = $this->db_connect();
-
- //        try 
- //        {
- //            $db->beginTransaction();
-
- //            $req = $db->query('SELECT COUNT(*) FROM comment WHERE user_id = "' . $userId . '"');
-
- //            if ($req->fetchColumn() > 0)
- //            {
- //                $req = $db->prepare('DELETE user, comment FROM user, comment WHERE user.id = ?'); 
- //            }
- //            else
- //            {
- //                $req = $db->prepare('DELETE FROM user WHERE id = ?'); 
- //            }
-
- //            $req->execute(array($userId));
- //            $db->commit();
-
- //            return true;
- //        } 
- //        catch (Exception $e) 
- //        {
- //            $db->rollback();
- //        } 
- //    }
-
-	// public function getUser($pseudo)
-	// {
-	// 	$db = $this->db_connect();
-
-	// 	$req = $db->query('
-	// 		SELECT id, pseudo, email, pass, access 
-	// 		FROM user 
-	// 		WHERE pseudo = "' . $pseudo . '"');
-		
-	// 	$data = $req->fetch();
-		
-	// 	return new User($data);
-	// }
-
-	// public function getUsers()
-	// {
-	// 	$db = $this->db_connect();
-
- //    	$users = $db->query('
-	// 		SELECT id, pseudo, email, access 
-	// 		FROM user 
-	// 		ORDER BY access, pseudo');
-
- //    	return $users;
-	// }
-
-	// public function editUser(User $user)
-	// {
-	// 	$db = $this->db_connect();
-
-	// 	$req = $db->prepare('
-	// 		UPDATE user 
-	// 		SET pseudo = :pseudo, email = :email, pass = :pass 
-	// 		WHERE id = :id
-	// 	');
-
-	// 	$req->execute(array(
-	// 		'id'     => $user->id(),
-	// 		'pseudo' => $user->pseudo(),
-	// 		'email'  => $user->email(),
-	// 		'pass'   => $user->pass()
-	// 	));
-	// }
 }

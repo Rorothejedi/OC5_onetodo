@@ -10,7 +10,7 @@
 				<div class="col-lg-6">
 					<h1>Se connecter à OneToDo</h1>
 					<p>ou <a href="inscription">créer un compte</a></p>
-					<form action="process_connect" method="POST">
+					<form action="processConnexion" method="POST">
 						<div class="form-group">
 							<label for="login">Nom d'utilisateur <span class="text-muted">(ou email)</span></label>
 							<input id="login" type="text" class="form-control" name="login" required>
@@ -23,7 +23,7 @@
 						<div class="form-group">
 							<div class="form-check">
 							  	<label class="form-check-label">
-							    	<input type="checkbox" class="form-check-input">
+							    	<input type="checkbox" name="remember" class="form-check-input">
 							    	Se souvenir de moi
 							  	</label>
 							</div>

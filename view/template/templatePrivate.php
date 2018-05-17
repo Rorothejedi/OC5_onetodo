@@ -10,7 +10,6 @@
    		echo '<title>' . $title . '</title>';
    		echo $meta;
 		echo $linkBootstrapCSS; 
-		echo $linkFontAwesome;
 		echo $linkGoogleFont;
 		echo $linkCustomScrollbar;
 		echo $stylesheet;
@@ -39,7 +38,7 @@
     				</li>
     				<li class="nav-item text-center" title="Voir les messages">
     					<a href="#">
-	    					<span class="fa-layers">
+	    					<span class="fa-layers fa-fw">
 	    						<i class="fas fa-envelope"></i>
 	    						<span class="fa-layers-counter">5</span>
 	  						</span>
@@ -112,9 +111,10 @@
 		echo $cdnPopper;
 		echo $cdnBoostrap;
 		echo $cdnCustomScrollbar;
+		echo $cdnFontAwesomeJs;
 
 		// Call to JavaScript scripts
-		// echo $scriptScroll; // provoque un conflit au niveau des link des collapses
+		echo $scriptScroll; 
 		echo $scriptAlert;
 		echo $scriptGlobal;
 		echo $scriptSidebar;

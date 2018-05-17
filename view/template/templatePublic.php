@@ -44,7 +44,6 @@ Dernière mise à jour : 14/05/2018
 	<!-- CSS Bootstrap / Icons FontAwesome / Google Fonts / Stylesheets / Favicon -->
 	<?php 
 		echo $linkBootstrapCSS; 
-		echo $linkFontAwesome;
 		echo $linkGoogleFont;
 		echo $stylesheet;
 		echo $favicon;
@@ -92,6 +91,7 @@ Dernière mise à jour : 14/05/2018
 		echo $cdnJQuery;
 		echo $cdnPopper;
 		echo $cdnBoostrap;
+		echo $cdnFontAwesomeJs;
 
 		// Call to JavaScript scripts
 		echo $scriptScroll;
