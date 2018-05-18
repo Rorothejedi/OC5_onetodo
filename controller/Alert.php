@@ -12,5 +12,6 @@ class Alert
 	{
 		$_SESSION['alert_failure'] = $message;
 		header('Location: ' . $page);
+		exit;
 	}
 }

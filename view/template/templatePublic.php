@@ -4,9 +4,9 @@ OneTodo - Gérez vos projets en toute simplicité !
 
 Réalisé par Rodolphe Cabotiau
 Date de début de projet : 09/05/2018
-Date d'achèvement : ../../2018
+Date d'achèvement V1.0: ../06/2018
 
-Dernière mise à jour : 14/05/2018 
+Dernière mise à jour : 18/05/2018 
 
 -->
 
@@ -58,8 +58,20 @@ Dernière mise à jour : 14/05/2018
 				<img class="logoHome" src="./public/img/logo.png" alt="" height="64px" width="200px" srcset="./public/img/logo.svg">
 			</a>
 			<div class="btn-group">
-				<a href="connexion" class="btn btn-outline-secondary">Se connecter</a>
-			    <a href="inscription" class="btn btn-dark">Créer un compte</a>
+				<?php 
+
+					if (!empty($_SESSION['user_id']) && !empty($_SESSION['user_username'])) 
+					{
+						echo '<a href="dashboard" class="btn btn-primary">Accéder au tableau de bord | <strong>' . $_SESSION['user_username'] . '</strong></a>';
+					}
+					else
+					{
+						echo '<a href="connexion" class="btn btn-outline-secondary">Se connecter</a>' .
+							 '<a href="inscription" class="btn btn-dark">Créer un compte</a>';
+					}
+
+				?>
+			    
 			</div>
 		</nav>
 

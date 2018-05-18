@@ -9,12 +9,13 @@ namespace App;
 	if(session_id() == "") session_start();
 
 	// Vérification de l'existence d'un cookie pour la connexion automatique
-	if(isset($_COOKIE['auth']) && !isset($_SESSION['auth']))
+	if(isset($_COOKIE['auth']) && !isset($_SESSION['user_id']))
 	{
 		$auth = htmlspecialchars($_COOKIE['auth']);
 		$auth = explode('---', $auth);
 		$user = \App\model\App::getDb()->prepare('SELECT * FROM user WHERE id = ?', [$auth[0]], true, true, false);
 		$key = sha1($user->username . $user->password . $_SERVER['REMOTE_ADDR']);
+		// Correspondance entre la key de la bdd et celle du cookie 
 		if ($key == $auth[1]) 
 		{
 			$_SESSION['user_id']       = $user->id;
@@ -32,16 +33,21 @@ namespace App;
 
 	// Router get
 	$router->get('/', "Public#displayHome");
-	$router->get('/dashboard', "Private#displayDashboard");
 	$router->get('/connexion', "Public#displayConnection");
 	$router->get('/inscription', "Public#displayRegistration");
 	$router->get('/mentions_legales', "Public#displayLegal");
 	$router->get('/confirmation_inscription', "Public#displayConfirmRegistration");
 	$router->get('/validation_inscription', "Public#displayValidationRegistration");
+	$router->get('/mot_de_passe_oublie', "Public#displayForgottenPassword");
+
+	$router->get('/dashboard', "Private#displayDashboard");
+	$router->get('/disconnect', "Private#disconnect");
+
 
 	// Router post
 	$router->post('/processRegistration', "Public#processRegistration");
 	$router->post('/processConnexion', "Public#processConnexion");
+	$router->post('/processForgottenPassword', "Public#processForgottenPassword");
 
 	//Route execution
 	$router->run(); 

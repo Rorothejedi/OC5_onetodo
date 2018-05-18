@@ -19,7 +19,7 @@
 	</header>
 
 	<section>
-		<p><a href="dashboard">Tableau de bord</a></p>
+		
 	</section>
 
 	

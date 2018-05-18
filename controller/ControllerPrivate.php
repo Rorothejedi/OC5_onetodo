@@ -7,8 +7,35 @@ namespace App\controller;
  */
 class ControllerPrivate
 {
+
+	/**
+	 * Vérification de l'existence d'un session de l'utilisateur pour autoriser l'accès à la partie privée.
+	 */
+	public function __construct()
+	{
+		if (empty($_SESSION['user_id']) && empty($_SESSION['user_username'])) 
+		{ 
+			header('Location: ./connexion');
+			exit();
+		}
+	}
+
+	/**
+	 *  Méthode d'affichage du tableau de bord (dashboard)
+	 */
 	public function displayDashboard()
 	{
 		require('./view/viewPrivate/viewDashboard.php');
+	}
+
+	/**
+	 * Permet de déconnecter un utilisateur
+	 */
+	public function disconnect()
+	{
+		session_destroy();
+		setcookie('auth', '', time() - 3600, null, null, false, true);
+		header('Location: ./');
+		exit();
 	}
 }

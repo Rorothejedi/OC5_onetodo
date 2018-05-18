@@ -1,4 +1,5 @@
 <?php 
+
 	require_once('initRessources.php');
 ?>
 
@@ -50,7 +51,7 @@
         				</a>
         				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 				          	<a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Paramètres</a>
-				          	<a class="dropdown-item" href="./"><i class="fas fa-power-off"></i> Déconnexion</a>
+				          	<a class="dropdown-item" href="disconnect"><i class="fas fa-power-off"></i> Déconnexion</a>
 				        </div>
         			</li>
     			</ul>

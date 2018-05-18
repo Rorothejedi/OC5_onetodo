@@ -1,9 +1,6 @@
 <?php 
 namespace App\controller;
 
-// Vérification de l'existence de la session
-if(session_id() == "") session_start();
-
 /**
  * Class ControllerPublic
  * Controller qui gère les views et les models de la partie public du site (page d'accueil, de connexion, d'inscription et les mentions légales).
@@ -51,6 +48,14 @@ class ControllerPublic extends Alert
 	}
 
 	/**
+	 * Méthode d'affichage de la page de mot de passe oublié.
+	 */
+	public function displayForgottenPassword()
+	{
+		require('./view/viewPublic/viewForgottenPassword.php');
+	}
+
+	/**
 	 * Méthode d'affichage et de traitement des données de la page de validation de l'inscription avec gestion des erreurs.
 	 * Récupère les données en GET (username et key) pour vérifier la concordance avec celles de la base de données. Si elles sont conforment, le compte de l'utilisateur est validé.
 	 */
@@ -81,7 +86,8 @@ class ControllerPublic extends Alert
 			else
 			{
 				$this->alert_success('Votre compte est déjà actif');
-				header('Location: connexion');
+				header('Location: ./connexion');
+				exit;
 			}
 		}
 		else
@@ -121,7 +127,7 @@ class ControllerPublic extends Alert
 				    {
 				    	if (preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $password)) 
 				    	{
-				    		if ($password == $confirm_password)
+				    		if ($password === $confirm_password)
 				    		{
 				    			// Hashage du mot de passe
 				    			$password = password_hash($password, PASSWORD_DEFAULT);
@@ -146,6 +152,7 @@ class ControllerPublic extends Alert
 								$_SESSION['save_username'] = null;
 								$_SESSION['save_email']    = null;
 				    			header('Location: ./confirmation_inscription');
+				    			exit;
 				    		}
 				    		else
 				    		{
@@ -154,7 +161,7 @@ class ControllerPublic extends Alert
 				    	}
 				    	else
 				    	{
-				    		$this->alert_failure('Le mot de passe doit contenir au moins 8 caractères avec des chiffres et des lettres', 'inscription');
+				    		$this->alert_failure('Le mot de passe doit contenir au moins 8 caractères avec des chiffres et des lettres majuscules et minuscules', 'inscription');
 				    	}
 				    }
 				    else
@@ -181,7 +188,7 @@ class ControllerPublic extends Alert
 	}
 
 	/**
-	 * [processConnexion description]
+	 * Permet la connexion d'un utilisateur avec son email ou son nom d'utilisateur. Si l'utilisateur n'a pas préalablement validé son adresse mail en cliquant sur le lien du mail envoyé, un mail lui est renvoyé en entrant ses identifiants. Si celui-ci coche la case "se souvenir de moi", un cookie est créer et des variables de session (id, username) sont initialisées dans tous les cas.
 	 */
 	public function processConnexion()
 	{
@@ -208,14 +215,28 @@ class ControllerPublic extends Alert
 
 				if (password_verify($password, $connectData->password())) 
 				{
-					$_SESSION['user_id']       = $connectData->id();
-					$_SESSION['user_username'] = $connectData->username();
+					if ($connectData->confirm_register() === 0) 
+					{
+						// Envoi du mail et alerte de confirmation
+				    	$new_mail = new \App\model\Mail($connectData->email());
+				    	$new_mail->send_register_mail($connectData->username(), $connectData->token());
 
-					// Si l'utilisateur a coché la case "Se souvenir de moi"
-					if (isset($_POST['remember'])) {
-						setcookie('auth', $connectData->id() . '---' . sha1($connectData->username() . $connectData->password() . $_SERVER['REMOTE_ADDR']), time() + 3600 * 24 * 365, null, null, false, true);
+						$this->alert_success('Un mail viens de vous être renvoyé pour que vous puissiez valider votre compte. Vérifiez vos spam !');
+						header('Location: ./confirmation_inscription');
 					}
-					header('Location: ./dashboard');
+					else
+					{
+						$_SESSION['user_id']       = $connectData->id();
+						$_SESSION['user_username'] = $connectData->username();
+
+						// Si l'utilisateur a coché la case "Se souvenir de moi"
+						if (isset($_POST['remember'])) 
+						{
+							setcookie('auth', $connectData->id() . '---' . sha1($connectData->username() . $connectData->password() . $_SERVER['REMOTE_ADDR']), time() + 3600 * 24 * 365, null, null, false, true);
+						}
+						header('Location: ./dashboard');
+						exit();
+					}
 				}
 				else
 				{
@@ -233,11 +254,87 @@ class ControllerPublic extends Alert
 		}
 	}
 
-	public function disconnect()
+	/**
+	 * Permet la génération d'un token et l'envoi d'un mail contenant celui-ci à l'adresse mail renseigné pour que l'utilisateur puisse modifier son mot de passe.
+	 */
+	public function processForgottenPassword()
 	{
-		session_destroy();
-		setcookie('auth', '', time() - 3600, null, null, false, true);
-		header('Location: ./');
+		if (isset($_POST['email']) && !empty($_POST['email']))  
+		{
+			$email = htmlspecialchars($_POST['email']);
+
+			// Génération d'une clé aléatoire de 16 caractères
+			$length = 16;
+			$token  = bin2hex(random_bytes($length));
+
+			$user        = new \App\model\User(['email' => $email]);
+			$userManager = new \App\model\UserManager();
+			$courentUser = $userManager->getUser($user);
+
+			if ($email == $courentUser->email()) 
+			{
+				$courentUser->setToken($token);
+				$userManager->editUser($courentUser);
+
+				// Envoi du mail
+				$new_mail = new \App\model\Mail($courentUser->email());
+				$new_mail->send_forgot_pass_mail($courentUser->username(), $courentUser->token());
+
+				$this->alert_success('Un mail viens de vous être envoyé pour que vous puissiez réinitiliser votre mot de passe. Vérifiez vos spam !');
+
+				header('Location: ./mot_de_passe_oublie');
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Cette adresse email n\'existe pas', 'mot_de_passe_oublie');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmissent ne sont pas valides', 'mot_de_passe_oublie');
+		}
+	}
+
+	/**
+	 * [proccesssNewPassword description]
+	 */
+	public function proccesssNewPassword()
+	{
+		if (isset($_POST['password']) && !empty($_POST['password']) 
+			&& isset($_POST['confirm_password']) && !empty($_POST['confirm_password'])
+			&& isset($_GET['username']) && !empty($_GET['username'])
+			&& isset($_GET['key']) && !empty($_GET['key'])) 
+		{
+			$password         = htmlspecialchars($_POST['password']);
+			$confirm_password = htmlspecialchars($_POST['confirm_password']);
+			$username         = htmlspecialchars($_GET['username']);
+			$token            = htmlspecialchars($_GET['key']);
+
+			if (preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $password)) 
+			{
+				if ($password === $confirm_password)
+				{
+	    			// Hashage du mot de passe
+	    			$password = password_hash($password, PASSWORD_DEFAULT);
+
+	    			
+
+	    		}
+	    		else
+	    		{
+				   $this->alert_failure('Les mots de passes renseignés doivent être identiques', 'mot_de_passe_oublie&username=' . $_GET['username'] . '&key=' . $_GET['key']);
+	    		}
+	    	}
+	    	else
+	    	{
+				$this->alert_failure('Le mot de passe doit contenir au moins 8 caractères avec des chiffres et des lettres majuscules et minuscules', 'mot_de_passe_oublie&username=' . $_GET['username'] . '&key=' . $_GET['key']);
+	    	}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmissent ne sont pas valides', 'mot_de_passe_oublie&username=' . $_GET['username'] . '&key=' . $_GET['key']);
+		}
 	}
 
 }

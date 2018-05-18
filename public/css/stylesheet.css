@@ -1,18 +1,18 @@
-/*Colors used
 
-#222222 : Raisin Black
-#363636 : Jet
-#E8E8E8 : Platinum
-#4B9857 : Middle Green
-#306BA2 : Lapis Lazuli
-*/
+/*Variables CSS*/
+:root {
+	--user-color  : #306BA2; /*Lapis Lazuli*/
+
+	--main-color  : #222222; /*Raisin Black*/
+	--second-color: #363636; /*Jet*/
+	--third-color : #E8E8E8; /*Platinum*/
+}
 
 /*Test*/
-
 section {
 	width: 100%;
 	min-height: 100vh;
-	background-color: #E8E8E8;
+	background-color: var(--third-color);
 }
 
 /*------------------------------------------   Common   -------------------------------------------------*/
@@ -40,7 +40,7 @@ a.top {
    	position: fixed;
    	bottom: 30px;
    	right: 20px;
-   	color: #306BA2;
+   	color: var(--user-color);
 }
 
 /*------------------------------------------   Homepage   -------------------------------------------------*/
@@ -55,16 +55,16 @@ a.top {
 	padding: 0px;	
 }
 .topHome {
-	background-color: #363636;
+	background-color: var(--second-color);
     height: 750px;
 }
 /*Footer*/
 .footer_element {
-	background-color: #306ba2;
+	background-color: var(--user-color);
 	height: 60px;
 }
 .footer_content {
-	background-color: #222222;
+	background-color: var(--main-color);
 	height: 250px;
 	display: flex;
 	flex-direction: column;
@@ -95,7 +95,9 @@ a.top {
 	padding-top: 10px;
 }
 .section_connection button:last-child {
-	margin: 35px 0 120px 0;
+	margin: 35px 0 30px 0;
+	border-top: none;
+	border-bottom: none;
 }
 .section_connection input[type="text"], input[type="email"], input[type="password"]  {
 	height: 42px;
@@ -120,11 +122,11 @@ a.top {
 	padding-top: 0;
 	height: 55px;
 	color: white;
-	background-color: #222222;				/*<--- First Color*/
+	background-color: var(--main-color);
 }
 .logoDashboard {
 	font-family: 'Waterlily', sans-serif;
-	color: #E8E8E8 !important;
+	color: var(--third-color) !important;
 	font-size: 1.5em;
 }
 .fa-layers, .fa-user-circle, .fa-plus {
@@ -134,24 +136,24 @@ a.top {
 	transition: color 0.2s;
 }
 .logoDashboard:hover, .fa-plus:hover, .fa-layers:hover, .fa-user-circle:hover, .dropdown-item:hover {
-	color : #306BA2 !important;				/*<--- Third Color*/
+	color : var(--user-color) !important;
 }
 .fa-layers-counter {
 	font-size: 35px;
-	background: #306BA2;
+	background: var(--user-color);
 }
 
 .navbar-nav > li > .dropdown-menu { 
-	background-color: #222222;				/*<--- First Color*/
+	background-color: var(--main-color);
 	margin-top: 3px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
 .dropdown-toggle {
-	color : #E8E8E8 !important;
+	color: var(--third-color) !important;
 }
 .fa-layers, .fa-plus {
-	color: #E8E8E8;
+	color: var(--third-color);
 }
 .dropdown-toggle::after {
     display:none
@@ -168,16 +170,16 @@ a.top {
 	min-width: 250px;
     max-width: 250px;
 	height: calc(100vh - 55px);
-	background-color: #363636;				/*<--- Second Color*/
+	background-color: var(--second-color);
 	transition: margin 0.3s;
 }
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #363636;
+    background: var(--second-color);
 }
 
 #sidebar ul li a {
-	color: #E8E8E8;
+	color: var(--third-color);
     padding: 10px 20px;
     font-size: 1em;
     display: block;
@@ -188,7 +190,7 @@ a.top {
 
 }
 #sidebar ul li a:hover {
-	background-color: #306BA2; 	/*<--- Third Color*/
+	background-color: var(--user-color);
 }
 #sidebar.active {
     margin-left: -250px;
@@ -201,7 +203,6 @@ a.top {
 }
 #content {
 	width: calc(100% - 250px);
-    
     padding: 40px;
     min-height: 100vh;
     transition: all 0.3s;
@@ -243,7 +244,7 @@ a:hover, a:focus {
 	text-align: justify;
 }
 .tiles_project div {
-	background-color: #306BA2; 	/*<--- Third Color*/
+	background-color: var(--user-color);
 	color: white;
 	transition: opacity 0.2s;
 }
@@ -251,7 +252,7 @@ a:hover, a:focus {
 	opacity: 0.9;
 }
 .title_content {
-	color: #363636;
+	color: var(--second-color);
 	transition: opacity 0.2s;
 }
 .title_content:hover {
