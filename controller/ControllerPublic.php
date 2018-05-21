@@ -56,6 +56,36 @@ class ControllerPublic extends Alert
 	}
 
 	/**
+	 * Méthode d'affichage de la page de réinitialisation du mot de passe utilisateur. Vérification de la validité des informations avant l'accès à la page 'nouveau_mot_de_passe' par un utilisateur.
+	 */
+	public function displayNewPassword()
+	{
+		if (isset($_GET['username']) && !empty($_GET['username'])
+			&& isset($_GET['key']) && !empty($_GET['key']))
+		{
+			$username = htmlspecialchars($_GET['username']);
+			$token    = htmlspecialchars($_GET['key']);
+
+			$user        = new \App\model\User(['username' => $username]);
+			$userManager = new \App\model\UserManager();
+			$courentUser = $userManager->getUser($user);
+
+			if ($courentUser->token() == $token) 
+			{
+				require('./view/viewPublic/viewNewPassword.php');
+			}
+			else
+			{
+				$this->alert_failure('Les données transmises ne correspondent pas aux données de l\'utilisateur', 'mot_de_passe_oublie');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises ne sont pas valides', 'mot_de_passe_oublie');
+		}
+	}
+
+	/**
 	 * Méthode d'affichage et de traitement des données de la page de validation de l'inscription avec gestion des erreurs.
 	 * Récupère les données en GET (username et key) pour vérifier la concordance avec celles de la base de données. Si elles sont conforment, le compte de l'utilisateur est validé.
 	 */
@@ -299,7 +329,7 @@ class ControllerPublic extends Alert
 	/**
 	 * [proccesssNewPassword description]
 	 */
-	public function proccesssNewPassword()
+	public function processNewPassword()
 	{
 		if (isset($_POST['password']) && !empty($_POST['password']) 
 			&& isset($_POST['confirm_password']) && !empty($_POST['confirm_password'])
@@ -318,22 +348,42 @@ class ControllerPublic extends Alert
 	    			// Hashage du mot de passe
 	    			$password = password_hash($password, PASSWORD_DEFAULT);
 
-	    			
+	    			$user        = new \App\model\User(['username' => $username]);
+					$userManager = new \App\model\UserManager();
+					$courentUser = $userManager->getUser($user);
 
+					if ($courentUser->token() == $token) 
+					{
+						$userEdit = new \App\model\User([
+							'username' => $courentUser->username(),
+							'email' => $courentUser->email(),
+							'password' => $password,
+							'token' => null
+						]);
+
+						$userManager->editUser($userEdit);
+						$this->alert_success('Votre nouveau mot de passe à bien été enregistré, vous pouvez vous connecter');
+						header('Location: ./connexion');
+						exit();
+					}
+					else
+					{
+				   		$this->alert_failure('Les données transmises ne correspondent pas aux données de l\'utilisateur', 'nouveau_mot_de_passe&username=' . $_GET['username'] . '&key=' . $_GET['key']);
+					}
 	    		}
 	    		else
 	    		{
-				   $this->alert_failure('Les mots de passes renseignés doivent être identiques', 'mot_de_passe_oublie&username=' . $_GET['username'] . '&key=' . $_GET['key']);
+				   $this->alert_failure('Les mots de passes renseignés doivent être identiques', 'nouveau_mot_de_passe&username=' . $_GET['username'] . '&key=' . $_GET['key']);
 	    		}
 	    	}
 	    	else
 	    	{
-				$this->alert_failure('Le mot de passe doit contenir au moins 8 caractères avec des chiffres et des lettres majuscules et minuscules', 'mot_de_passe_oublie&username=' . $_GET['username'] . '&key=' . $_GET['key']);
+				$this->alert_failure('Le mot de passe doit contenir au moins 8 caractères avec des chiffres et des lettres majuscules et minuscules', 'nouveau_mot_de_passe&username=' . $_GET['username'] . '&key=' . $_GET['key']);
 	    	}
 		}
 		else
 		{
-			$this->alert_failure('Les données transmissent ne sont pas valides', 'mot_de_passe_oublie&username=' . $_GET['username'] . '&key=' . $_GET['key']);
+			$this->alert_failure('Les données transmissent ne sont pas valides', 'nouveau_mot_de_passe&username=' . $_GET['username'] . '&key=' . $_GET['key']);
 		}
 	}
 

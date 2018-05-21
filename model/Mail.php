@@ -77,7 +77,7 @@ class Mail
 			<body>
 				<p>Cliquez sur le bouton ci-dessous pour accèder à la page vous permettant de réinitialiser votre mot de passe.</p>
 				<br>
-				<a href='http://localhost/projet_5_openclassrooms/mot_de_passe_oublie&username=" . urlencode($username) . "&key=". urlencode($key) ."' style='background-color:#306BA2; padding:7px; border-radius:3px; color:white; text-decoration:none'>Réinitialiser mot de passe</a>
+				<a href='http://localhost/projet_5_openclassrooms/nouveau_mot_de_passe&username=" . urlencode($username) . "&key=". urlencode($key) ."' style='background-color:#306BA2; padding:7px; border-radius:3px; color:white; text-decoration:none'>Réinitialiser mot de passe</a>
 				<br><br>
 				<small>Cet email est automatique, merci de ne pas y répondre.</small>
 			</body>

@@ -32,6 +32,7 @@ namespace App;
 	$router = new model\router\Router($_GET['url']);
 
 	// Router get
+	// -- Partie publique
 	$router->get('/', "Public#displayHome");
 	$router->get('/connexion', "Public#displayConnection");
 	$router->get('/inscription', "Public#displayRegistration");
@@ -39,15 +40,20 @@ namespace App;
 	$router->get('/confirmation_inscription', "Public#displayConfirmRegistration");
 	$router->get('/validation_inscription', "Public#displayValidationRegistration");
 	$router->get('/mot_de_passe_oublie', "Public#displayForgottenPassword");
+	$router->get('/nouveau_mot_de_passe', "Public#displayNewPassword");
 
+	// -- Partie privée
 	$router->get('/dashboard', "Private#displayDashboard");
 	$router->get('/disconnect', "Private#disconnect");
+
+	// -- Partie projet
 
 
 	// Router post
 	$router->post('/processRegistration', "Public#processRegistration");
 	$router->post('/processConnexion', "Public#processConnexion");
 	$router->post('/processForgottenPassword', "Public#processForgottenPassword");
+	$router->post('/processNewPassword', "Public#processNewPassword");
 
 	//Route execution
 	$router->run(); 
