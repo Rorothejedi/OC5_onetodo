@@ -37,6 +37,7 @@ namespace App;
 	$router->get('/connexion', "Public#displayConnection");
 	$router->get('/inscription', "Public#displayRegistration");
 	$router->get('/mentions_legales', "Public#displayLegal");
+	$router->get('/contact', "Public#displayContact");
 	$router->get('/confirmation_inscription', "Public#displayConfirmRegistration");
 	$router->get('/validation_inscription', "Public#displayValidationRegistration");
 	$router->get('/mot_de_passe_oublie', "Public#displayForgottenPassword");
@@ -50,6 +51,7 @@ namespace App;
 
 
 	// Router post
+	$router->post('/processContact', "Public#processContact");
 	$router->post('/processRegistration', "Public#processRegistration");
 	$router->post('/processConnexion', "Public#processConnexion");
 	$router->post('/processForgottenPassword', "Public#processForgottenPassword");

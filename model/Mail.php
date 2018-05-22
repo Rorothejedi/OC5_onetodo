@@ -7,16 +7,17 @@ namespace App\model;
  */
 class Mail
 {
-	private $to;
-	private $from = 'rorotestazerty@gmail.com';
+	private $email;
+	private $from         = 'rorotestazerty@gmail.com';
+	private $contact_mail = 'rodolphe.cabotiau@gmail.com';
 
 	/**
 	 * Transmet les variables passé en argument aux attributs de la classe
-	 * @param string $to      Adresse email du destinataire
+	 * @param string $email      Adresse email du destinataire
 	 */
-	public function __construct($to)
+	public function __construct($email)
 	{
-		$this->to = $to;
+		$this->email = $email;
 	}
 
 	//A modifier lors de la mise en ligne (adresse from et lien du mail)
@@ -51,7 +52,7 @@ class Mail
 		</html>
 		";
 		
-		mail($this->to, $subject, $message, $headers);
+		mail($this->email, $subject, $message, $headers);
 	}
 
 	/**
@@ -84,6 +85,37 @@ class Mail
 		</html>
 		";
 		
-		mail($this->to, $subject, $message, $headers);
+		mail($this->email, $subject, $message, $headers);
+	}
+
+	
+	public function send_contact_mail($title, $content)
+	{
+		$subject = "Contact ONETODO | " . $title;
+
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'From: Contact ONETODO ' . $this->from . "\r\n";
+		$headers .= 'Reply-To: ' . $this->from . "\r\n";
+		$headers .= 'Content-type:text/html;charset=UTF-8' . "\r\n";
+		$headers .= 'X-Mailer: PHP/' . phpversion();
+
+		$message = "
+		<html>
+			<head>
+				<title>Contact ONETODO | " . $title . "</title>
+			</head>
+			<body>
+				<h3>Demande de contact de " . $this->email . "</h3>
+				<p><em>Sujet :</em> " . $title . "</p>
+				<p><em>Message :</em> " . $content . "</p>
+				<br>
+				<a href='mailto:" . $this->email . "' style='background-color:#306BA2; padding:7px; border-radius:3px; color:white; text-decoration:none'>Répondre</a>
+				<br><br>
+				<small>Cet email est automatique, merci de ne pas y répondre.</small>
+			</body>
+		</html>
+		";
+
+		mail($this->contact_mail, $subject, $message, $headers);
 	}
 }

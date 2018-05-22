@@ -68,7 +68,23 @@ a.top {
 	height: 250px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-around;
+}
+.footer_content .container {
+	height: 100%;
+}
+.footer_content .container div {
+	height: 50%;
+}
+.footer_content .container div a {
+	width: 100%;
+	color: var(--third-color);
+}
+.footer_content .container div:last-child a:last-child {
+	font-size: 0.75rem;
+}
+.footer_content .container div a .fa-heart {
+	color: crimson;
 }
 
 /*---------------------------------------   Legal notice page   -------------------------------------------------*/
@@ -81,6 +97,12 @@ a.top {
 }
 .notice_content:last-child {
 	padding-bottom: 120px;
+}
+
+/*-----------------------------------------   Contact page   ---------------------------------------------------*/
+
+.btn-submit {
+	margin-bottom: 120px !important;
 }
 
 /*-----------------------------------   Connection/Registration page   ------------------------------------------*/

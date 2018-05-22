@@ -6,7 +6,7 @@ Réalisé par Rodolphe Cabotiau
 Date de début de projet : 09/05/2018
 Date d'achèvement V1.0: ../06/2018
 
-Dernière mise à jour : 18/05/2018 
+Dernière mise à jour : 22/05/2018 
 
 -->
 
@@ -48,6 +48,9 @@ Dernière mise à jour : 18/05/2018
 		echo $stylesheet;
 		echo $favicon;
 	?>
+
+	<!-- Intégration ReCaptcha V2 -->
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -84,10 +87,13 @@ Dernière mise à jour : 18/05/2018
 		<div class="footer_element"></div>
 		<div class="footer_content">
 			<div class="container">
-				<div class="d-flex justify-content-between">
-					<a href="mentions_legales">Mentions légales</a>
-					<a href="https://www.linkedin.com/in/rodolphe-cabotiau-234824132/">Make with <i class="fas fa-heart"></i></a>
-					<a href="https://github.com/Rorothejedi/projet_5_openclassrooms">Venez contribuer au projet !</a>
+				<div class="d-flex align-items-end">
+					<a class="text-left" href="https://github.com/Rorothejedi/projet_5_openclassrooms">Venez contribuer au projet !</a>
+					<a class="text-center" href="contact">Contact</a>
+					<a class="text-right" href="mentions_legales">Mentions légales</a>
+				</div>
+				<div class="d-flex align-items-center">
+					<a class="text-center" href="https://www.linkedin.com/in/rodolphe-cabotiau-234824132/">Make with <i class="fas fa-heart fa-xs"></i></a>
 				</div>
 			</div>
 		</div>

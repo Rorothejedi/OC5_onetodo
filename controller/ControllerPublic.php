@@ -24,6 +24,14 @@ class ControllerPublic extends Alert
 	}
 
 	/**
+	 * Méthode d'affichage de la page de contact.
+	 */
+	public function displayContact()
+	{
+		require('./view/viewPublic/viewContact.php');
+	}
+
+	/**
 	 * Méthode d'affichage de la page de connexion.
 	 */
 	public function displayConnection()
@@ -82,6 +90,50 @@ class ControllerPublic extends Alert
 		else
 		{
 			$this->alert_failure('Les données transmises ne sont pas valides', 'mot_de_passe_oublie');
+		}
+	}
+
+	/**
+	 * [processContact description]
+	 */
+	public function processContact()
+	{
+		if (isset($_POST['email']) && !empty($_POST['email']) 
+			&& isset($_POST['subject']) && !empty($_POST['subject']) 
+			&& isset($_POST['message']) && !empty($_POST['message'])) 
+		{
+			$email   = htmlspecialchars($_POST['email']);
+			$subject = htmlspecialchars($_POST['subject']);
+			$message = htmlspecialchars($_POST['message']);
+
+			$captcha = new \App\model\Recaptcha('6Le4tVoUAAAAAFRSaFMwnF-GjrPktffvmJnIwNlz');
+
+			if($captcha->checkCode($_POST['g-recaptcha-response']) === true) 
+			{
+				if (filter_var($email, FILTER_VALIDATE_EMAIL))
+			    {
+			    	// Envoi du mail
+					$new_mail = new \App\model\Mail($email);
+					$new_mail->send_contact_mail($subject, $message);
+
+					$this->alert_success('Votre message a bien été transmis !');
+
+					header('Location: ./contact');
+					exit();
+			    }
+			    else
+			    {
+					$this->alert_failure('Cette adresse email n\'est pas valide', 'contact');
+			    }
+			}
+			else
+			{
+				$this->alert_failure('Le captcha ne semble pas valide', 'contact');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises ne sont pas valides', 'contact');
 		}
 	}
 
@@ -327,7 +379,7 @@ class ControllerPublic extends Alert
 	}
 
 	/**
-	 * [proccesssNewPassword description]
+	 * Permet la création d'un nouveau mot de passe pour l'utilisateur qui en a fait la demande. Récupére les données (GET et POST), vérifie l'authenticité des données et du mot de passe et enregistre ce dernier dans la base de données.
 	 */
 	public function processNewPassword()
 	{
