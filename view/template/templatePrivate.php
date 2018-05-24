@@ -1,6 +1,6 @@
 <?php 
-
 	require_once('initRessources.php');
+	$avatar = new \App\model\Avatar($userData->email(), 33);
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@
 						    <span class="hamburger-inner"></span>
 						</span>
 					</button>
-	    			<a class="navbar-brand logoDashboard" href="dashboard">ONE TO DO</a>
+	    			<a class="navbar-brand logoDashboard" href="<?= $absolute_path ?>/dashboard">ONE TO DO</a>
   				</div>
     			<ul class="nav navbar-right">
     				<li class="nav-item" title="Créer un nouveau projet">
@@ -38,7 +38,7 @@
     					</a>
     				</li>
     				<li class="nav-item text-center" title="Voir les messages">
-    					<a href="#">
+    					<a href="<?= $absolute_path ?>/messagerie">
 	    					<span class="fa-layers fa-fw">
 	    						<i class="fas fa-envelope"></i>
 	    						<span class="fa-layers-counter">5</span>
@@ -46,12 +46,12 @@
   						</a>
     				</li>
 					<li class="nav-item dropdown">
-					  	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Options profil">
-          					<i class="fas fa-user-circle"></i>
+					  	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Options profil"> 
+          					<?= $avatar->generateGravatar() ?>
         				</a>
         				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-				          	<a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Paramètres</a>
-				          	<a class="dropdown-item" href="disconnect"><i class="fas fa-power-off"></i> Déconnexion</a>
+				          	<a class="dropdown-item" href="<?= $absolute_path ?>/parametres"><i class="fas fa-cog"></i> Paramètres</a>
+				          	<a class="dropdown-item" href="<?= $absolute_path ?>/disconnect"><i class="fas fa-power-off"></i> Déconnexion</a>
 				        </div>
         			</li>
     			</ul>
@@ -60,45 +60,9 @@
 	</header>
 
 	<div class="wrapper">
-		<nav id="sidebar">
-	        <ul class="list-unstyled components">
-	        	<hr>
-	        	<li>
-	        		<a href="dashboard"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Tableau de bord</a>
-	        	</li>
-	        	<hr>
-	            <li>
-	                <a href="#myProject" data-toggle="collapse" aria-expanded="false" class="activeCollapse justify-content-between d-flex">
-		                Vos projets <i class="fas fa-caret-down rotate"></i>
-		            </a>
-	                <ul class="collapse" id="myProject">
-	                    <li><a href="#" class="rounded-left">Projet 1</a></li>
-	                    <li><a href="#" class="rounded-left">Projet 2</a></li>
-	                    <li><a href="#" class="rounded-left">Projet 3</a></li>
-	                </ul>
-	            </li>
-	            <li>
-	                <a href="#contributeProject" data-toggle="collapse" aria-expanded="false" class="activeCollapse justify-content-between d-flex">
-		                Contributeurs <i class="fas fa-caret-down rotate"></i>
-		            </a>
-	                <ul class="collapse" id="contributeProject">
-	                    <li><a href="#" class="rounded-left">Projet 4</a></li>
-	                    <li><a href="#" class="rounded-left">Projet 5</a></li>
-	                    <li><a href="#" class="rounded-left">Projet 6</a></li>
-	                </ul>
-	            </li>
-	            <li>
-	                <a href="#watchProject" data-toggle="collapse" aria-expanded="false" class="activeCollapse justify-content-between d-flex">
-	                	Observateurs <i class="fas fa-caret-down rotate"></i>
-	                </a>
-	                <ul class="collapse" id="watchProject">
-	                    <li><a href="#" class="rounded-left">Projet 7</a></li>
-	                    <li><a href="#" class="rounded-left">Projet 8</a></li>
-	                    <li><a href="#" class="rounded-left">Projet 9</a></li>
-	                </ul>
-	            </li>
-	        </ul>
-	    </nav>
+		<?php 
+			require('sidebar.php');
+		 ?>
 
 	    <section id="content">
 	       <?= $content ?>
@@ -119,7 +83,44 @@
 		echo $scriptAlert;
 		echo $scriptGlobal;
 		echo $scriptSidebar;
+		echo $scriptConfirm;
+		echo $scriptInputChecking;
 	?>
+
+	<script>
+		// Script pour pouvoir envoyer un message avec les touches entrées
+		$('#userMessage').keydown(function(event) 
+		{
+		    if (event.keyCode == 13) 
+		    {
+		        if (!event.shiftKey) 
+		        {
+		        	$('#formUserMessage').submit();
+		        }
+		    }
+		});
+		
+		// $('#content_messaging').load('./view/viewPrivate/viewMessagingNotSeen.php');
+
+		// function getAllMessage()
+		// {
+		// 	$('#content_messaging').fadeOut(function(){
+		// 		$('#content_messaging').load('./view/viewPrivate/viewMessagingAll.php', function() {
+		// 			$('#content_messaging').fadeIn();
+		// 		});
+		// 	});
+		// }
+		// function getNotSeenMessage()
+		// {
+		// 	$('#content_messaging').fadeOut(function(){
+		// 		$('#content_messaging').load('./view/viewPrivate/viewMessagingNotSeen.php', function() {
+		// 			$('#content_messaging').fadeIn();
+		// 		});
+		// 	});
+		// }
+		
+		
+	</script>
 
 </body>
 </html>

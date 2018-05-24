@@ -35,9 +35,9 @@ class UserManager
 			INSERT INTO user (username, email, password, token) 
 			VALUES (:username, :email, :password, :token)', 
 			['username' => $user->username(),
-			'email'      => $user->email(),
-			'password'   => $user->password(),
-			'token'      => $user->token()],
+			'email'     => $user->email(),
+			'password'  => $user->password(),
+			'token'     => $user->token()],
 		false);
 	}
 
@@ -51,11 +51,11 @@ class UserManager
 			UPDATE user 
 			SET username = :username, email = :email, password = :password, token = :token
 			WHERE id = :id OR username = :username OR email = :email',
-			['id' => $user->id(),
+			['id'      => $user->id(),
 			'username' => $user->username(),
-			'email'      => $user->email(),
-			'password'   => $user->password(),
-			'token'      => $user->token()],
+			'email'    => $user->email(),
+			'password' => $user->password(),
+			'token'    => $user->token()],
 		false);
 	}
 

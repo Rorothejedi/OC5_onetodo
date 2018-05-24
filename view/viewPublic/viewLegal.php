@@ -7,7 +7,7 @@
 
 	</head>
 	<!-- Legal notice generate with Subdelirium.com -->
-	<section>
+	<section class="notice_section">
 		<div class="container">
 			<h1 class="text-center h1_title">Mentions légales</h1>
 			<div class="row notice_content">

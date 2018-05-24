@@ -94,7 +94,7 @@ class ControllerPublic extends Alert
 	}
 
 	/**
-	 * [processContact description]
+	 * Méthode de traitement du formulaire de contact. Gestion de l'envoi d'un mail au webmaster.
 	 */
 	public function processContact()
 	{

@@ -12,7 +12,7 @@
 section {
 	width: 100%;
 	min-height: 100vh;
-	background-color: var(--third-color);
+	/*background-color: var(--third-color);*/
 }
 
 /*------------------------------------------   Common   -------------------------------------------------*/
@@ -28,9 +28,14 @@ section {
 }
 .alert {
 	position: fixed;
-	top : 100px;
-	right: 40px;
+	top : 94px;
+	right: 53px;
 	max-width: 50%;
+}
+.vertical_center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .h1_title {
 	padding-top: 70px;
@@ -89,6 +94,9 @@ a.top {
 
 /*---------------------------------------   Legal notice page   -------------------------------------------------*/
 
+.notice_section {
+	background-color: var(--third-color);
+}
 .notice_content {
 	text-align: justify;
 }
@@ -109,6 +117,7 @@ a.top {
 
 .section_connection {
 	height: auto;
+	background-color: var(--third-color);
 }
 .section_connection h1 {
 	padding-top: 110px;
@@ -140,8 +149,10 @@ a.top {
 	padding-right: 10px;
 	width: 60px;
 }
+.navbar {
+	flex-wrap: nowrap !important;
+}
 .navbar_private {
-	padding-top: 0;
 	height: 55px;
 	color: white;
 	background-color: var(--main-color);
@@ -151,7 +162,7 @@ a.top {
 	color: var(--third-color) !important;
 	font-size: 1.5em;
 }
-.fa-layers, .fa-user-circle, .fa-plus {
+.fa-layers, .fa-plus {
 	font-size: 28px;
 }
 .logoDashboard, .fa-plus, .fa-layers, .fa-user-circle {
@@ -225,7 +236,7 @@ a.top {
 }
 #content {
 	width: calc(100% - 250px);
-    padding: 40px;
+    padding: 95px 40px 10px 40px;
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
@@ -246,6 +257,15 @@ a.top {
 	}
 	.logoDashboard {
 		display: none;
+	}
+	#content {
+		padding: 95px 0 0 0;
+	}
+	.img_user_message {
+		display: none;
+	}
+	.conversation_title, .text_conversation_title {
+		padding: 0 !important;
 	}
 }
 
@@ -279,4 +299,67 @@ a:hover, a:focus {
 }
 .title_content:hover {
 	opacity: 0.7;
+}
+
+/*---------------------------------------------   User Settings   ---------------------------------------------------*/
+
+.user-circle-settings {
+	font-size: 70px;
+	color: var(--main-color);
+}
+
+/*---------------------------------------------   Messaging   ---------------------------------------------------*/
+
+.messages_content {
+	/*min-height: 720px;*/
+	padding: 2rem 2rem;
+	margin-bottom: 0;
+
+}
+.conversation_title {
+	color: var(--main-color);
+	min-height: 70px;
+	padding: 20px 10px;
+	transition: all 0.2s;
+}
+.conversation_title:hover {
+	background-color: white;
+}
+.img_conversation_title {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.text_conversation_title {
+	padding-left: 20px;
+	overflow-wrap: break-word;
+}
+.text_username_contact {
+	margin-bottom: 3px;
+	padding: 10px;
+}
+
+/*Discussion*/
+
+.begin_flux {
+	padding-bottom: 20px;
+}
+.new_message {
+	margin-top: 20px;
+}
+.flux_message {
+	margin-top: -10px;
+}
+.flux_message_left {
+	background-color: white;
+	padding: 10px 20px;
+}
+.message_right {
+	padding-right: 20px;
+	overflow-wrap: break-word;
+}
+.flux_message_right {
+	color: var(--third-color);
+	background-color: var(--second-color);
+	padding: 10px 20px;
 }

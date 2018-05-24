@@ -45,17 +45,30 @@ namespace App;
 
 	// -- Partie privée
 	$router->get('/dashboard', "Private#displayDashboard");
+	$router->get('/parametres', "Private#displayUserSettings");
+
+	
+	$router->get('/messagerie/discussions', "Private#displayMessagingAll");
+	$router->get('/messagerie/talk', "Private#displayMessagingTalk");
+	$router->get('/messagerie', "Private#displayMessagingNotSeen");
+	
+	
+
 	$router->get('/disconnect', "Private#disconnect");
 
 	// -- Partie projet
 
 
 	// Router post
+	// -- Partie publique
 	$router->post('/processContact', "Public#processContact");
 	$router->post('/processRegistration', "Public#processRegistration");
 	$router->post('/processConnexion', "Public#processConnexion");
 	$router->post('/processForgottenPassword', "Public#processForgottenPassword");
 	$router->post('/processNewPassword', "Public#processNewPassword");
+
+	// -- Partie privée
+	$router->post('/processEditUser', "Private#processEditUser");
 
 	//Route execution
 	$router->run(); 

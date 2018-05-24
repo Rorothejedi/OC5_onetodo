@@ -67,6 +67,7 @@ class Database
 	{
 		$req = $this->getPDO()->prepare($request);
 		$req->execute($attributes);
+
 		if($fetch)
 		{
 			if ($count)

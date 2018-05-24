@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 15 mai 2018 à 19:52
+-- Généré le :  mar. 22 mai 2018 à 18:59
 -- Version du serveur :  10.1.30-MariaDB
 -- Version de PHP :  7.2.2
 
@@ -33,6 +33,13 @@ CREATE TABLE `access` (
   `id_project` int(11) NOT NULL,
   `access` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `access`
+--
+
+INSERT INTO `access` (`id_user`, `id_project`, `access`) VALUES
+(74, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -67,10 +74,18 @@ CREATE TABLE `message` (
 CREATE TABLE `project` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `color` varchar(10) DEFAULT NULL,
   `description` text,
-  `wiki` longtext,
-  `color` varchar(10) DEFAULT NULL
+  `wiki` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `project`
+--
+
+INSERT INTO `project` (`id`, `name`, `status`, `color`, `description`, `wiki`) VALUES
+(1, 'Projet test', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -109,7 +124,7 @@ CREATE TABLE `user` (
   `username` varchar(30) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `confirm_register` tinyint(4) NOT NULL DEFAULT '0',
+  `confirm_register` tinyint(1) NOT NULL DEFAULT '0',
   `token` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -118,7 +133,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `confirm_register`, `token`) VALUES
-(1, 'Rorothejedi', 'rodolphe.cabotiau@laposte.com', '1324', 1, NULL);
+(1, 'Rorothejedi', 'rodolphe.cabotiau@laposte.com', '1324', 1, NULL),
+(74, 'rodolphecabotiau', 'rodolphe.cabotiau@gmail.com', '$2y$10$94o2joSgjEVuWKu/ZuP/cuPODgaCavKWJRLoR5zN7yFJi37V91cbG', 1, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -183,7 +199,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `task`
@@ -201,7 +217,7 @@ ALTER TABLE `todolist`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- Contraintes pour les tables déchargées

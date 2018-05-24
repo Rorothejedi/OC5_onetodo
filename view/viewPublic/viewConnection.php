@@ -16,8 +16,8 @@
 							<input id="login" type="text" class="form-control" name="login" required>
 						</div>
 						<div class="form-group">
-							<label for="password">Mot de passe</label>
-							<input id="password" type="password" class="form-control" name="password" required>
+							<label for="pass">Mot de passe</label>
+							<input id="pass" type="password" class="form-control" name="password" required>
 							<small><a href="mot_de_passe_oublie">Mot de passe oublié ?</a></small>
 						</div>
 						<div class="form-group">
