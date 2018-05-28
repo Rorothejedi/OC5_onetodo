@@ -13,12 +13,6 @@
 
 	$absolute_path = "/projet_5_openclassrooms";
 
-	function setAbsolutePath()
-	{
-		global $absolute_path;
-		echo $absolute_path;
-	}
-
 	/*----------------------------------------   Common meta  ------------------------------------------------*/
 
 	$meta = '<meta charset="UTF-8">'.

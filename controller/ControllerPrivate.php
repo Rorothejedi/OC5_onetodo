@@ -20,19 +20,25 @@ class ControllerPrivate extends Alert
 		}
 	}
 
-	/**
-	 * Permet la récupération des projets en cours d'un utilisateur.
-	 * @return array Tableau contenant les données des projets auquels l'utilisateur a accès.
-	 */
-	public function callUserProjects()
+	public function initUser()
 	{
 		$user = new \App\model\User([
 			'id'       => $_SESSION['user_id'], 
 			'username' => $_SESSION['user_username']
 		]);
 
+		return $user;
+	}
+
+	/**
+	 * Permet la récupération des projets en cours d'un utilisateur.
+	 * @return array Tableau contenant les données des projets auquels l'utilisateur a accès.
+	 */
+	public function callUserProjects()
+	{
+		$user = $this->initUser();
 		$projectManager = new \App\model\ProjectManager();
-		$projects = $projectManager->getUserProjects($user);
+		$projects       = $projectManager->getUserProjects($user);
 		return $projects;
 	}
 
@@ -42,14 +48,18 @@ class ControllerPrivate extends Alert
 	 */
 	public function callUserData()
 	{
-		$user = new \App\model\User([
-			'id'       => $_SESSION['user_id'], 
-			'username' => $_SESSION['user_username']
-		]);
-
+		$user = $this->initUser();
 		$userManager = new \App\model\UserManager();
-		$userData = $userManager->getUser($user);
+		$userData    = $userManager->getUser($user);
 		return $userData;
+	}
+
+	public function callNotSeenMessage()
+	{
+		$user = $this->initUser();
+		$messageManager = new \App\model\MessageManager();
+		$notSeenMessage = $messageManager->getNotSeenMessage($user);
+		return $notSeenMessage;
 	}
 
 	/**
@@ -57,8 +67,9 @@ class ControllerPrivate extends Alert
 	 */
 	public function displayDashboard()
 	{
-		$projects = $this->callUserProjects();
-		$userData = $this->callUserData();
+		$projects       = $this->callUserProjects();
+		$userData       = $this->callUserData();
+		$notSeenMessage = $this->callNotSeenMessage();
 		require('./view/viewPrivate/viewDashboard.php');
 	}
 
@@ -67,39 +78,62 @@ class ControllerPrivate extends Alert
 	 */
 	public function displayUserSettings()
 	{
-		$userData = $this->callUserData();
-		$projects = $this->callUserProjects();
+		$userData       = $this->callUserData();
+		$projects       = $this->callUserProjects();
+		$notSeenMessage = $this->callNotSeenMessage();
 		require('./view/viewPrivate/viewUserSettings.php');
-	}
-
-	/**
-	 * Méthode d'affichage de la messagerie interne (messages non lus)
-	 */
-	public function displayMessagingNotSeen()
-	{
-		$userData = $this->callUserData();
-		$projects = $this->callUserProjects();
-		require('./view/viewPrivate/viewMessagingNotSeen.php');
 	}
 
 	/**
 	 * Méthode d'affichage de la messagerie interne (toutes les discussions)
 	 */
-	public function displayMessagingAll()
+	public function displayMessaging()
 	{
-		$userData = $this->callUserData();
-		$projects = $this->callUserProjects();
-		require('./view/viewPrivate/viewMessagingAll.php');
+		$userData       = $this->callUserData();
+		$projects       = $this->callUserProjects();
+		$notSeenMessage = $this->callNotSeenMessage();
+
+		$messageManager = new \App\model\MessageManager();
+		$conversations  = $messageManager->getConversations($userData);
+		$contacts       = $messageManager->getMainContact($userData);
+
+		require('./view/viewPrivate/viewMessaging.php');
 	}
 
 	/**
-	 * Méthode d'affichage de la messagerie interne (discussion privé entre deux utilisateurs)
+	 * Méthode d'affichage de la messagerie interne (discussion privé entre deux ou plusieurs utilisateurs)
 	 */
 	public function displayMessagingTalk()
 	{
-		$userData = $this->callUserData();
-		$projects = $this->callUserProjects();
-		require('./view/viewPrivate/viewMessagingTalk.php');
+		$userData       = $this->callUserData();
+		$projects       = $this->callUserProjects();
+
+		if (isset($_GET['conv']) && !empty($_GET['conv'])) 
+		{
+			$id_conversation = (int) htmlspecialchars($_GET['conv']);
+
+			$messageManager  = new \App\model\MessageManager();
+			$accessConv      = $messageManager->getAccessUserConversation($userData, $id_conversation);
+
+			if ($accessConv == 1) 
+			{
+				$messageManager->seenConversation($userData, $id_conversation);
+				$notSeenMessage = $this->callNotSeenMessage();
+
+				$users_conversation = $messageManager->getUsersConversations($id_conversation, $_SESSION['user_id']);
+				$main_contact_add = $messageManager->getMainContactAdd($userData, $id_conversation);
+				$conversation       = $messageManager->getConversation($id_conversation);
+				require('./view/viewPrivate/viewMessagingTalk.php');
+			}
+			else
+			{
+				$this->alert_failure('Vous n\'êtes pas autorisé à accéder à cette conversation', '../messagerie');
+			}
+		}
+		else 
+		{
+			$this->alert_failure('Cette conversation n\'existe pas', '../messagerie');
+		}
 	}
 
 	/**
@@ -202,6 +236,102 @@ class ControllerPrivate extends Alert
 		else
 		{
 			$this->alert_failure('Les champs "Nom d\'utilisateur" et "Email" doivent être correctement remplis', 'parametres');
+		}
+	}
+
+	public function newConversation()
+	{
+		$userData = $this->callUserData();
+
+		$messageManager      = new \App\model\MessageManager();
+		$id_new_conversation = $messageManager->addNewConversation($userData);
+
+		if (isset($_GET['user']))
+		{
+			if ((int) !empty($_GET['user'])) 
+			{
+				$id_user     = (int) htmlspecialchars($_GET['user']);
+				
+				$userManager = new \App\Model\UserManager();
+				$id_exist    = $userManager->existIdUser($id_user);
+
+				if ($id_exist > 0) 
+				{
+					$messageManager->addUserConversation($id_new_conversation->id, $id_user);
+					header('Location: ./messagerie/talk?conv=' . $id_new_conversation->id);
+					exit();
+				}
+				else
+				{
+					$this->alert_failure('L\'identifiant de l\'utilisateur que vous souhaitez ajouter n\'existe pas', 'messagerie');
+				}
+			}
+			else
+			{
+				$this->alert_failure('L\'identifiant de l\'utilisateur que vous souhaitez ajouter n\'est pas correct', 'messagerie');
+			}
+		}
+		else
+		{
+			header('Location: ./messagerie/talk?conv=' . $id_new_conversation->id);
+		}
+	}
+
+	public function addUserConversation()
+	{
+		if (isset($_GET['conv']) && !empty($_GET['conv']) 
+			&& isset($_GET['user']) && !empty($_GET['user']))
+		{
+			$id_conversation = (int) htmlspecialchars($_GET['conv']);
+			$id_user         = (int) htmlspecialchars($_GET['user']);
+
+			$userManager = new \App\Model\UserManager();
+			$id_exist    = $userManager->existIdUser($id_user);
+
+			if ($id_exist > 0) 
+			{
+				$messageManager      = new \App\model\MessageManager();
+				$messageManager->addUserConversation($id_conversation, $id_user);
+				header('Location: ./messagerie/talk?conv=' . $id_conversation);
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('L\'identifiant de l\'utilisateur que vous souhaitez ajouter n\'existe pas', 'messagerie/talk?conv=' . $id_conversation);
+			}
+		}
+		else
+		{
+			$this->alert_failure('L\'identifiant de l\'utilisateur que vous souhaitez ajouter n\'est pas correct', 'messagerie');
+		}
+	}
+
+	public function processNewMessage()
+	{
+		if (isset($_POST['content']) && !empty($_POST['content']) 
+			&& isset($_POST['conv']) && !empty($_POST['conv']))
+		{
+			$content         = htmlspecialchars($_POST['content']);
+			$id_conversation = (int) htmlspecialchars($_POST['conv']);
+
+			$userData       = $this->callUserData();
+			$messageManager = new \App\model\MessageManager();
+			$accessConv     = $messageManager->getAccessUserConversation($userData, $id_conversation);
+
+			if ($accessConv == 1) 
+			{
+				$messageManager->addMessage($id_conversation, $_SESSION['user_id'], $content);
+				header('Location: messagerie/talk?conv=' . $id_conversation);
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Vous n\'êtes pas autorisé à poster un message dans cette conversation', 'messagerie');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Le contenu de votre message n\'est pas valide', 'messagerie');
 		}
 	}
 }

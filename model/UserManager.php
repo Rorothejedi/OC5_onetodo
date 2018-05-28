@@ -77,6 +77,21 @@ class UserManager
 	}
 
 	/**
+	 * Permet de vérifier l'existence d'un utilisateur grâce à son id.
+	 * @param  int $id_user Identifiant de l'utilisateur potentiel.
+	 * @return int          Affiche le nombre de résultat obtenu. S'il y a un résultat, c'est que l'utilisateur existe.
+	 */
+	public function existIdUser($id_user)
+	{
+		$data = App::getDb()->prepare('
+			SELECT * FROM user WHERE id = :id_user',
+			[':id_user' => $id_user],
+		true, false, true);
+
+		return $data;
+	}
+
+	/**
 	 * Permet la validation d'un utilisateur en modifiant le contenu du champ 'confirm_register' dans la base de données. 
 	 * (0: inactif; 1: actif)
 	 * @param  User   $user Classe User contenant au moins le nom d'utilisateur.

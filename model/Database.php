@@ -45,12 +45,19 @@ class Database
 	 * @param  string $request Requête à effectuer dans la base de données.
 	 * @return array           Tableau contenant les résultats de la requête.
 	 */
-	public function query($request, $fetch = false)
+	public function query($request, $fetch = false, $one = false)
 	{
 		$req = $this->getPDO()->query($request);
 		if($fetch)
 		{
-			$data = $req->fetchAll(PDO::FETCH_OBJ);
+			if ($one) 
+			{
+				$data = $req->fetch(PDO::FETCH_OBJ);
+			}
+			else
+			{
+				$data = $req->fetchAll(PDO::FETCH_OBJ);
+			}
 			$req->closeCursor(); 
 			return $data;
 		}

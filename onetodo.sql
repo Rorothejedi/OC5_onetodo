@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 22 mai 2018 à 18:59
+-- Généré le :  ven. 25 mai 2018 à 13:22
 -- Version du serveur :  10.1.30-MariaDB
 -- Version de PHP :  7.2.2
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `access` (
   `id_user` int(11) NOT NULL,
   `id_project` int(11) NOT NULL,
-  `access` tinyint(4) NOT NULL
+  `access` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -39,7 +39,8 @@ CREATE TABLE `access` (
 --
 
 INSERT INTO `access` (`id_user`, `id_project`, `access`) VALUES
-(74, 1, 1);
+(74, 1, 1),
+(74, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -55,15 +56,48 @@ CREATE TABLE `associate` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `discussion`
+--
+
+CREATE TABLE `discussion` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `seen` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `discussion`
+--
+
+INSERT INTO `discussion` (`id`, `id_user`, `seen`) VALUES
+(0, 74, 0),
+(1, 74, 0),
+(2, 74, 0),
+(3, 1, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `message`
 --
 
 CREATE TABLE `message` (
-  `id_recipient` int(11) NOT NULL,
-  `id_sender` int(11) NOT NULL,
+  `id_discussion` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `content` text NOT NULL,
   `date_reception` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `message`
+--
+
+INSERT INTO `message` (`id_discussion`, `id_user`, `content`, `date_reception`) VALUES
+(0, 0, 'test message 1', '2018-05-25 13:13:00'),
+(0, 0, 'Test message 2', '2018-05-26 05:09:00'),
+(0, 0, 'Test message 3', '2018-05-26 10:09:00'),
+(0, 0, 'fdsfd', '2018-05-16 00:00:00'),
+(0, 0, 'fdsfdsfsd', '2018-05-26 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -85,7 +119,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `name`, `status`, `color`, `description`, `wiki`) VALUES
-(1, 'Projet test', 0, NULL, NULL, NULL);
+(1, 'Projet test', 0, NULL, NULL, NULL),
+(2, 'Projet bis', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -133,8 +168,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `confirm_register`, `token`) VALUES
+(0, 'test', 'fdsfsd', 'fdsfds', 1, NULL),
 (1, 'Rorothejedi', 'rodolphe.cabotiau@laposte.com', '1324', 1, NULL),
-(74, 'rodolphecabotiau', 'rodolphe.cabotiau@gmail.com', '$2y$10$94o2joSgjEVuWKu/ZuP/cuPODgaCavKWJRLoR5zN7yFJi37V91cbG', 1, NULL);
+(74, 'Rodolphe', 'rodolphe.cabotiau@gmail.com', '$2y$10$Pxoclzi9KZaD23ZwYNyfbeEMFuy1BXeUd5Udyt9uaRIkHiPwiDm/u', 1, NULL),
+(75, 'toto', 'r.cabotiau@intech-sud.fr', '$2y$10$94o2joSgjEVuWKu/ZuP/cuPODgaCavKWJRLoR5zN7yFJi37V91cbG', 1, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -155,11 +192,18 @@ ALTER TABLE `associate`
   ADD KEY `id_user` (`id_user`);
 
 --
+-- Index pour la table `discussion`
+--
+ALTER TABLE `discussion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Index pour la table `message`
 --
 ALTER TABLE `message`
-  ADD KEY `id_recipient` (`id_recipient`),
-  ADD KEY `id_sender` (`id_sender`);
+  ADD KEY `id_discussion` (`id_discussion`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Index pour la table `project`
@@ -196,10 +240,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `discussion`
+--
+ALTER TABLE `discussion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT pour la table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `task`
@@ -217,7 +267,7 @@ ALTER TABLE `todolist`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- Contraintes pour les tables déchargées
@@ -238,11 +288,17 @@ ALTER TABLE `associate`
   ADD CONSTRAINT `FK_id_user_associate` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
+-- Contraintes pour la table `discussion`
+--
+ALTER TABLE `discussion`
+  ADD CONSTRAINT `FK_id_user_discussion` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+
+--
 -- Contraintes pour la table `message`
 --
 ALTER TABLE `message`
-  ADD CONSTRAINT `FK_id_recipient_user` FOREIGN KEY (`id_recipient`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `FK_id_sender_user` FOREIGN KEY (`id_sender`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `FK_id_message_discussion` FOREIGN KEY (`id_discussion`) REFERENCES `discussion` (`id`),
+  ADD CONSTRAINT `FK_id_message_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
 -- Contraintes pour la table `task`

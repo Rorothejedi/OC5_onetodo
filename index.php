@@ -47,13 +47,11 @@ namespace App;
 	$router->get('/dashboard', "Private#displayDashboard");
 	$router->get('/parametres', "Private#displayUserSettings");
 
-	
-	$router->get('/messagerie/discussions', "Private#displayMessagingAll");
+	$router->get('/messagerie', "Private#displayMessaging");
 	$router->get('/messagerie/talk', "Private#displayMessagingTalk");
-	$router->get('/messagerie', "Private#displayMessagingNotSeen");
+	$router->get('/newConversation', "Private#newConversation");
+	$router->get('/addUserConversation', "Private#addUserConversation");
 	
-	
-
 	$router->get('/disconnect', "Private#disconnect");
 
 	// -- Partie projet
@@ -69,6 +67,10 @@ namespace App;
 
 	// -- Partie privée
 	$router->post('/processEditUser', "Private#processEditUser");
+	$router->post('/processNewMessage', "Private#processNewMessage");
+
+
+
 
 	//Route execution
 	$router->run(); 

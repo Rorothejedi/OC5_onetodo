@@ -28,8 +28,8 @@ section {
 }
 .alert {
 	position: fixed;
-	top : 94px;
-	right: 53px;
+	top : 85px;
+	right: 40px;
 	max-width: 50%;
 }
 .vertical_center {
@@ -46,6 +46,9 @@ a.top {
    	bottom: 30px;
    	right: 20px;
    	color: var(--user-color);
+}
+.breadcrumb {
+	margin-bottom: 0.25rem;
 }
 
 /*------------------------------------------   Homepage   -------------------------------------------------*/
@@ -162,13 +165,13 @@ a.top {
 	color: var(--third-color) !important;
 	font-size: 1.5em;
 }
-.fa-layers, .fa-plus {
+.fa-layers, .icon_plus {
 	font-size: 28px;
 }
-.logoDashboard, .fa-plus, .fa-layers, .fa-user-circle {
+.logoDashboard, .icon_plus, .fa-layers, .fa-user-circle {
 	transition: color 0.2s;
 }
-.logoDashboard:hover, .fa-plus:hover, .fa-layers:hover, .fa-user-circle:hover, .dropdown-item:hover {
+.logoDashboard:hover, .icon_plus:hover, .fa-layers:hover, .fa-user-circle:hover, .dropdown-item:hover {
 	color : var(--user-color) !important;
 }
 .fa-layers-counter {
@@ -236,7 +239,7 @@ a.top {
 }
 #content {
 	width: calc(100% - 250px);
-    padding: 95px 40px 10px 40px;
+    padding: 85px 25px 10px 25px;
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
@@ -313,14 +316,18 @@ a:hover, a:focus {
 .messages_content {
 	/*min-height: 720px;*/
 	padding: 2rem 2rem;
-	margin-bottom: 0;
-
+	/*margin-bottom: 0;*/
 }
 .conversation_title {
 	color: var(--main-color);
 	min-height: 70px;
-	padding: 20px 10px;
+	padding: 15px 10px;
 	transition: all 0.2s;
+	margin-bottom: 5px;
+}
+/*Si une conversation est considérée comme non-lue*/
+.not_seen {
+	background-color: var(--third-color);
 }
 .conversation_title:hover {
 	background-color: white;
@@ -333,10 +340,21 @@ a:hover, a:focus {
 .text_conversation_title {
 	padding-left: 20px;
 	overflow-wrap: break-word;
+	width: 100%;
 }
 .text_username_contact {
 	margin-bottom: 3px;
 	padding: 10px;
+}
+.new_conversation_button {
+	transition: background-color 0.3s, color 0.3s;
+	color: var(--main-color);
+	padding: 1.25rem 2rem;
+	margin-bottom: 1.7rem;
+}
+.new_conversation_button:hover {
+	background-color: var(--main-color);
+	color: var(--third-color);
 }
 
 /*Discussion*/
@@ -345,7 +363,7 @@ a:hover, a:focus {
 	padding-bottom: 20px;
 }
 .new_message {
-	margin-top: 20px;
+	margin-top: 15px;
 }
 .flux_message {
 	margin-top: -10px;
@@ -354,12 +372,28 @@ a:hover, a:focus {
 	background-color: white;
 	padding: 10px 20px;
 }
+.message_left {
+	padding-left: 20px;
+	overflow-wrap: break-word;
+}
 .message_right {
 	padding-right: 20px;
-	overflow-wrap: break-word;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .flux_message_right {
 	color: var(--third-color);
 	background-color: var(--second-color);
 	padding: 10px 20px;
+}
+.icon_add_user {
+	color: var(--main-color);
+	font-size: 1.75rem;
+	padding-right: 5px;
+}
+.user_fill_in_left {
+	width: 48px;
+}
+.user_fill_in_right {
+	width: 50px;
 }

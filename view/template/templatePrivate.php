@@ -34,14 +34,19 @@
     			<ul class="nav navbar-right">
     				<li class="nav-item" title="Créer un nouveau projet">
     					<a href="#">
-    						<i class="fas fa-plus"></i>
+    						<i class="fas fa-plus icon_plus"></i>
     					</a>
     				</li>
     				<li class="nav-item text-center" title="Voir les messages">
     					<a href="<?= $absolute_path ?>/messagerie">
 	    					<span class="fa-layers fa-fw">
 	    						<i class="fas fa-envelope"></i>
-	    						<span class="fa-layers-counter">5</span>
+	    						<?php 
+	    							if ($notSeenMessage > 0)
+	    							{
+	    								echo '<span class="fa-layers-counter">' . $notSeenMessage . '</span>';
+	    							} 
+	    						?>	
 	  						</span>
   						</a>
     				</li>

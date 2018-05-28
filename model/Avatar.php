@@ -72,6 +72,10 @@ class Avatar
 						'<small class="d-block">Ajouter un avatar</small>' .
 					'</a>';
 			}
+			elseif ($this->size === 50) 
+			{
+				$html = '<i class="fas fa-user-circle fa-3x"></i>';
+			}
 			else
 			{
 				$html = '<i class="fas fa-user-circle fa-2x"></i>';
