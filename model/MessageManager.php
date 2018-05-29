@@ -8,30 +8,6 @@ namespace App\model;
 class MessageManager
 {
 	
-	public function getDiscussions()
-	{
-		$data = App::getDb()->prepare('
-			SELECT d.id_discussion
-
-
-			--deleteUserDiscussion($id_user, $id_discussion)
-			-- Enleve un utilisateur de la discussion
-			DELETE discussion
-			FROM discussion
-			WHERE id_discussion = :id_user AND id_user = :id_discussion
-			------------------------------------------------------
-
-			--postNewMessage(Message $message)
-			-- Post un nouveau message dans une discussion donnée (prend objet message en paramètre)
-			INSERT INTO message
-				(id_discussion, id_user, content, date_reception)
-			VALUES
-				(:id_discussion, :id_user, :content, :date_reception)
-			---A test ----------------------------------------
-
-			');
-	}
-
 	/**
 	 * Permet d'afficher le nombre de message non-lus de l'utilisateur en cours.
 	 * @param  User   $user Objet User désignant l'utilisateur en cours nécessaire pour récupérer l'identifiant de celui-ci.
@@ -104,15 +80,15 @@ class MessageManager
 	public function getMainContact(User $user)
 	{
 		$data = App::getDb()->prepare('
-			SELECT m.id_user, u.username, u.email
-			FROM message m
-			INNER JOIN user u ON u.id = m.id_user
-			WHERE m.id_user != :id AND m.id_conversation IN (
-				SELECT m.id_conversation 
-				FROM message m
-				WHERE m.id_user = :id )
-			GROUP BY m.id_user
-			ORDER BY COUNT( m.id_user ) DESC
+			SELECT s.id_user, u.username, u.email
+			FROM seen s
+			INNER JOIN user u ON u.id = s.id_user
+			WHERE s.id_user != :id AND s.id_conversation IN (
+				SELECT s.id_conversation 
+				FROM seen s
+				WHERE s.id_user = :id )
+			GROUP BY s.id_user
+			ORDER BY COUNT( s.id_user ) DESC
 			LIMIT 6',
 			['id' => $user->id()],
 		true, false, false);
@@ -195,9 +171,9 @@ class MessageManager
 				INNER JOIN user u ON u.id = s.id_user
 				WHERE s.id_conversation = :id_conversation AND s.id_user != :id_user ) 
 			AND s.id_conversation IN (
-				SELECT m.id_conversation 
-				FROM message m
-				WHERE m.id_user = :id_user )
+				SELECT s.id_conversation 
+				FROM seen s
+				WHERE s.id_user = :id_user )
 			AND s.id_user != :id_user
 			GROUP BY s.id_user
 			ORDER BY COUNT( s.id_user ) DESC
@@ -252,10 +228,10 @@ class MessageManager
 	}
 
 	/**
-	 * [addMessage description]
-	 * @param int    $id_conversation [description]
-	 * @param int    $id_user         [description]
-	 * @param string $content         [description]
+	 * Permet d'ajouter un nouveau message dans une conversation
+	 * @param int    $id_conversation Identifiant de la conversation dans laquelle poster le message.
+	 * @param int    $id_user         Identifiant de l'auteur du message.
+	 * @param string $content         Contenu du message.
 	 */
 	public function addMessage($id_conversation, $id_user, $content)
 	{
@@ -271,7 +247,19 @@ class MessageManager
 		);
 	}
 
+	/**
+	 * Enleve l'utilisateur en cours de la conversation sélectionné.
+	 * @param  int    $id_conversation Identifiant de la conversation auquelle l'accès à l'utilisateur doit être supprimé.
+	 * @param  User   $user            Objet User désignant l'utilisateur en cours nécessaire pour récupérer l'identifiant de celui-ci.
+	 */
+	public function deleteUserConversation($id_conversation, User $user)
+	{
+		$data = App::getDb()->prepare('
+			DELETE FROM seen
+			WHERE id_conversation = :id_conversation AND id_user = :id_user',
+			['id_conversation' => $id_conversation,
+			'id_user' => $user->id()]
+		);
+	}
 
-
-	
 }

@@ -282,22 +282,64 @@ class ControllerPrivate extends Alert
 		if (isset($_GET['conv']) && !empty($_GET['conv']) 
 			&& isset($_GET['user']) && !empty($_GET['user']))
 		{
+			$userData = $this->callUserData();
+
 			$id_conversation = (int) htmlspecialchars($_GET['conv']);
-			$id_user         = (int) htmlspecialchars($_GET['user']);
 
-			$userManager = new \App\Model\UserManager();
-			$id_exist    = $userManager->existIdUser($id_user);
+			$userManager    = new \App\Model\UserManager();
+			$messageManager = new \App\model\MessageManager();
 
-			if ($id_exist > 0) 
+			$accessConv = $messageManager->getAccessUserConversation($userData, $id_conversation);
+
+			if ($accessConv == 1) 
 			{
-				$messageManager      = new \App\model\MessageManager();
-				$messageManager->addUserConversation($id_conversation, $id_user);
-				header('Location: ./messagerie/talk?conv=' . $id_conversation);
-				exit();
+				if (is_numeric($_GET['user']))
+				{
+					$id_user  = (int) htmlspecialchars($_GET['user']);
+					$id_exist = $userManager->existIdUser($id_user);
+
+					if ($id_exist > 0) 
+					{
+						$messageManager->addUserConversation($id_conversation, $id_user);
+						$this->alert_success('L\'utilisateur a été ajouté à la conversation avec succès');
+						header('Location: ./messagerie/talk?conv=' . $id_conversation);
+						exit();
+					}
+					else
+					{
+						$this->alert_failure('L\'identifiant de l\'utilisateur que vous souhaitez ajouter n\'existe pas', 'messagerie/talk?conv=' . $id_conversation);
+					}
+				}
+				elseif (is_string($_GET['user']))
+				{
+					$username       = htmlspecialchars($_GET['user']);
+					$username_exist = $userManager->existUser($username, '');
+
+					if ($username_exist > 0) 
+					{
+						$messageManager = new \App\model\MessageManager();
+
+						$user = new \App\model\User(['username' => $username]);
+						$id_user = $userManager->getUser($user);
+
+						$messageManager->addUserConversation($id_conversation, $id_user->id());
+						$this->alert_success('L\'utilisateur a été ajouté à la conversation avec succès');
+						header('Location: ./messagerie/talk?conv=' . $id_conversation);
+						exit();
+					}
+					else
+					{
+						$this->alert_failure('Le nom de l\'utilisateur que vous souhaitez ajouter n\'existe pas', 'messagerie/talk?conv=' . $id_conversation);
+					}
+				}
+				else
+				{
+					$this->alert_failure('L\'identifiant de l\'utilisateur que vous souhaitez ajouter n\'est pas correct', 'messagerie/talk?conv=' . $id_conversation);
+				}
 			}
 			else
 			{
-				$this->alert_failure('L\'identifiant de l\'utilisateur que vous souhaitez ajouter n\'existe pas', 'messagerie/talk?conv=' . $id_conversation);
+				$this->alert_failure('Vous n\'êtes pas autorisé à ajouté un utilisateur à cette conversation', 'messagerie/talk?conv=' . $id_conversation);
 			}
 		}
 		else
@@ -332,6 +374,34 @@ class ControllerPrivate extends Alert
 		else
 		{
 			$this->alert_failure('Le contenu de votre message n\'est pas valide', 'messagerie');
+		}
+	}
+
+	public function processDeleteUserConversation()
+	{
+		if (isset($_GET['conv']) && !empty($_GET['conv'])) 
+		{
+			$id_conversation = (int) htmlspecialchars($_GET['conv']);
+
+			$userData       = $this->callUserData();
+			$messageManager = new \App\model\MessageManager();
+			$accessConv     = $messageManager->getAccessUserConversation($userData, $id_conversation);
+
+			if ($accessConv == 1) 
+			{
+				$messageManager->deleteUserConversation($id_conversation, $userData);
+				$this->alert_success('Vous avez été retiré de cette conversation avec succès');
+				header('Location: ./messagerie');
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Cette conversation ne peut pas être supprimée car vous n\'y avez pas accès', 'messagerie');
+			}
+		}
+		else
+		{
+			$this->alert_failure('L\'identifiant de la conversation à supprimer n\'est pas correct', 'messagerie');
 		}
 	}
 }

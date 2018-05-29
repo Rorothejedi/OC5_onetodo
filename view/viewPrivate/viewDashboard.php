@@ -31,6 +31,7 @@
     			<li class="breadcrumb-item active" aria-current="Tableau de bord">Tableau de bord</li>
   			</ol>
 		</nav>
+		<br>
 
 		<?php if ($myProjectContent === true): ?>
 		<!-- Your projects -->

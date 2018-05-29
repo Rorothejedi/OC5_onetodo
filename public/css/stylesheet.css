@@ -397,3 +397,9 @@ a:hover, a:focus {
 .user_fill_in_right {
 	width: 50px;
 }
+.link_message, .link_message:hover {
+	color: var(--second-color);
+}
+.delete_conversation_icon:hover {
+	color: var(--danger) !important;
+}

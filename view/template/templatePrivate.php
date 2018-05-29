@@ -96,13 +96,22 @@
 		// Script pour pouvoir envoyer un message avec les touches entrées
 		$('#userMessage').keydown(function(event) 
 		{
-		    if (event.keyCode == 13) 
-		    {
-		        if (!event.shiftKey) 
-		        {
-		        	$('#formUserMessage').submit();
-		        }
-		    }
+			var attr = $('#userMessage').attr('readonly');
+
+			if (attr === undefined) {
+			    if (event.keyCode == 13) 
+			    {
+			        if (!event.shiftKey) 
+			        {
+			        	$('#formUserMessage').submit();
+			        }
+			    }
+			}
+		});
+
+		// Script de fonctionnement des tooltips
+		$(document).ready(function(){
+    		$('[data-toggle="tooltip"]').tooltip();   
 		});
 		
 		// $('#content_messaging').load('./view/viewPrivate/viewMessagingNotSeen.php');

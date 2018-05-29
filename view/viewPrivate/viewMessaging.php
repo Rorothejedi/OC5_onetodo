@@ -20,12 +20,19 @@
 						</div>
 						<hr>
 					</div>
+					<?php 
+
+						if (count($conversations) == 0) 
+						{
+							echo '<p class="text-muted font-italic">Démarrez dès maintenant <a href="newConversation">une nouvelle conversation</a> !</p>';
+						}
+					 ?>
 					
 					<?php foreach ($conversations as $key => $conversation): 
 						$usernames = $messageManager->getUsersConversations($conversation->id_conversation, $_SESSION['user_id']);
 					?>
 					<!-- Message -->
-					<a href="messagerie/talk?conv=<?= $conversation->id_conversation ?>">
+					<a href="messagerie/talk?conv=<?= $conversation->id_conversation ?>" class="link_message">
 						<div class="conversation_title d-flex rounded <?php if($conversation->seen < 1){echo 'table-warning';} ?>">
 							<div class="img_conversation_title">
 								<?php 
@@ -34,20 +41,20 @@
 								?>
 							</div>
 							<div class="text_conversation_title">
-									<div class="d-flex justify-content-between">
-										<div>
-											<?php 
-												$name = '';
-												foreach ($usernames as $key => $username) 
-												{
-													$name .= "<strong>" . $username->username . "</strong> | ";
-												} 
-												echo substr($name, 0, -2);
-											?>
-										</div>
-										<small class="text-muted"><?= $conversation->date_reception ?></small>
+								<div class="d-flex justify-content-between">
+									<div>
+										<?php 
+											$name = '';
+											foreach ($usernames as $key => $username) 
+											{
+												$name .= "<strong>" . $username->username . "</strong> | ";
+											} 
+											echo substr($name, 0, -2);
+										?>
 									</div>
-								<div>
+									<small class="text-muted"><?= $conversation->date_reception ?></small>
+								</div>
+								<div class="d-flex justify-content-between">
 									<span class="text-muted">
 										<?php 
 											if ($conversation->username == $_SESSION['user_username']) 
@@ -60,6 +67,9 @@
 											} 
 										?>
 									</span>
+									<a href="deleteUserConversation?conv=<?= $conversation->id_conversation ?>" data-confirm="Etes-vous certain de vouloir vous retirer de cette conversation ?" class="delete_conversation_icon text-muted" data-toggle="tooltip" data-placement="left" title="Se retirer de la conversation">
+										<i class="fas fa-times-circle"></i>
+									</a>
 								</div>
 							</div>
 						</div>

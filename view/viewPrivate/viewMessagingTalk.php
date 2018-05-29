@@ -153,9 +153,10 @@
 						<h5>Ajouter à la conversation</h5>
 						<hr>
 					</div>
-					<form action="">
+					<form action="../addUserConversation" method="GET">
 						<div class="input-group">
-							<input type="text" placeholder="Un utilisateur..." aria-label="Rechercher un utilisateur" class="form-control">
+							<input name='user' type="text" placeholder="Un utilisateur..." aria-label="Rechercher un utilisateur" class="form-control">
+							<input type="hidden" name="conv" value="<?= $_GET['conv'] ?>">
 							<div class="input-group-append">
 							    <button class="btn btn-dark" type="submit"><i class="fas fa-plus"></i></button>
 							</div>

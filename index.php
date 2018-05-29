@@ -51,6 +51,7 @@ namespace App;
 	$router->get('/messagerie/talk', "Private#displayMessagingTalk");
 	$router->get('/newConversation', "Private#newConversation");
 	$router->get('/addUserConversation', "Private#addUserConversation");
+	$router->get('/deleteUserConversation', "Private#processDeleteUserConversation");
 	
 	$router->get('/disconnect', "Private#disconnect");
 
