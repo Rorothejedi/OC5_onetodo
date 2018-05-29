@@ -54,6 +54,7 @@
 	  					</div>
 	  					<div class="card-body">
 	  						<?php if (isset($project->description)) { echo $project->description;} ?>
+	  						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eleifend congue elit non dignissim. Proin vel metus luctus, faucibus erat ut, rhoncus enim. Etiam rhoncus purus metus.
 	  					</div>
 	  				</div>
   				</a>

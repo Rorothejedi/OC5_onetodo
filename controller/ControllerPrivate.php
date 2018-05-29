@@ -20,6 +20,10 @@ class ControllerPrivate extends Alert
 		}
 	}
 
+	/**
+	 * Instancie l'objet User avec les données de l'utilisateur en cours.
+	 * @return Object User
+	 */
 	public function initUser()
 	{
 		$user = new \App\model\User([
@@ -54,6 +58,10 @@ class ControllerPrivate extends Alert
 		return $userData;
 	}
 
+	/**
+	 * Permet de récupérer le nombre de message non-lus de l'utilisateur en cours.
+	 * @return int Nombre de message non-lus.
+	 */
 	public function callNotSeenMessage()
 	{
 		$user = $this->initUser();
@@ -71,6 +79,17 @@ class ControllerPrivate extends Alert
 		$userData       = $this->callUserData();
 		$notSeenMessage = $this->callNotSeenMessage();
 		require('./view/viewPrivate/viewDashboard.php');
+	}
+
+	/**
+	 * Méthode d'affichage de la page de création de projet.
+	 */
+	public function displayCreateProject()
+	{
+		$projects       = $this->callUserProjects();
+		$userData       = $this->callUserData();
+		$notSeenMessage = $this->callNotSeenMessage();
+		require('./view/viewPrivate/viewCreateProject.php');
 	}
 
 	/**
@@ -101,6 +120,7 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
+	 * /messagerie/talk
 	 * Méthode d'affichage de la messagerie interne (discussion privé entre deux ou plusieurs utilisateurs)
 	 */
 	public function displayMessagingTalk()
@@ -137,6 +157,7 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
+	 * /disconnect
 	 * Permet de déconnecter un utilisateur.
 	 */
 	public function disconnect()
@@ -147,9 +168,8 @@ class ControllerPrivate extends Alert
 		exit();
 	}
 
-	// PROCESS ------
-	
 	/**
+	 * /parametres
 	 * Permet l'édition des données concernant l'utilisdateur par celui-ci (nom d'utilisateur, email, mot de passe).
 	 */
 	public function processEditUser()
@@ -239,6 +259,12 @@ class ControllerPrivate extends Alert
 		}
 	}
 
+	/**
+	 * /messagerie
+	 * Permet de créer une nouvelle conversation (vérification des données reçues, vérification de l'utilisateur).
+	 * Si une données utilisateur est transmise, sa vérification est effectuée.
+	 * S'il n'y a pas de données utilisateur, la conversation est créer sans y ajouter d'utilisateur.
+	 */
 	public function newConversation()
 	{
 		$userData = $this->callUserData();
@@ -277,6 +303,10 @@ class ControllerPrivate extends Alert
 		}
 	}
 
+	/**
+	 * /messagerie/talk
+	 * Permet d'ajouter un utilisateur (avec son pseudo (barre de recherche) ou son id) à une conversation déjà existante.
+	 */
 	public function addUserConversation()
 	{
 		if (isset($_GET['conv']) && !empty($_GET['conv']) 
@@ -348,6 +378,10 @@ class ControllerPrivate extends Alert
 		}
 	}
 
+	/**
+	 * /messagerie/talk
+	 * Permet d'ajouter un nouveau message à une conversation.
+	 */
 	public function processNewMessage()
 	{
 		if (isset($_POST['content']) && !empty($_POST['content']) 
@@ -377,6 +411,10 @@ class ControllerPrivate extends Alert
 		}
 	}
 
+	/**
+	 * /messagerie
+	 * Permet de retirer l'utilisateur en cours de la conversation qu'il a sélectionnée.
+	 */
 	public function processDeleteUserConversation()
 	{
 		if (isset($_GET['conv']) && !empty($_GET['conv'])) 
@@ -404,4 +442,6 @@ class ControllerPrivate extends Alert
 			$this->alert_failure('L\'identifiant de la conversation à supprimer n\'est pas correct', 'messagerie');
 		}
 	}
+
+
 }

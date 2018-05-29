@@ -32,12 +32,12 @@
 	    			<a class="navbar-brand logoDashboard" href="<?= $absolute_path ?>/dashboard">ONE TO DO</a>
   				</div>
     			<ul class="nav navbar-right">
-    				<li class="nav-item" title="Créer un nouveau projet">
-    					<a href="#">
+    				<li class="nav-item" title="Créer un nouveau projet" data-toggle="tooltip" data-placement="bottom">
+    					<a href="<?= $absolute_path ?>/nouveauProjet">
     						<i class="fas fa-plus icon_plus"></i>
     					</a>
     				</li>
-    				<li class="nav-item text-center" title="Voir les messages">
+    				<li class="nav-item text-center" title="Voir les messages" data-toggle="tooltip" data-placement="bottom">
     					<a href="<?= $absolute_path ?>/messagerie">
 	    					<span class="fa-layers fa-fw">
 	    						<i class="fas fa-envelope"></i>
@@ -109,9 +109,44 @@
 			}
 		});
 
-		// Script de fonctionnement des tooltips
-		$(document).ready(function(){
+		// Script de fonctionnement des tooltips.
+		$(document).ready(function()
+		{
     		$('[data-toggle="tooltip"]').tooltip();   
+		});
+
+		// Script qui gère le compteur de caractère de la description de création de projet.
+		$(document).ready(function()
+		{
+			var max = 180;
+			$('#descriptionProject').keypress(function(event) 
+			{
+				if (event.which < 0x20) {
+					if ($(this).val().length - 1 == -1) 
+					{
+						$('.charactersCount').fadeIn('fast').text('Il vous reste 180 caractères');
+					} 
+					else
+					{
+						$('.charactersCount').fadeIn('fast').text('Il vous reste ' + (max - ($(this).val().length - 1))  + ' caractères');
+					}
+					return;
+				}
+
+				if ($(this).val().length < max) 
+				{
+					$('.charactersCount').fadeIn('fast').text('Il vous reste ' + (max - ($(this).val().length + 1)) + ' caractères');
+					$('.charactersCountFillIn').addClass('hidden');
+				}
+				else if ($(this).val().length == max) 
+				{
+					event.preventDefault();
+				}
+				else if ($(this).val().length > max)
+				{
+					$(this).val() = $(this).val().substring(0, max);
+				}
+			});
 		});
 		
 		// $('#content_messaging').load('./view/viewPrivate/viewMessagingNotSeen.php');
