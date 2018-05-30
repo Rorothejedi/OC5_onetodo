@@ -150,7 +150,6 @@ a.top {
 	justify-content: center;
 	padding-left: 10px;
 	padding-right: 10px;
-	width: 60px;
 }
 .navbar {
 	flex-wrap: nowrap !important;
@@ -164,6 +163,9 @@ a.top {
 	font-family: 'Waterlily', sans-serif;
 	color: var(--third-color) !important;
 	font-size: 1.5em;
+}
+.icon-navbar {
+	width: 60px;
 }
 .fa-layers, .icon_plus {
 	font-size: 28px;
@@ -401,4 +403,10 @@ a:hover, a:focus {
 }
 .delete_conversation_icon:hover {
 	color: var(--danger) !important;
+}
+
+/*---------------------------------------------   Common : Projects   ---------------------------------------------------*/
+
+.project {
+	padding: 55px 0px 25px 0px !important;
 }

@@ -1,10 +1,10 @@
 <?php 
 	$title = 'OneToDo | Paramètres du projet';
 	ob_start();
+	require('projectNavbar.php');
 ?>
 
 	<div class="container-fluid">
-		<?php require('projectNavbar.php'); ?>
 		<h3>Paramètres du projet</h3>
 	</div>
 

@@ -10,12 +10,12 @@
 	    			<a class="navbar-brand logoDashboard" href="<?= \App\model\App::getDomainPath() ?>/dashboard">ONE TO DO</a>
   				</div>
     			<ul class="nav navbar-right">
-    				<li class="nav-item" title="Créer un nouveau projet" data-toggle="tooltip" data-placement="bottom">
+    				<li class="nav-item icon-navbar" title="Créer un nouveau projet" data-toggle="tooltip" data-placement="bottom">
     					<a href="<?= \App\model\App::getDomainPath() ?>/nouveauProjet">
     						<i class="fas fa-plus icon_plus"></i>
     					</a>
     				</li>
-    				<li class="nav-item text-center" title="Voir les messages" data-toggle="tooltip" data-placement="bottom">
+    				<li class="nav-item text-center icon-navbar" title="Voir les messages" data-toggle="tooltip" data-placement="bottom">
     					<a href="<?= \App\model\App::getDomainPath() ?>/messagerie">
 	    					<span class="fa-layers fa-fw">
 	    						<i class="fas fa-envelope"></i>
@@ -28,7 +28,7 @@
 	  						</span>
   						</a>
     				</li>
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown icon-navbar">
 					  	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Options profil"> 
           					<?= $avatar->generateGravatar() ?>
         				</a>

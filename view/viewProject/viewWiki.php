@@ -1,10 +1,10 @@
 <?php 
 	$title = 'OneToDo | Wiki projet';
 	ob_start();
+	require('projectNavbar.php');
 ?>
 
 	<div class="container-fluid">
-		<?php require('projectNavbar.php'); ?>
 		<h3>Wiki</h3>
 	</div>
 

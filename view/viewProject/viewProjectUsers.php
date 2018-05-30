@@ -1,10 +1,10 @@
 <?php 
 	$title = 'OneToDo | Utilisateurs du projet';
 	ob_start();
+	require('projectNavbar.php');
 ?>
 
 	<div class="container-fluid">
-		<?php require('projectNavbar.php'); ?>
 		<h3>Liste des utilisateurs du projet</h3>
 	</div>
 

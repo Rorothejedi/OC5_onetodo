@@ -1,10 +1,10 @@
 <?php 
 	$title = 'OneToDo | Liste(s) des tâches';
 	ob_start();
+	require('projectNavbar.php');
 ?>
 
 	<div class="container-fluid">
-		<?php require('projectNavbar.php'); ?>
 		<h3>Todolist !</h3>
 	</div>
 

@@ -3,8 +3,8 @@
 	ob_start();
 ?>
 
+	<?php require('projectNavbar.php'); ?>
 	<div class="container-fluid">
-		<?php require('projectNavbar.php'); ?>
 		<h3>Home !</h3>
 	</div>
 

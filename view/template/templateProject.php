@@ -25,7 +25,7 @@
 
 	<div class="wrapper">
 		<?php require('sidebar.php'); ?>
-	    <section id="content">
+	    <section id="content" class="project">
 	       <?= $content ?>
 	    </section>
 	</div>

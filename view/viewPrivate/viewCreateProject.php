@@ -32,7 +32,21 @@
 							</div>
 							<div class="form-group col-lg-6">
 								<label for="colorProject">Couleur</label>
-								<input id="colorProject" name="colorProject" type="color" value="#306BA2" class="form-control">
+								<input id="colorProject" name="colorProject" type="color" list="colors" value="#306BA2" class="form-control">
+								<datalist id="colors">
+									<option>#2c3e50</option>
+									<option>#34495e</option>
+									<option>#27ae60</option>
+									<option>#16a085</option>
+									<option>#408080</option>
+									<option>#2980b9</option>
+									<option>#306BA2</option>
+									<option>#9b59b6</option>
+									<option>#8e44ad</option>
+									<option>#e74c3c</option>
+									<option>#c0392b</option>
+									<option>#ff8000</option>
+								</datalist>
 							</div>
 						</div>
 						<div class="form-group">
