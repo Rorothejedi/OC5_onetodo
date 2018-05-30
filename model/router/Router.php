@@ -11,7 +11,8 @@ class Router {
     private $routes = []; // Contiendra la liste des routes
     private $namedRoutes = [];
 
-    public function __construct($url){
+    public function __construct($url)
+    {
         $this->url = $url;
     }
 

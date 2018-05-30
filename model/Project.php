@@ -9,6 +9,7 @@ class Project
 {
 	private $_id;
 	private $_name;
+	private $_link;
 	private $_status;
 	private $_color;
 	private $_description;
@@ -38,12 +39,13 @@ class Project
 	}
 
 	//Liste des getters
-	public function id() { return $this->_id; }
-	public function name() { return $this->_name; }
-	public function status() { return $this->_status; }
-	public function color() { return $this->_color; }
+	public function id() { 			return $this->_id; }
+	public function name() { 		return $this->_name; }
+	public function link() { 		return $this->_link; }
+	public function status() {		return $this->_status; }
+	public function color() {		return $this->_color; }
 	public function description() { return $this->_description; }
-	public function wiki() { return $this->_wiki; }
+	public function wiki() { 		return $this->_wiki; }
 
 	// Liste des setters
 	public function setId($id)
@@ -53,9 +55,17 @@ class Project
 
 	public function setName($name)
 	{
-		if (is_string($name))  
+		if (is_string($name) && strlen($name) <= 70)  
 		{
 			$this->_name = $name;
+		}
+	}
+
+	public function setLink($link)
+	{
+		if (is_string($link))
+		{
+			$this->_link = $link;
 		}
 	}
 
@@ -80,7 +90,7 @@ class Project
 
 	public function setDescription($description)
 	{
-		if (is_string($description)) 
+		if (is_string($description) && strlen($description) <= 180) 
 		{
 			$this->_description = $description;
 		}

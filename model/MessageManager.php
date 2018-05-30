@@ -3,7 +3,7 @@ namespace App\model;
 
 /**
  * Class MessageManager
- * 
+ * Gére toutes les requêtes relative à la messagerie, au messages et aux conversation.
  */
 class MessageManager
 {

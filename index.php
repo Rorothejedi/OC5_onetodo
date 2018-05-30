@@ -57,6 +57,11 @@ namespace App;
 	$router->get('/disconnect', "Private#disconnect");
 
 	// -- Partie projet
+	$router->get('/projet/:slug/tâches', 'Project#displayTodolist');
+	$router->get('/projet/:slug/wiki', 'Project#displayWiki');
+	$router->get('/projet/:slug/utilisateurs', 'Project#displayProjectUsers');
+	$router->get('/projet/:slug/parametres', 'Project#displayProjectSettings');
+	$router->get('/projet/:slug', 'Project#displayHomeProject');
 
 
 	// Router post

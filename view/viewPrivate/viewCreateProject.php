@@ -17,10 +17,10 @@
 						<h5>Avant de commencer, dites-nous tout sur votre projet ...</h5>
 						<hr>
 					</div>
-					<form action="nouveauProjet" method="POST">
+					<form action="processNewProject" method="POST">
 						<div class="form-group">
-							<label for="projectName">Nom du projet</label>
-							<input id="projectName" name="projectName" type="text" class="form-control" required>
+							<label for="projectName">Nom du projet <em class="text-muted small">(70 caractères maximum)</em></label>
+							<input id="projectName" name="projectName" type="text" class="form-control" maxlength="70" required>
 						</div>
 						<div class="form-row justify-content-between">
 							<div class="form-group col-lg-5">
@@ -37,7 +37,7 @@
 						</div>
 						<div class="form-group">
 							<label for="descriptionProject">Description <em class="text-muted small">(180 caractères maximum)</em></label>
-							<textarea id="descriptionProject" name="descriptionProject" rows="3" class="form-control" placeholder="Facultative"></textarea>
+							<textarea id="descriptionProject" name="descriptionProject" rows="3" class="form-control" placeholder="Facultative" maxlength="180"></textarea>
 							<p class="charactersCount hidden text-muted">fdsfdf</p>
 							<br class="charactersCountFillIn">
 						</div>

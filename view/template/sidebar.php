@@ -25,11 +25,13 @@
 
 <nav id="sidebar">
     <ul class="list-unstyled components">
-    	<hr>
+    	
     	<li>
-    		<a href="<?= $absolute_path ?>/dashboard"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Tableau de bord</a>
+            <hr>
+    		<a href="<?= \App\model\App::getDomainPath() ?>/dashboard"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Tableau de bord</a>
+            <hr>
     	</li>
-    	<hr>
+    	
 
     	<?php if ($myProjectContent === true): ?>
 
@@ -44,7 +46,7 @@
 						if ($project->access == 1):
 				?>
 
-                <li><a href="#" class="rounded-left"><?= $project->name ?></a></li>
+                <li><a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left"><?= $project->name ?></a></li>
 
                 <?php 
 						endif;
@@ -70,7 +72,7 @@
 						if ($project->access == 2):
 				?>
 
-                <li><a href="<?= $absolute_path ?>/#" class="rounded-left"><?= $project->name ?></a></li>
+                <li><a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left"><?= $project->name ?></a></li>
 
                 <?php 
 						endif;
@@ -96,7 +98,7 @@
 						if ($project->access == 3):
 				?>
 
-                <li><a href="#" class="rounded-left"><?= $project->name ?></a></li>
+                <li><a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left"><?= $project->name ?></a></li>
 
                 <?php 
 						endif;

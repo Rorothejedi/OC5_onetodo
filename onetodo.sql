@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 28 mai 2018 à 21:42
+-- Généré le :  mer. 30 mai 2018 à 18:15
 -- Version du serveur :  10.1.30-MariaDB
 -- Version de PHP :  7.2.2
 
@@ -40,7 +40,11 @@ CREATE TABLE `access` (
 
 INSERT INTO `access` (`id_user`, `id_project`, `access`) VALUES
 (74, 1, 1),
-(74, 2, 2);
+(74, 2, 2),
+(74, 8, 1),
+(74, 9, 1),
+(74, 10, 1),
+(79, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -68,66 +72,21 @@ CREATE TABLE `conversation` (
 --
 
 INSERT INTO `conversation` (`id`) VALUES
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(10),
-(11),
-(12),
-(13),
-(14),
-(15),
-(16),
-(17),
-(18),
-(19),
-(20),
-(21),
-(22),
-(23),
-(24),
-(26),
-(27),
-(28),
-(29),
-(30),
-(31),
-(32),
-(33),
-(34),
-(35),
-(36),
-(37),
-(38),
-(39),
-(40),
-(41),
-(42),
-(43),
-(44),
-(45),
-(46),
-(47),
-(48),
-(49),
-(50),
-(51),
-(52),
-(53),
-(54),
-(55),
-(56),
-(57),
-(58),
-(59),
-(60),
-(61),
-(62),
-(63),
-(64);
+(68),
+(69),
+(70),
+(71),
+(72),
+(73),
+(74),
+(75),
+(76),
+(77),
+(78),
+(79),
+(80),
+(81),
+(82);
 
 -- --------------------------------------------------------
 
@@ -148,30 +107,21 @@ CREATE TABLE `message` (
 --
 
 INSERT INTO `message` (`id`, `id_conversation`, `id_user`, `content`, `date_reception`) VALUES
-(7, 1, 74, 'Test conversation 1 avec Rodolphe !', '2018-05-25 00:00:00'),
-(8, 1, 1, 'Test conversation 1 avec Rorothejedi !', '2018-05-23 00:00:00'),
-(9, 1, 76, 'Test conversation 1 avec test !', '2018-05-29 00:00:00'),
-(10, 3, 74, 'Test conversation 3 avec Rodolphe !', '2018-05-26 14:00:00'),
-(11, 3, 75, 'Test conversation 3 avec toto!', '2018-05-31 07:03:00'),
-(12, 2, 77, 'Test conversation 2 avec usertest!', '2018-05-31 04:00:00'),
-(13, 2, 74, 'Test conversation 2 avec Rodolphe !', '2018-06-06 03:00:00'),
-(14, 4, 76, 'Test conversation 4 avec test!', '2018-05-31 00:00:00'),
-(15, 4, 77, 'Test conversation 4 avec usertest!', '2018-06-04 05:00:00'),
-(16, 1, 77, 'vvfdfsd', '2018-05-17 00:00:00'),
-(17, 62, 74, 'test\r\n', '2018-05-28 20:32:38'),
-(18, 62, 74, 'test\r\n', '2018-05-28 20:33:24'),
-(19, 62, 74, 'Yo les gens !!!', '2018-05-28 20:36:35'),
-(20, 62, 74, 'C\'est okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk', '2018-05-28 20:36:59'),
-(21, 62, 74, 'C\'est oooooooooooooooooooooooooookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\r\ngfgdgdfgdfgfd', '2018-05-28 20:53:27'),
-(22, 62, 77, 'fdsfsdfsdfsdfdsf', '2018-06-21 09:00:00'),
-(23, 62, 74, 'Ca marche, je suis ok', '2018-05-28 21:15:34'),
-(24, 62, 77, 'fdsfsdfsdfsdfdsf', '2018-06-21 09:00:00'),
-(25, 63, 74, 'gfdgfdgd', '2018-05-28 21:25:01'),
-(26, 63, 1, 'fsdfdsfdsf', '2018-05-28 22:00:00'),
-(27, 63, 1, 'gfgdfgdf', '2018-05-28 21:27:47'),
-(28, 63, 1, 'gfdgdfgd', '2018-05-28 21:31:27'),
-(29, 62, 1, 'fvdfsdfdsf', '2018-05-28 21:32:04'),
-(30, 64, 74, 'hghfg', '2018-05-28 21:34:49');
+(33, 68, 74, 'SAlut !', '2018-05-29 11:18:39'),
+(34, 68, 74, 'Comment Ã§a va ?', '2018-05-29 11:18:47'),
+(35, 68, 74, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates vitae voluptatem et alias, excepturi, asperiores mollitia deserunt sit blanditiis totam temporibus quam necessitatibus exercitationem, repellat ex atque nihil. Porro, nobis!', '2018-05-29 11:19:00'),
+(36, 68, 74, 'test', '2018-05-29 11:33:44'),
+(37, 68, 74, 'blabla', '2018-05-29 12:10:10'),
+(38, 75, 74, 'Salut !', '2018-05-29 12:28:20'),
+(39, 75, 74, 'Comment Ã§a va ?', '2018-05-29 12:28:28'),
+(40, 76, 74, 'Salut les gars !', '2018-05-29 12:39:58'),
+(41, 76, 74, 'Comment allez-vous ?', '2018-05-29 12:40:05'),
+(42, 77, 74, 'Comment Ã§a se passe toto ?', '2018-05-29 12:40:35'),
+(43, 78, 74, 'Coucou !', '2018-05-29 12:40:58'),
+(44, 79, 79, 'Salut ! Ca va bien ?', '2018-05-29 12:45:32'),
+(45, 79, 74, 'Oui, bien ! \r\nEt toi ?', '2018-05-29 12:46:44'),
+(46, 79, 79, 'Pas trop mal ;-)', '2018-05-29 12:50:32'),
+(47, 82, 74, 'test', '2018-05-29 15:51:33');
 
 -- --------------------------------------------------------
 
@@ -182,9 +132,10 @@ INSERT INTO `message` (`id`, `id_conversation`, `id_user`, `content`, `date_rece
 CREATE TABLE `project` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
-  `color` varchar(10) DEFAULT NULL,
-  `description` text,
+  `color` varchar(10) DEFAULT '#306ba2',
+  `description` tinytext,
   `wiki` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -192,9 +143,13 @@ CREATE TABLE `project` (
 -- Déchargement des données de la table `project`
 --
 
-INSERT INTO `project` (`id`, `name`, `status`, `color`, `description`, `wiki`) VALUES
-(1, 'Projet test', 0, NULL, NULL, NULL),
-(2, 'Projet bis', 0, NULL, NULL, NULL);
+INSERT INTO `project` (`id`, `name`, `link`, `status`, `color`, `description`, `wiki`) VALUES
+(1, 'Projet test', 'projet-test', 0, '#306ba2', NULL, NULL),
+(2, 'Projet bis', 'projet-bis', 0, '#306ba2', NULL, NULL),
+(8, 'vvv', 'vvv', 0, '#306ba2', NULL, NULL),
+(9, 'Project test 2.0', 'projet-test-2.0', 0, '#ff8000', 'Je test tout !!!', NULL),
+(10, 'je test !!!', 'je-test-!!!', 1, '#408080', 'test dsqdsnqkjdhsq kskjdqhj sqjkdhsqjh sdhsqd jsqh dskqjdhsqhdksqh ksqdkjqsdk hskfhkgh ukfdhvkufhvuk hvufhvkufh vku vhudfhvukxh ukhxvukhxcvukh vukhcvukhxc kuvhcxukvhkcux hvukcxhvuk', NULL),
+(12, 'Mon super projet', 'mon-super-projet', 0, '#369c62', 'Le meilleur projet du monde !', NULL);
 
 -- --------------------------------------------------------
 
@@ -213,91 +168,28 @@ CREATE TABLE `seen` (
 --
 
 INSERT INTO `seen` (`id_conversation`, `id_user`, `seen`) VALUES
-(1, 74, 1),
-(1, 1, 1),
-(1, 76, 1),
-(3, 74, 1),
-(3, 75, 1),
-(2, 77, 1),
-(2, 74, 1),
-(4, 76, 1),
-(4, 77, 1),
-(1, 77, 1),
-(6, 74, 1),
-(10, 74, 1),
-(11, 75, 1),
-(12, 74, 1),
-(13, 74, 1),
-(14, 74, 1),
-(15, 74, 1),
-(16, 74, 1),
-(17, 74, 1),
-(18, 74, 1),
-(19, 74, 1),
-(20, 74, 1),
-(21, 74, 1),
-(22, 74, 1),
-(23, 74, 1),
-(24, 74, 1),
-(26, 74, 1),
-(27, 74, 1),
-(28, 74, 1),
-(29, 74, 1),
-(30, 74, 1),
-(31, 74, 1),
-(32, 74, 1),
-(33, 74, 1),
-(34, 74, 1),
-(35, 74, 1),
-(36, 74, 1),
-(35, 75, 1),
-(37, 74, 1),
-(38, 74, 1),
-(39, 74, 1),
-(40, 74, 1),
-(41, 74, 1),
-(42, 74, 1),
-(43, 74, 1),
-(44, 74, 1),
-(45, 74, 1),
-(46, 74, 1),
-(47, 74, 1),
-(48, 74, 1),
-(48, 77, 1),
-(49, 74, 1),
-(49, 77, 1),
-(50, 74, 1),
-(50, 77, 1),
-(51, 74, 1),
-(51, 77, 1),
-(52, 74, 1),
-(53, 74, 1),
-(53, 77, 1),
-(54, 74, 1),
-(54, 77, 1),
-(55, 74, 1),
-(55, 77, 1),
-(56, 74, 1),
-(56, 77, 1),
-(57, 74, 1),
-(57, 77, 1),
-(2, 76, 1),
-(2, 1, 1),
-(58, 74, 1),
-(58, 76, 1),
-(59, 74, 1),
-(59, 75, 1),
-(60, 74, 1),
-(61, 74, 1),
-(61, 76, 1),
-(62, 74, 1),
-(62, 77, 0),
-(62, 1, 0),
-(62, 76, 0),
-(63, 74, 0),
-(63, 1, 0),
-(64, 74, 1),
-(64, 1, 1);
+(68, 1, 0),
+(69, 74, 1),
+(70, 74, 1),
+(71, 74, 1),
+(72, 74, 1),
+(73, 74, 1),
+(74, 74, 1),
+(75, 77, 0),
+(76, 74, 1),
+(76, 77, 0),
+(76, 1, 0),
+(77, 74, 1),
+(77, 75, 0),
+(78, 74, 1),
+(78, 78, 0),
+(77, 1, 1),
+(79, 79, 1),
+(79, 74, 0),
+(80, 74, 1),
+(81, 74, 1),
+(82, 74, 1),
+(82, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -350,7 +242,8 @@ INSERT INTO `user` (`id`, `username`, `email`, `password`, `confirm_register`, `
 (75, 'toto', 'r.cabotiau@intech-sud.fr', '$2y$10$94o2joSgjEVuWKu/ZuP/cuPODgaCavKWJRLoR5zN7yFJi37V91cbG', 1, NULL),
 (76, 'test', 'test@test.com', 'fdsfsdfsdfsd', 0, NULL),
 (77, 'usertest', 'usertest@email.com', 'fdsfdsfsd', 0, NULL),
-(78, 'pastest', 'pastest@email.com', 'fdsfdsfdsfsdf', 0, NULL);
+(78, 'pastest', 'pastest@email.com', 'fdsfdsfdsfsdf', 0, NULL),
+(79, 'HappyTest', 'happytest@email.com', '$2y$10$xcEI3WrrFAjMcjdAIHjDFO0z4LOHlcO6FrfJDJ1DZqM16OrQeh67m', 1, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -389,7 +282,8 @@ ALTER TABLE `message`
 --
 ALTER TABLE `project`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD UNIQUE KEY `name` (`name`),
+  ADD UNIQUE KEY `link` (`link`);
 
 --
 -- Index pour la table `seen`
@@ -429,19 +323,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `conversation`
 --
 ALTER TABLE `conversation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT pour la table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `task`
@@ -459,7 +353,7 @@ ALTER TABLE `todolist`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- Contraintes pour les tables déchargées

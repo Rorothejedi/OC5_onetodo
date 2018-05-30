@@ -24,7 +24,7 @@ class ControllerPrivate extends Alert
 	 * Instancie l'objet User avec les données de l'utilisateur en cours.
 	 * @return Object User
 	 */
-	public function initUser()
+	private function initUser()
 	{
 		$user = new \App\model\User([
 			'id'       => $_SESSION['user_id'], 
@@ -38,7 +38,7 @@ class ControllerPrivate extends Alert
 	 * Permet la récupération des projets en cours d'un utilisateur.
 	 * @return array Tableau contenant les données des projets auquels l'utilisateur a accès.
 	 */
-	public function callUserProjects()
+	private function callUserProjects()
 	{
 		$user = $this->initUser();
 		$projectManager = new \App\model\ProjectManager();
@@ -50,7 +50,7 @@ class ControllerPrivate extends Alert
 	 * Permet la récupération des données concernant l'utilisateur actuellement connecté.
 	 * @return array Tableau contenant les données de l'utilisateur connecté.
 	 */
-	public function callUserData()
+	private function callUserData()
 	{
 		$user = $this->initUser();
 		$userManager = new \App\model\UserManager();
@@ -62,7 +62,7 @@ class ControllerPrivate extends Alert
 	 * Permet de récupérer le nombre de message non-lus de l'utilisateur en cours.
 	 * @return int Nombre de message non-lus.
 	 */
-	public function callNotSeenMessage()
+	private function callNotSeenMessage()
 	{
 		$user = $this->initUser();
 		$messageManager = new \App\model\MessageManager();
@@ -443,5 +443,84 @@ class ControllerPrivate extends Alert
 		}
 	}
 
+	public function processNewProject()
+	{
+		if (isset($_POST['projectName']) && !empty($_POST['projectName'])
+			&& isset($_POST['colorProject']) && !empty($_POST['colorProject'])  
+			&& isset($_POST['statusProject'])
+			&& isset($_POST['descriptionProject'])) 
+		{
+			$projectName   = htmlspecialchars($_POST['projectName']);
+			$statusProject = (int) htmlspecialchars($_POST['statusProject']);
+			$colorProject  = htmlspecialchars($_POST['colorProject']);
 
+			if (!empty($_POST['descriptionProject'])) 
+			{
+				$descriptionProject = htmlspecialchars($_POST['descriptionProject']);
+
+				if (strlen($descriptionProject) > 180) 
+				{
+					$this->alert_failure('La description de votre projet est trop longue (180 caractères maximum)', 'nouveauProjet');
+					exit();
+				}
+			}
+			else
+			{
+				$descriptionProject = null;
+			}
+
+			if (strlen($projectName) <= 70) 
+			{
+				$projectManager = new \App\model\ProjectManager();
+				$verifExistProjectName = $projectManager->existProject($projectName);
+
+				if ($verifExistProjectName == 0) 
+				{
+					if ($statusProject === 0 || $statusProject === 1) 
+					{
+						if (preg_match('/#([a-f0-9]{3}){1,2}\b/i', $colorProject))
+						{
+							$link = strtolower(str_replace(' ', '-', $projectName));
+							$newProject = new \App\model\Project([
+								'name'        => $projectName,
+								'link'		  => $link,
+								'status'      => $statusProject,
+								'color'       => $colorProject,
+								'description' => $descriptionProject
+							]);
+
+							$projectManager->addProject($newProject);
+							$actualProject = $projectManager->getProject($newProject);
+							$projectManager->addUserInProject($_SESSION['user_id'], $actualProject->id(), 1);
+
+							$this->alert_success('Votre projet <strong>' . $projectName . '</strong> a bien été créer !');
+							// todo : A changer. Mettre l'url du nouveau projet
+							header('Location: ./dashboard');
+							exit();
+						}
+						else
+						{
+							$this->alert_failure('La couleur de votre projet n\'est pas valide', 'nouveauProjet');
+						}
+					}
+					else
+					{
+						$this->alert_failure('Le status de votre projet n\'est pas valide', 'nouveauProjet');
+					}
+				}
+				else
+				{
+					$this->alert_failure('Ce nom de projet existe déjà', 'nouveauProjet');
+				}
+			}
+			else
+			{
+				$this->alert_failure('Le nom de votre projet est trop long (70 caractères maximum)', 'nouveauProjet');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les informations transmises ne sont pas correctes', 'nouveauProjet');
+		}
+	}
 }

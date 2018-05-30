@@ -9,19 +9,97 @@ class ProjectManager
 {
 
 	/**
-	 * [getProjects description]
+	 * Permet de récupérer les projets liés à un utilisateur.
 	 * @param  User   $user Objet User pour identifier les projets qui lui sont liés.
 	 * @return array       	Tableau contenant les données des projets concernant l'utilisateur passé en paramètre.
 	 */
 	public function getUserProjects(User $user)
 	{
 		$data = App::getDb()->prepare('
-			SELECT * FROM project p
+			SELECT p.name, p.link, p.status, p.color, p.description,
+			a.id_user, a.id_project, a.access,
+			u.username, u.email
+			FROM project p
 			RIGHT JOIN access a ON p.id = a.id_project
 			RIGHT JOIN user u ON a.id_user = u.id
 			WHERE u.id = :id',
 			['id' => $user->id()],
 		true, false, false);
+
+		return $data;
+	}
+
+	/**
+	 * Permet d'obtenir toutes les données d'un projet.
+	 * @param  Project $project Cet objet contient certaines des données unique du projet (id ou name).
+	 * @return object           Renvoi l'object Project avec toutes les données du projet passé en paramètre.
+	 */
+	public function getProject(Project $project)
+	{
+		$data = App::getDb()->prepare('
+			SELECT * FROM project WHERE id = :id_project OR name = :name_project OR link = :link_project',
+			['id_project'  => $project->id(),
+			'name_project' => $project->name(),
+			'link_project' => $project->link()],
+		true, true, false);
+
+		return new \App\model\Project($data);
+	}
+
+	public function existProject($name)
+	{
+		$link = strtolower(str_replace(' ', '-', $name));
+		$data = App::getDb()->prepare('
+			SELECT * FROM project WHERE name = :name_project OR link = :link',
+			['name_project' => $name,
+			'link'          => $link],
+		true, false, true);
+
+		return $data;
+	}
+
+	/**
+	 * Permet de créer un nouveau projet.
+	 * @param Project $project Objet contenant les informations du projet à créer.
+	 */
+	public function addProject(Project $project)
+	{
+		$data = App::getDb()->prepare('
+			INSERT INTO project
+				(name, link, status, color, description)
+			VALUES
+				(:name, :link, :status, :color, :description)',
+			['name'       => $project->name(),
+			'link'        => $project->link(),
+			'status'      => $project->status(),
+			'color'       => $project->color(),
+			'description' => $project->description()]
+		);
+	}
+
+	public function addUserInProject($id_user, $id_project, $access)
+	{
+		$data = App::getDb()->prepare('
+			INSERT INTO access
+				(id_user, id_project, access)
+			VALUES
+				(:id_user, :id_project, :access)',
+			['id_user'   => $id_user,
+			'id_project' => $id_project,
+			'access'     => $access]
+		);
+	}
+
+	public function verifAccessProject($id_user, $link_project)
+	{
+		$data = App::getDb()->prepare('
+			SELECT * 
+			FROM access
+			WHERE id_user = :id_user 
+			AND id_project = (SELECT id FROM project WHERE link = :link_project)',
+			['id_user'     => $id_user,
+			'link_project' => $link_project],
+		true, false, true);
 
 		return $data;
 	}

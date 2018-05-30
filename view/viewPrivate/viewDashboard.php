@@ -46,15 +46,14 @@
 				if ($project->access == 1):
 		?>
 
-			<div class="col-lg-3 tiles_project ">
-				<a href="#">
-					<div class="card">
+			<div class="col-lg-3 tiles_project">
+				<a href="projet/<?= $project->link ?>">
+					<div class="card" style="background-color: <?= $project->color ?>">
 	  					<div class="card-header">
 	  						<?= $project->name ?>
 	  					</div>
 	  					<div class="card-body">
 	  						<?php if (isset($project->description)) { echo $project->description;} ?>
-	  						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eleifend congue elit non dignissim. Proin vel metus luctus, faucibus erat ut, rhoncus enim. Etiam rhoncus purus metus.
 	  					</div>
 	  				</div>
   				</a>
@@ -71,7 +70,7 @@
 			else:
 		?>
 		<br>
-		<h5>Vous n'avez pas encore créé votre projet ? <a href="#">Lancez-vous</a> !</h5>
+		<h5>Vous n'avez pas encore créé votre projet ? <a href="nouveauProjet">Lancez-vous</a> !</h5>
 
 		<?php
 			endif; 
@@ -90,9 +89,9 @@
 					if ($project->access == 2):
 			?>
 
-			<div class="col-lg-3 tiles_project ">
-				<a href="#">
-					<div class="card">
+			<div class="col-lg-3 tiles_project">
+				<a href="projet/<?= $project->link ?>">
+					<div class="card" style="background-color: <?= $project->color ?>">
 	  					<div class="card-header">
 	  						<?= $project->name ?>
 	  					</div>
@@ -127,9 +126,9 @@
 					if ($project->access == 3):
 			?>
 
-			<div class="col-lg-3 tiles_project ">
-				<a href="#">
-					<div class="card">
+			<div class="col-lg-3 tiles_project">
+				<a href="projet/<?= $project->link ?>">
+					<div class="card" style="background-color: <?= $project->color ?>">
 	  					<div class="card-header">
 	  						<?= $project->name ?>
 	  					</div>

@@ -7,11 +7,9 @@
 	/*-----------------------------------   Medias and social networks --------------------------------------*/
 
 	$catchword  = "Gérez vos projets en toute simplicité !";
-	$urlAdress  = "https://rodolphe.cabotiau.com/projet_5_openclassrooms/";
+	$urlAdress  = "https://rodolphe.cabotiau.com" . \App\model\App::getDomainPath();
 	$keywords   = "gestion projets";
 	$twitterTag = "@RCabotiau";
-
-	$absolute_path = "/projet_5_openclassrooms";
 
 	/*----------------------------------------   Common meta  ------------------------------------------------*/
 
@@ -38,9 +36,9 @@
 	$linkGoogleFont   = '';
 
 	// Development stylesheet and minify version
-	$stylesheet       = '<link href="' . $absolute_path . '/public/css/stylesheet.css" rel="stylesheet">'.
-						'<!-- <link href="' . $absolute_path . '/public/css/stylesheet.min.css" rel="stylesheet"> -->'.
-						'<link rel="stylesheet" href="' . $absolute_path . '/public/css/hamburger.css">';
+	$stylesheet       = '<link href="' . \App\model\App::getDomainPath() . '/public/css/stylesheet.css" rel="stylesheet">'.
+						'<!-- <link href="' . \App\model\App::getDomainPath() . '/public/css/stylesheet.min.css" rel="stylesheet"> -->'.
+						'<link rel="stylesheet" href="' . \App\model\App::getDomainPath() . '/public/css/hamburger.css">';
 
 	$favicon          = '<!-- <link rel="shortcut icon" type="image/x-icon" href="./public/img/favicon.ico">  -->'.
 						'<!-- <link rel="icon" type="image/x-icon" href="./public/img/favicon.ico"> -->';
@@ -55,9 +53,12 @@
 
 	/*------------------------------------   Javascript files  ------------------------------------------------*/
 
-	$scriptScroll        = '<script src="' . $absolute_path . '/public/js/scroll.js"></script>';
-	$scriptAlert         = '<script src="' . $absolute_path . '/public/js/alert.js" async></script>';
-	$scriptInputChecking = '<script src="' . $absolute_path . '/public/js/inputChecking.js" async></script>';
-	$scriptGlobal        = '<script src="' . $absolute_path . '/public/js/global.js"></script>';
-	$scriptSidebar		 = '<script src="' . $absolute_path . '/public/js/sidebar.js"></script>';
-	$scriptConfirm		 = '<script src="' . $absolute_path . '/public/js/confirm.js"></script>'; 
+	$scriptScroll        = '<script src="' . \App\model\App::getDomainPath() . '/public/js/scroll.js"></script>';
+	$scriptAlert         = '<script src="' . \App\model\App::getDomainPath() . '/public/js/alert.js" async></script>';
+	$scriptInputChecking = '<script src="' . \App\model\App::getDomainPath() . '/public/js/inputChecking.js" async></script>';
+	$scriptGlobal        = '<script src="' . \App\model\App::getDomainPath() . '/public/js/global.js"></script>';
+	$scriptSidebar		 = '<script src="' . \App\model\App::getDomainPath() . '/public/js/sidebar.js"></script>';
+	$scriptConfirm		 = '<script src="' . \App\model\App::getDomainPath() . '/public/js/confirm.js"></script>'; 
+	$scriptTooltip       = '<script src="' . \App\model\App::getDomainPath() . '/public/js/tooltip.js"></script>';
+	$scriptTextarea		 = '<script src="' . \App\model\App::getDomainPath() . '/public/js/textarea.js"></script>';
+	$scriptProjectDescription = '<script src="' . \App\model\App::getDomainPath() . '/public/js/projectDescription.js"></script>';

@@ -11,6 +11,7 @@ class App
 	const DB_USER = 'root';
 	const DB_PASS = '';
 	const DB_HOST = 'localhost';
+	const DOMAIN_NAME = '/projet_5_openclassrooms';
 
 	private static $database;
 
@@ -21,5 +22,10 @@ class App
 			self::$database = new Database(self::DB_NAME, self::DB_USER, self::DB_PASS, self::DB_HOST);
 		}
 		return self::$database;
+	}
+
+	public static function getDomainPath()
+	{
+		return self::DOMAIN_NAME;
 	}
 }

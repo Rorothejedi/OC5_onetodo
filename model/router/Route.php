@@ -10,20 +10,20 @@ class Route
 	private $path;
 	private $callable;
 	private $matches = [];
-	private $params = [];
+	private $params  = [];
 
 	public function __construct($path, $callable)
 	{
-		$this->path = trim($path, '/');
+		$this->path     = trim($path, '/');
 		$this->callable = $callable;
 	}
 
 	public function match($url)
 	{
-	    $url = trim($url, '/');
-	    $path = preg_replace_callback('#:([\w]+)#', [$this, 'paramMatch'], $this->path);
-	    $path = str_replace('/', '/', $path);
-	    $regex = "#^$path$#i";
+		$url   = trim($url, '/');
+		$path  = preg_replace_callback('#:([\w]+)#', [$this, 'paramMatch'], $this->path);
+		$path  = str_replace('/', '/', $path);
+		$regex = "#^$path$#i";
 
 	    if(!preg_match($regex, $url, $matches))
 	    {
@@ -31,6 +31,7 @@ class Route
 	    }
 	    array_shift($matches);
 	    $this->matches = $matches;
+	    
 	    return true;
 	}
 
