@@ -1,5 +1,4 @@
 # OneToDo - Gérez facilement vos projets !
-<hr>
 
 Schéma de navigation
 
