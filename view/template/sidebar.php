@@ -26,8 +26,7 @@
 <nav id="sidebar">
     <ul class="list-unstyled components">
     	
-    	<li>
-            <hr>
+    	<li class="home-button">
     		<a href="<?= \App\model\App::getDomainPath() ?>/dashboard"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Tableau de bord</a>
             <hr>
     	</li>

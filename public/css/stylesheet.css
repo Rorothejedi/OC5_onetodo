@@ -12,7 +12,6 @@
 section {
 	width: 100%;
 	min-height: 100vh;
-	/*background-color: var(--third-color);*/
 }
 
 /*------------------------------------------   Common   -------------------------------------------------*/
@@ -27,6 +26,7 @@ section {
 	display: none;
 }
 .alert {
+	z-index: 999;
 	position: fixed;
 	top : 85px;
 	right: 40px;
@@ -151,13 +151,11 @@ a.top {
 	padding-left: 10px;
 	padding-right: 10px;
 }
-.navbar {
-	flex-wrap: nowrap !important;
-}
 .navbar_private {
 	height: 55px;
 	color: white;
 	background-color: var(--main-color);
+	flex-wrap: nowrap !important;
 }
 .logoDashboard {
 	font-family: 'Waterlily', sans-serif;
@@ -233,6 +231,16 @@ a.top {
 #sidebar.active {
     margin-left: -250px;
 }
+.home-button a {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 15px !important;
+	padding-bottom: 16px !important;
+}
+.home-button hr {
+	margin-top: 0;
+}
+
 /*Animation for caret icon*/
 .rotate.down {
     -moz-transform: rotate(180deg);
@@ -407,6 +415,20 @@ a:hover, a:focus {
 
 /*---------------------------------------------   Common : Projects   ---------------------------------------------------*/
 
+.fixed-top-2 {
+	width: calc(100% - 250px);
+	z-index: 1;
+	margin-top: 55px;
+	margin-left: 250px;
+	transition: width 0.3s, margin-left 0.3s;
+}
+.fixed-top-2.active {
+	width: 100%;
+	margin-left: 0;
+}
 .project {
 	padding: 55px 0px 25px 0px !important;
+}
+.content-project {
+	padding: 100px 25px 10px 25px;
 }

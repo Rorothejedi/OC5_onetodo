@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col-lg-8 col-md-12">
 				<div class="jumbotron">
-					<form action="processEditUser" method="POST">
+					<form action="processEditUser" method="POST" id="main-form">
 						<div class="form-group">
 							<div class="d-flex">
 								<div class="text-center align-self-center">

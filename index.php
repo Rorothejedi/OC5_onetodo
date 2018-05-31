@@ -77,8 +77,9 @@ namespace App;
 	$router->post('/processNewMessage', "Private#processNewMessage");
 	$router->post('/processNewProject', "Private#processNewProject");
 
-
-
+	// -- Partie projet
+	$router->post('/projet/:slug/processEditProject', 'Project#processEditProject');
+	$router->post('/projet/:slug/processDeleteProject', 'Project#processDeleteProject');
 
 	//Route execution
 	$router->run(); 

@@ -71,7 +71,7 @@ class Project
 
 	public function setStatus($status)
 	{
-		if ($status === 0 || $status === 1) 
+		if ($status == 0 || $status == 1) 
 		{
 			$this->_status = $status;
 		}

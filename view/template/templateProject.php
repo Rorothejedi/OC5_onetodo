@@ -51,5 +51,15 @@
 		echo $scriptProjectDescription;
 	?>
 
+	<script>
+		
+		$('.button-edit-project-disabled').click(function() {
+			$('#descriptionProject, #colorProject, #statusProject, #nameProject').removeAttr('disabled');
+			$('.button-edit-project').show();
+			$(this).hide();
+		});
+
+	</script>
+
 </body>
 </html>
