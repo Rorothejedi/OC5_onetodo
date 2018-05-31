@@ -469,7 +469,7 @@ class ControllerPrivate extends Alert
 				$descriptionProject = null;
 			}
 
-			if (strlen($projectName) <= 70) 
+			if (strlen($projectName) <= 35) 
 			{
 				$projectManager = new \App\model\ProjectManager();
 				$verifExistProjectName = $projectManager->existProject($projectName);

@@ -62,3 +62,5 @@
 	$scriptTooltip       = '<script src="' . \App\model\App::getDomainPath() . '/public/js/tooltip.js"></script>';
 	$scriptTextarea		 = '<script src="' . \App\model\App::getDomainPath() . '/public/js/textarea.js"></script>';
 	$scriptProjectDescription = '<script src="' . \App\model\App::getDomainPath() . '/public/js/projectDescription.js"></script>';
+	$scriptTinymce = '<script src="' . \App\model\App::getDomainPath() . '/public/vendor/tinymce/tinymce.min.js"></script>' .
+					'<script src="' . \App\model\App::getDomainPath() . '/public/vendor/tinymce/initTinymce.js"></script>';

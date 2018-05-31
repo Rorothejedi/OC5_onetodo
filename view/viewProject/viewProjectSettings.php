@@ -49,7 +49,7 @@
 							<br class="charactersCountFillIn">
 						</div>
 						<br>
-						<button type="button" class="btn btn-dark button-edit-project-disabled ">Modifier les informations concernant le projet ?</button>
+						<button type="button" class="btn btn-dark button-edit-project-disabled">Modifier les informations concernant le projet ?</button>
 						<button type="submit" class="btn btn-primary button-edit-project hidden" data-confirm="Etes-vous sûr de vouloir modifier les informations relatives à votre projet ?">Modifier les informations</button>
 					</form>
 				</div>

@@ -219,18 +219,29 @@ a.top {
     padding: 10px 20px;
     font-size: 1em;
     display: block;
-    transition: background-color 0.1s;
+    transition: background-color 0.2s, opacity 0.2s;
 }
 #sidebar ul li {
 	list-style: none;
-
 }
 #sidebar ul li a:hover {
-	background-color: var(--user-color);
+	opacity: 0.6;
 }
 #sidebar.active {
     margin-left: -250px;
 }
+.projectColorLink {
+    opacity: 1 !important;
+}
+
+.activeProject {
+	background-color: white;
+	color: var(--first-color) !important;
+}
+.activeProject:hover, .projectColorLink:hover {
+	opacity: 0.6 !important;
+}
+
 .home-button a {
 	margin-top: 0;
 	margin-bottom: 0;
@@ -243,10 +254,11 @@ a.top {
 
 /*Animation for caret icon*/
 .rotate.down {
-    -moz-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
+    -moz-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
 }
+
 #content {
 	width: calc(100% - 250px);
     padding: 85px 25px 10px 25px;

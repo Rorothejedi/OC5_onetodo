@@ -78,6 +78,8 @@ namespace App;
 	$router->post('/processNewProject', "Private#processNewProject");
 
 	// -- Partie projet
+	$router->post('/projet/:slug/processEditWiki', 'Project#processEditWiki');
+
 	$router->post('/projet/:slug/processEditProject', 'Project#processEditProject');
 	$router->post('/projet/:slug/processDeleteProject', 'Project#processDeleteProject');
 

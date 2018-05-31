@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 30 mai 2018 à 18:15
+-- Généré le :  jeu. 31 mai 2018 à 21:32
 -- Version du serveur :  10.1.30-MariaDB
 -- Version de PHP :  7.2.2
 
@@ -39,12 +39,10 @@ CREATE TABLE `access` (
 --
 
 INSERT INTO `access` (`id_user`, `id_project`, `access`) VALUES
-(74, 1, 1),
 (74, 2, 2),
-(74, 8, 1),
-(74, 9, 1),
-(74, 10, 1),
-(79, 12, 1);
+(74, 19, 1),
+(74, 29, 1),
+(74, 30, 3);
 
 -- --------------------------------------------------------
 
@@ -131,8 +129,8 @@ INSERT INTO `message` (`id`, `id_conversation`, `id_user`, `content`, `date_rece
 
 CREATE TABLE `project` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `link` varchar(255) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `link` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `color` varchar(10) DEFAULT '#306ba2',
   `description` tinytext,
@@ -144,12 +142,10 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `name`, `link`, `status`, `color`, `description`, `wiki`) VALUES
-(1, 'Projet test', 'projet-test', 0, '#306ba2', NULL, NULL),
 (2, 'Projet bis', 'projet-bis', 0, '#306ba2', NULL, NULL),
-(8, 'vvv', 'vvv', 0, '#306ba2', NULL, NULL),
-(9, 'Project test 2.0', 'projet-test-2.0', 0, '#ff8000', 'Je test tout !!!', NULL),
-(10, 'je test !!!', 'je-test-!!!', 1, '#408080', 'test dsqdsnqkjdhsq kskjdqhj sqjkdhsqjh sdhsqd jsqh dskqjdhsqhdksqh ksqdkjqsdk hskfhkgh ukfdhvkufhvuk hvufhvkufh vku vhudfhvukxh ukhxvukhxcvukh vukhcvukhxc kuvhcxukvhkcux hvukcxhvuk', NULL),
-(12, 'Mon super projet', 'mon-super-projet', 0, '#369c62', 'Le meilleur projet du monde !', NULL);
+(19, 'The harmony project', 'the-harmony-project', 1, '#ff8000', 'The most beautiful project in the world !', NULL),
+(29, 'Projet test', 'projet-test', 0, '#008080', 'Je test absolument tout ici !', '<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\">Partie 1 - Wiki</span></p>\r\n<p style=\"text-align: justify;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</p>\r\n<blockquote>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n</blockquote>\r\n<p style=\"padding-left: 30px;\">&nbsp;</p>\r\n<hr />\r\n<p>&nbsp;</p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\">Partie 2 - Le wiki deux</span></p>\r\n<ul>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.<br /><br /></li>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.<br /><br /></li>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</li>\r\n</ul>'),
+(30, 'Projet observation', 'projet-observation', 0, '#008000', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -181,14 +177,12 @@ INSERT INTO `seen` (`id_conversation`, `id_user`, `seen`) VALUES
 (76, 1, 0),
 (77, 74, 1),
 (77, 75, 0),
-(78, 74, 1),
 (78, 78, 0),
 (77, 1, 1),
 (79, 79, 1),
 (79, 74, 0),
 (80, 74, 1),
 (81, 74, 1),
-(82, 74, 1),
 (82, 1, 0);
 
 -- --------------------------------------------------------
@@ -335,7 +329,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT pour la table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT pour la table `task`
@@ -363,7 +357,7 @@ ALTER TABLE `user`
 -- Contraintes pour la table `access`
 --
 ALTER TABLE `access`
-  ADD CONSTRAINT `FK_id_project_access` FOREIGN KEY (`id_project`) REFERENCES `project` (`id`),
+  ADD CONSTRAINT `FK_id_project_access` FOREIGN KEY (`id_project`) REFERENCES `project` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_id_user_access` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --

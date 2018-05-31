@@ -261,4 +261,25 @@ class ControllerProject extends Alert
 			$this->alert_failure('Les données transmises sont incorrectes', 'parametres');
 		}
 	}
+
+	public function processEditWiki()
+	{
+		$project = $this->callProjectData();
+
+		if (isset($_POST['wikiProject']) && isset($_POST['editWiki']) && $_POST['editWiki'] == 'editWiki') 
+		{
+			// Pas de vérification contre les failles XSS (tinymce fait cette vérification par défaut)
+			$wiki = $_POST['wikiProject'];
+			$projectManager = new \App\model\ProjectManager();
+			$projectManager->editWiki($project, $wiki);
+
+			$this->alert_success('Le wiki a été édité avec succès !');
+			header('Location: ' . \App\model\App::getDomainPath() . '/projet/' . $project->link() .'/wiki');
+			exit();
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'wiki');
+		}
+	}
 }

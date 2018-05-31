@@ -49,11 +49,25 @@
 			<div class="col-lg-3 tiles_project">
 				<a href="projet/<?= $project->link ?>">
 					<div class="card" style="background-color: <?= $project->color ?>">
-	  					<div class="card-header">
+	  					<div class="card-header d-flex justify-content-between">
 	  						<?= $project->name ?>
+	  						<div class="text-right">
+	  							<?php 
+		  							if ($project->status == 0) 
+		  							{
+		  								echo '<i class="fas fa-key"></i>';
+		  							}
+		  							else
+		  							{
+		  								echo '<i class="far fa-eye"></i>';
+		  							}
+	  							?>
+	  						</div>
 	  					</div>
 	  					<div class="card-body">
-	  						<?php if (isset($project->description)) { echo $project->description;} ?>
+	  						<p class="card-text">
+	  							<?php if (isset($project->description)) { echo $project->description;} ?>
+	  						</p>
 	  					</div>
 	  				</div>
   				</a>
@@ -92,11 +106,25 @@
 			<div class="col-lg-3 tiles_project">
 				<a href="projet/<?= $project->link ?>">
 					<div class="card" style="background-color: <?= $project->color ?>">
-	  					<div class="card-header">
+	  					<div class="card-header d-flex justify-content-between">
 	  						<?= $project->name ?>
+	  						<div class="text-right">
+	  							<?php 
+		  							if ($project->status == 0) 
+		  							{
+		  								echo '<i class="fas fa-key"></i>';
+		  							}
+		  							else
+		  							{
+		  								echo '<i class="far fa-eye"></i>';
+		  							}
+	  							?>
+	  						</div>
 	  					</div>
 	  					<div class="card-body">
-	  						<?php if (isset($project->description)) { echo $project->description;} ?>
+	  						<p class="card-text">
+		  						<?php if (isset($project->description)) { echo $project->description;} ?>
+		  					</p>
 	  					</div>
 	  				</div>
   				</a>
@@ -129,11 +157,23 @@
 			<div class="col-lg-3 tiles_project">
 				<a href="projet/<?= $project->link ?>">
 					<div class="card" style="background-color: <?= $project->color ?>">
-	  					<div class="card-header">
+	  					<div class="card-header d-flex justify-content-between">
 	  						<?= $project->name ?>
+	  						<?php 
+	  							if ($project->status == 0) 
+	  							{
+	  								echo '<i class="fas fa-key"></i>';
+	  							}
+	  							else
+	  							{
+	  								echo '<i class="far fa-eye"></i>';
+	  							}
+  							?>
 	  					</div>
 	  					<div class="card-body">
-	  						<?php if (isset($project->description)) { echo $project->description;} ?>
+	  						<p class="card-text">
+		  						<?php if (isset($project->description)) { echo $project->description;} ?>
+		  					</p>
 	  					</div>
 	  				</div>
   				</a>

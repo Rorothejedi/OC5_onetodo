@@ -1,22 +1,31 @@
 <?php 
+    $link = explode('/', $_GET['url']);
 
 	$myProjectContent         = false;
 	$contributeProjectContent = false;
 	$watchProjectContent      = false;
 
-	for ($i = 0; $i < count($projects); $i++) 
+    $myProjectContentCount         = 0;
+    $contributeProjectContentCount = 0;
+    $watchProjectContentCount      = 0;
+
+    $arr_length = count($projects);
+	for ($i = 0; $i < $arr_length; $i++) 
 	{ 
 		if ($projects[$i]->access == 1)
 		{
 			$myProjectContent = true;
+            $myProjectContentCount++;
 		}
 		elseif ($projects[$i]->access == 2) 
 		{
 			$contributeProjectContent = true;
+            $contributeProjectContentCount++;
 		}
 		elseif ($projects[$i]->access == 3) 
 		{
 			$watchProjectContent = true;
+            $watchProjectContentCount++;
 		}
 	} 
 
@@ -29,24 +38,27 @@
     	<li class="home-button">
     		<a href="<?= \App\model\App::getDomainPath() ?>/dashboard"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Tableau de bord</a>
             <hr>
-    	</li>
-    	
+    	</li>	
 
     	<?php if ($myProjectContent === true): ?>
 
         <li>
-            <a href="#myProject" data-toggle="collapse" aria-expanded="false" class="activeCollapse justify-content-between d-flex">
-                Vos projets <i class="fas fa-caret-down rotate"></i>
+            <a href="#myProject" data-toggle="collapse" aria-expanded="<?php if($myProjectContentCount <= 7){echo 'true';}else{echo 'false';} ?>" class="activeCollapse justify-content-between d-flex">
+                Vos projets <i class="fas fa-caret-down rotate <?php if($myProjectContentCount <= 7){echo 'down';} ?>"></i>
             </a>
-            <ul class="collapse" id="myProject">
+            <ul class="collapse <?php if($myProjectContentCount <= 7){echo 'show';} ?>" id="myProject">
 
             	<?php 
 					foreach ($projects as $key => $project): 
 						if ($project->access == 1):
 				?>
 
-                <li><a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left"><?= $project->name ?></a></li>
-
+                <li>
+                    <a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left projectColorLink <?php if($project->link == $link[1]){echo'activeProject';} ?>">
+                        <?= $project->name ?>
+                    </a>
+                </li>
+    
                 <?php 
 						endif;
 					endforeach;
@@ -61,17 +73,21 @@
 		?>
 
         <li>
-            <a href="#contributeProject" data-toggle="collapse" aria-expanded="false" class="activeCollapse justify-content-between d-flex">
-                Contributeurs <i class="fas fa-caret-down rotate"></i>
+            <a href="#contributeProject" data-toggle="collapse" aria-expanded="<?php if($contributeProjectContentCount <= 5){echo 'true';}else{echo 'false';} ?>" class="activeCollapse justify-content-between d-flex">
+                Contributeurs <i class="fas fa-caret-down rotate <?php if($contributeProjectContentCount <= 5){echo 'down';} ?>"></i>
             </a>
-            <ul class="collapse" id="contributeProject">
+            <ul class="collapse <?php if($contributeProjectContentCount <= 5){echo 'show';} ?>" id="contributeProject">
 
                <?php 
 					foreach ($projects as $key => $project): 
 						if ($project->access == 2):
 				?>
 
-                <li><a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left"><?= $project->name ?></a></li>
+                <li>
+                    <a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left projectColorLink <?php if($project->link == $link[1]){echo'activeProject';} ?>">
+                        <?= $project->name ?>
+                    </a>
+                </li>
 
                 <?php 
 						endif;
@@ -87,17 +103,21 @@
 		?>
 
         <li>
-            <a href="#watchProject" data-toggle="collapse" aria-expanded="false" class="activeCollapse justify-content-between d-flex">
-            	Observateurs <i class="fas fa-caret-down rotate"></i>
+            <a href="#watchProject" data-toggle="collapse" aria-expanded="<?php if($watchProjectContentCount <= 5){echo 'true';}else{echo 'false';} ?>" class="activeCollapse justify-content-between d-flex">
+            	Observateurs <i class="fas fa-caret-down rotate <?php if($watchProjectContentCount <= 5){echo 'down';} ?>"></i>
             </a>
-            <ul class="collapse" id="watchProject">
+            <ul class="collapse <?php if($watchProjectContentCount <= 5){echo 'show';} ?>" id="watchProject">
 
                 <?php 
 					foreach ($projects as $key => $project): 
 						if ($project->access == 3):
 				?>
 
-                <li><a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left"><?= $project->name ?></a></li>
+                <li>
+                    <a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left projectColorLink <?php if($project->link == $link[1]){echo'activeProject';} ?>">
+                        <?= $project->name ?>
+                    </a>
+                </li>
 
                 <?php 
 						endif;

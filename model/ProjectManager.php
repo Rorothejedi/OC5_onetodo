@@ -131,7 +131,7 @@ class ProjectManager
 	/**
 	 * Permet de récupérer les droits d'accès de l'utilisateur en cours sur le projet passé en paramètre.
 	 * @param  User    $user    Objet contenant les informations de l'utilisateur en cours.
-	 * @param  Project $project Objet contenant les informations du projet en cours de consultations.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
 	 * @return array            Tableau (fetch) contenant la valeur d'accès de l'utilisateur pour ce projet.
 	 */
 	public function getUserAccessProject(User $user, Project $project)
@@ -145,7 +145,10 @@ class ProjectManager
 		return $data;
 	}
 
-
+	/**
+	 * Permet de supprimer le projet sélectionné.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 */
 	public function deleteProject(Project $project)
 	{
 		$data = App::getDb()->prepare('
@@ -157,6 +160,11 @@ class ProjectManager
 		);
 	}
 
+	/**
+	 * Permet d'éditer les informations (nom, lien, status, couleur et description) du projet sélectionné.
+	 * @param  int     $id_project Identifiant du projet à modifier.
+	 * @param  Project $project    Objet contenant les informations du projet en cours de consultation.
+	 */
 	public function editProject($id_project, Project $project)
 	{
 		$data = App::getDb()->prepare('
@@ -169,6 +177,22 @@ class ProjectManager
 			'status'      => $project->status(),
 			'color'       => $project->color(),
 			'description' => $project->description()]
+		);
+	}
+
+	/**
+	 * Permet d'éditer le wiki du projet sélectionné.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @param  string  $wiki    Chaine de caractères contenant le wiki du projet en cours de consultation.
+	 */
+	public function editWiki(Project $project, $wiki)
+	{
+		$data = App::getDb()->prepare('
+			UPDATE project
+			SET wiki = :wiki
+			WHERE id = :id',
+			['id' => $project->id(),
+			'wiki' => $wiki]
 		);
 	}
 }

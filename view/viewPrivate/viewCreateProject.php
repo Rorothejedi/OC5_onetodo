@@ -19,8 +19,8 @@
 					</div>
 					<form action="processNewProject" method="POST">
 						<div class="form-group">
-							<label for="projectName">Nom du projet <em class="text-muted small">(70 caractères maximum)</em></label>
-							<input id="projectName" name="projectName" type="text" class="form-control" maxlength="70" required>
+							<label for="projectName">Nom du projet <em class="text-muted small">(35 caractères maximum)</em></label>
+							<input id="projectName" name="projectName" type="text" class="form-control" maxlength="35" required>
 						</div>
 						<div class="form-row justify-content-between">
 							<div class="form-group col-lg-5">
