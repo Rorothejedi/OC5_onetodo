@@ -118,4 +118,46 @@ class Mail
 
 		mail($this->contact_mail, $subject, $message, $headers);
 	}
+
+	// todo :Adresse du lien à modifier lors de la mise en ligne
+	public function send_user_project_mail($username, $project, $access)
+	{
+		$subject = 'ONETODO | Invitation au projet "' . $project . '"';
+
+		$headers = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'From: ONETODO ' . $this->from . "\r\n";
+		$headers .= 'Reply-To: ' . $this->from . "\r\n";
+		$headers .= 'Content-type:text/html;charset=UTF-8' . "\r\n";
+		$headers .= 'X-Mailer: PHP/' . phpversion();
+
+		if ($access == 2) 
+		{
+			$access = "que contributeur <small>(participez activement au projet)</small> !</p>";
+		} 
+		else
+		{
+			$access = "qu'observateur <small>(consultez les avancées du projet)</small> !</p>";
+		}
+
+		$message = '
+		<html>
+			<head>
+				<title>ONETODO | Invitation au projet "<strong>' . $project . '</strong>"</title>
+			</head>
+			<body>
+				<h3>Hello !</h3>
+				<br>
+				<p><strong>' . $username . '</strong> vous a invité à rejoindre le projet "<strong>' . $project . '</strong>" en tant ' . $access . 
+				'<p>Malheureusement, vous n\'êtes pas encore inscrit sur notre plateforme...</p>
+				<p><a href="http://localhost/projet_5_openclassrooms/inscription">Inscrivez-vous dès maintenant</a> pour gérer vos projets et contribuer à ceux de vos partenaires.</p>
+				<br>
+				<p>A très bientôt sur <a href="http://localhost/projet_5_openclassrooms/">ONETODO</a> !</p>
+				<br>
+				<small>Cet email est automatique, merci de ne pas y répondre.</small>
+			</body>
+		</html>
+		';
+		
+		mail($this->email, $subject, $message, $headers);
+	}
 }

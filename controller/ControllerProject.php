@@ -144,6 +144,10 @@ class ControllerProject extends Alert
 		$project 		= $this->callProjectData();
 		$userData       = $this->callUserData();
 		$notSeenMessage = $this->callNotSeenMessage();
+
+		$projectManager = new \App\model\ProjectManager();
+		$users = $projectManager->getAllUsersProject($project);
+		
 		require('./view/viewProject/viewProjectUsers.php');
 	}
 
@@ -262,6 +266,9 @@ class ControllerProject extends Alert
 		}
 	}
 
+	/**
+	 * Permet d'éditer le wiki d'un projet.
+	 */
 	public function processEditWiki()
 	{
 		$project = $this->callProjectData();
@@ -280,6 +287,157 @@ class ControllerProject extends Alert
 		else
 		{
 			$this->alert_failure('Les données transmises sont incorrectes', 'wiki');
+		}
+	}
+
+	/**
+	 * Permet à un utilisateur de quitter un projet où il est observateur ou contributeur.
+	 */
+	public function processUserWithdrawProject()
+	{
+		$userData = $this->callUserData();
+		$project  = $this->callProjectData();
+
+		if (isset($_POST['withdrawProject']) && $_POST['withdrawProject'] == 'withdrawProject')
+		{
+			$projectManager = new \App\model\ProjectManager();
+			$projectManager->withdrawProject($project, $userData->id());
+			$this->alert_success('Vous avez quitté le projet <strong>"' . $project->name() . '"</strong> avec succès');
+			header('Location: ../../dashboard');
+			exit();
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'home');
+		}
+	}
+
+	/**
+	 * Permet à un administrateur de retirer un utilisateur du projet en cours.
+	 */
+	public function processRemoveUserProject()
+	{
+		$project  = $this->callProjectData();
+
+		if (isset($_POST['removeUser']) && $_POST['removeUser'] == 'removeUser'
+			&& isset($_POST['id_user']) && !empty($_POST['id_user']))
+		{
+			$id_user = (int) htmlspecialchars($_POST['id_user']);
+
+			$projectManager = new \App\model\ProjectManager();
+			$projectManager->withdrawProject($project, $id_user);
+			$this->alert_success('L\'utilisateur a été retiré du projet avec succès');
+			header('Location: ./utilisateurs');
+			exit();
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'utilisateurs');
+		}
+	}
+
+	/**
+	 * Permet à l'administrateur d'un projet de changer le status d'un des utilisateur affilié au projet.
+	 */
+	public function processChangeUserStatus()
+	{
+		$project = $this->callProjectData();
+
+		if (isset($_POST['changeUserStatus']) && $_POST['changeUserStatus'] == 'changeUserStatus'
+			&& isset($_POST['changeStatus']) && !empty($_POST['changeStatus'])
+			&& isset($_POST['id_user']) && !empty($_POST['id_user']))
+		{
+			$access  = (int) htmlspecialchars($_POST['changeStatus']);
+			$id_user = (int) htmlspecialchars($_POST['id_user']);
+
+			if ($access == 2 || $access == 3) 
+			{
+				$projectManager = new \App\model\ProjectManager();
+				$projectManager->editUserAccess($project, $id_user, $access);
+				$this->alert_success('Le status de l\'utilisateur a été modifié avec succès');
+				header('Location: ./utilisateurs');
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Les valeurs transmises sont incorrectes', 'utilisateurs');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'utilisateurs');
+		}
+	}
+
+	/**
+	 * [processAddUserInProject description]
+	 */
+	public function processAddUserInProject()
+	{
+		$project  = $this->callProjectData();
+		$userData = $this->callUserData();
+
+		if (isset($_POST['newUserProject']) && !empty($_POST['newUserProject'])
+			&& isset($_POST['statusNewUserProject']) && !empty($_POST['statusNewUserProject']))
+		{
+			$user   = htmlspecialchars($_POST['newUserProject']);
+			$access = (int) htmlspecialchars($_POST['statusNewUserProject']);
+
+			if ($access == 2 || $access == 3) 
+			{
+				$userManager = new \App\model\UserManager();
+				$verifExistUser = $userManager->existUser($user, $user);
+
+				if ($verifExistUser == 1) 
+				{
+					if (filter_var($user, FILTER_VALIDATE_EMAIL))
+					{
+						$userSearch = new \App\model\User(['email' => $user]);
+					}
+					else
+					{
+						$userSearch = new \App\model\User(['username' => $user]);
+					}
+					$userObject = $userManager->getUser($userSearch);
+					$projectManager = new \App\model\ProjectManager();
+					$alreadyInProject = $projectManager->verifUserProject($userObject, $project);
+
+					if ($alreadyInProject == 0) 
+					{
+						$projectManager->addUserInProject($userObject->id(), $project->id(), $access);
+						$this->alert_success('<strong>' . $userObject->username() . '</strong> a été affilié au projet avec succès !');
+						header('Location: ./utilisateurs');
+						exit();
+					}
+					else
+					{
+						$this->alert_failure('<strong>' . $userObject->username() . '</strong> est déjà affilié à ce projet', 'utilisateurs');
+					}
+				}
+				else
+				{
+					if (filter_var($user, FILTER_VALIDATE_EMAIL)) 
+					{
+						$new_mail = new \App\model\Mail($user);
+						$new_mail->send_user_project_mail($userData->username(), $project->name(), $access);
+						$this->alert_success('Un mail a été envoyé à ' . $user . ' pour rejoindre la plateforme. <br>Ajoutez-le de nouveau au projet après son inscription pour l\'ajouter au projet.');
+						header('Location: ./utilisateurs');
+						exit();
+					}
+					else
+					{
+						$this->alert_failure('Ce nom d\'utilisateur n\'existe pas', 'utilisateurs');
+					}
+				}
+			}
+			else
+			{
+				$this->alert_failure('Les valeurs transmises sont incorrectes', 'utilisateurs');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'utilisateurs');
 		}
 	}
 }

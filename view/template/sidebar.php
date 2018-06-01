@@ -54,7 +54,7 @@
 				?>
 
                 <li>
-                    <a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left projectColorLink <?php if($project->link == $link[1]){echo'activeProject';} ?>">
+                    <a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link . '/home' ?>" class="rounded-left projectColorLink <?php if($project->link == $link[1]){echo'activeProject';} ?>">
                         <?= $project->name ?>
                     </a>
                 </li>
@@ -84,7 +84,7 @@
 				?>
 
                 <li>
-                    <a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left projectColorLink <?php if($project->link == $link[1]){echo'activeProject';} ?>">
+                    <a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link . '/home' ?>" class="rounded-left projectColorLink <?php if($project->link == $link[1]){echo'activeProject';} ?>">
                         <?= $project->name ?>
                     </a>
                 </li>
@@ -114,7 +114,7 @@
 				?>
 
                 <li>
-                    <a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link ?>" class="rounded-left projectColorLink <?php if($project->link == $link[1]){echo'activeProject';} ?>">
+                    <a href="<?= \App\model\App::getDomainPath() . '/projet/' . $project->link . '/home' ?>" class="rounded-left projectColorLink <?php if($project->link == $link[1]){echo'activeProject';} ?>">
                         <?= $project->name ?>
                     </a>
                 </li>

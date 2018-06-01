@@ -75,7 +75,6 @@ class ProjectManager
 	}
 
 
-
 	/**
 	 * Permet de créer un nouveau projet.
 	 * @param Project $project Objet contenant les informations du projet à créer.
@@ -95,6 +94,12 @@ class ProjectManager
 		);
 	}
 
+	/**
+	 * Permet d'ajouter un utilisateur à un projet.
+	 * @param int    $id_user    Identifiant de l'utilisateur à ajouter au projet.
+	 * @param int    $id_project Identifiant du projet auquel ajouter l'utilisateur.
+	 * @param int    $access     Droit d'accès (administrateur, contributeur ou observateur)
+	 */
 	public function addUserInProject($id_user, $id_project, $access)
 	{
 		$data = App::getDb()->prepare('
@@ -129,6 +134,23 @@ class ProjectManager
 	}
 
 	/**
+	 * undefined
+	 * @param  User    $user    Objet contenant les informations de l'utilisateur en cours.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @return undefined
+	 */
+	public function verifUserProject(User $user, Project $project)
+	{
+		$data = App::getDb()->prepare('
+			SELECT * FROM access WHERE id_user = :id_user AND id_project = :id_project',
+			['id_user'   => $user->id(),
+			'id_project' => $project->id()],
+		true, false, true);
+
+		return $data;
+	}
+
+	/**
 	 * Permet de récupérer les droits d'accès de l'utilisateur en cours sur le projet passé en paramètre.
 	 * @param  User    $user    Objet contenant les informations de l'utilisateur en cours.
 	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
@@ -138,7 +160,7 @@ class ProjectManager
 	{
 		$data = App::getDb()->prepare('
 			SELECT access FROM access WHERE id_user = :id_user AND id_project = :id_project',
-			['id_user' => $user->id(),
+			['id_user'   => $user->id(),
 			'id_project' => $project->id()],
 		true, true, false);
 
@@ -191,8 +213,54 @@ class ProjectManager
 			UPDATE project
 			SET wiki = :wiki
 			WHERE id = :id',
-			['id' => $project->id(),
+			['id'  => $project->id(),
 			'wiki' => $wiki]
+		);
+	}
+
+	/**
+	 * Permet de retirer un utilisateur d'un projet.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @param  int     $id_user Identifiant de l'utilisateur à retirer.
+	 */
+	public function withdrawProject(Project $project, $id_user)
+	{
+		$data = App::getDb()->prepare('
+			DELETE FROM access
+			WHERE id_user = :id_user AND id_project = :id_project',
+			['id_user'   => $id_user,
+			'id_project' => $project->id()]
+		);
+	}
+
+	/**
+	 * Permet d'obtenir la liste complète des utilisateurs liés à un projet.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @return array            Tableau (fetchAll) contenant les données de la requête.
+	 */
+	public function getAllUsersProject(Project $project)
+	{
+		$data = App::getDb()->prepare('
+			SELECT a.id_user, a.access, u.username, u.email
+			FROM access a
+			INNER JOIN user u ON u.id = a.id_user
+			WHERE a.id_project = :id
+			ORDER BY a.access',
+			['id' => $project->id()],
+		true, false, false);
+
+		return $data;
+	}
+
+	public function editUserAccess(Project $project, $id_user, $access)
+	{
+		$data = App::getDb()->prepare('
+			UPDATE access
+			SET access = :access
+			WHERE id_user = :id_user AND id_project = :id_project',
+			['access' => $access,
+			'id_user' => $id_user,
+			'id_project' => $project->id()]
 		);
 	}
 }

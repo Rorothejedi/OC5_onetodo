@@ -57,11 +57,11 @@ namespace App;
 	$router->get('/disconnect', "Private#disconnect");
 
 	// -- Partie projet
+	$router->get('/projet/:slug/home', 'Project#displayHomeProject');
 	$router->get('/projet/:slug/tâches', 'Project#displayTodolist');
 	$router->get('/projet/:slug/wiki', 'Project#displayWiki');
 	$router->get('/projet/:slug/utilisateurs', 'Project#displayProjectUsers');
 	$router->get('/projet/:slug/parametres', 'Project#displayProjectSettings');
-	$router->get('/projet/:slug', 'Project#displayHomeProject');
 
 
 	// Router post
@@ -78,6 +78,11 @@ namespace App;
 	$router->post('/processNewProject', "Private#processNewProject");
 
 	// -- Partie projet
+	$router->post('/projet/:slug/processUserWithdrawProject', 'Project#processUserWithdrawProject');
+	$router->post('/projet/:slug/processRemoveUserProject', 'Project#processRemoveUserProject');
+	$router->post('/projet/:slug/processChangeUserStatus', 'Project#processChangeUserStatus');
+	$router->post('/projet/:slug/processAddUserInProject', 'Project#processAddUserInProject');
+	
 	$router->post('/projet/:slug/processEditWiki', 'Project#processEditWiki');
 
 	$router->post('/projet/:slug/processEditProject', 'Project#processEditProject');

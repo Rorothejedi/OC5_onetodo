@@ -47,7 +47,7 @@
 		?>
 
 			<div class="col-lg-3 tiles_project">
-				<a href="projet/<?= $project->link ?>">
+				<a href="projet/<?= $project->link ?>/home">
 					<div class="card" style="background-color: <?= $project->color ?>">
 	  					<div class="card-header d-flex justify-content-between">
 	  						<?= $project->name ?>
@@ -55,11 +55,11 @@
 	  							<?php 
 		  							if ($project->status == 0) 
 		  							{
-		  								echo '<i class="fas fa-key"></i>';
+		  								echo '<i class="fas fa-key" title="Projet privé"></i>';
 		  							}
 		  							else
 		  							{
-		  								echo '<i class="far fa-eye"></i>';
+		  								echo '<i class="far fa-eye" title="Projet ouvert"></i>';
 		  							}
 	  							?>
 	  						</div>
@@ -104,7 +104,7 @@
 			?>
 
 			<div class="col-lg-3 tiles_project">
-				<a href="projet/<?= $project->link ?>">
+				<a href="projet/<?= $project->link ?>/home">
 					<div class="card" style="background-color: <?= $project->color ?>">
 	  					<div class="card-header d-flex justify-content-between">
 	  						<?= $project->name ?>
@@ -112,11 +112,11 @@
 	  							<?php 
 		  							if ($project->status == 0) 
 		  							{
-		  								echo '<i class="fas fa-key"></i>';
+		  								echo '<i class="fas fa-key" title="Projet privé"></i>';
 		  							}
 		  							else
 		  							{
-		  								echo '<i class="far fa-eye"></i>';
+		  								echo '<i class="far fa-eye" title="Projet ouvert"></i>';
 		  							}
 	  							?>
 	  						</div>
@@ -155,18 +155,18 @@
 			?>
 
 			<div class="col-lg-3 tiles_project">
-				<a href="projet/<?= $project->link ?>">
+				<a href="projet/<?= $project->link ?>/home">
 					<div class="card" style="background-color: <?= $project->color ?>">
 	  					<div class="card-header d-flex justify-content-between">
 	  						<?= $project->name ?>
 	  						<?php 
 	  							if ($project->status == 0) 
 	  							{
-	  								echo '<i class="fas fa-key"></i>';
+	  								echo '<i class="fas fa-key" title="Projet privé"></i>';
 	  							}
 	  							else
 	  							{
-	  								echo '<i class="far fa-eye"></i>';
+	  								echo '<i class="far fa-eye" title="Projet ouvert"></i>';
 	  							}
   							?>
 	  					</div>
