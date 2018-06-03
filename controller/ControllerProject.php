@@ -196,6 +196,8 @@ class ControllerProject extends Alert
 			$projectName   = htmlspecialchars($_POST['nameProject']);
 			$statusProject = (int) htmlspecialchars($_POST['statusProject']);
 			$colorProject  = htmlspecialchars($_POST['colorProject']);
+			$link          = strtolower(str_replace(' ', '-', $projectName));
+
 
 			if (!empty($_POST['descriptionProject'])) 
 			{
@@ -219,22 +221,44 @@ class ControllerProject extends Alert
 
 				if ($verifExistProjectName == 0) 
 				{
-					if ($statusProject === 0 || $statusProject === 1) 
+					if (preg_match('/#([a-f0-9]{3}){1,2}\b/i', $colorProject))
 					{
-						if (preg_match('/#([a-f0-9]{3}){1,2}\b/i', $colorProject))
+						if ($statusProject === 1)
 						{
-							$link = strtolower(str_replace(' ', '-', $projectName));
+							$open = (int) htmlspecialchars($_POST['openProject']);
+
+							if ($open === 1 || $open === 0)
+							{
+								$modifiedProject = new \App\model\Project([
+									'name'        => $projectName,
+									'link'		  => $link,
+									'status'      => $statusProject,
+									'open'		  => $open,
+									'color'       => $colorProject,
+									'description' => $descriptionProject
+								]);
+								goto executionModifiedProject;
+							}
+							else
+							{
+								$this->alert_failure('Le status de votre projet n\'est pas valide', 'parametres');
+							}
+						}
+						elseif ($statusProject === 0)
+						{
 							$modifiedProject = new \App\model\Project([
 								'name'        => $projectName,
 								'link'		  => $link,
 								'status'      => $statusProject,
+								'open' 		  => null,
 								'color'       => $colorProject,
 								'description' => $descriptionProject
 							]);
 
+							executionModifiedProject:
+
 							$projectManager->editProject($project->id(), $modifiedProject);
 							$actualProject = $projectManager->getProject($modifiedProject);
-
 
 							$this->alert_success('Votre projet "<strong>' . $projectName . '</strong>" a été modifié avec succès !');
 							header('Location: ' . \App\model\App::getDomainPath() . '/projet/' . $actualProject->link() .'/parametres');
@@ -242,12 +266,12 @@ class ControllerProject extends Alert
 						}
 						else
 						{
-							$this->alert_failure('La couleur de votre projet n\'est pas valide', 'parametres');
+							$this->alert_failure('Le status de votre projet n\'est pas valide', 'parametres');
 						}
 					}
 					else
 					{
-						$this->alert_failure('Le status de votre projet n\'est pas valide', 'parametres');
+						$this->alert_failure('La couleur de votre projet n\'est pas valide', 'parametres');
 					}
 				}
 				else

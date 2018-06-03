@@ -136,7 +136,7 @@
 								<textarea name="content" id="userMessage" class="form-control" placeholder="Votre message..." style="resize: none;" <?php if(count($users_conversation) == 0){echo 'readonly';} ?>></textarea>
 								<input type="hidden" name="conv" value="<?= $_GET['conv'] ?>">
 								<div>
-									<button class="d-flex btn btn-primary" title="Poster votre message">OK</button>
+									<button class="d-flex btn btn-primary" title="Poster votre message" <?php if(count($users_conversation) == 0){echo 'disabled';} ?>>OK</button>
 									<button type="button" class="btn btn-secondary text-center" style="width: 100%" value="Refresh Page" onclick="window.location.href=window.location.href" title="Rafraîchir la conversation">
 										<i class="fas fa-redo"></i>
 									</button>

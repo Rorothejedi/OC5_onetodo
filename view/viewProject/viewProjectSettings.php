@@ -6,7 +6,7 @@
 
 	<div class="container-fluid">
 		<div class="row content-project">
-			<div class="col-lg-8 col-md-12">
+			<div class="col-xl-8 col-lg-12">
 				<h4>Paramètres du projet</h4>
 				<div class="jumbotron">
 					<form action="processEditProject" method="POST" id="main-form">
@@ -42,6 +42,14 @@
 								</datalist>
 							</div>
 						</div>
+						<div class="form-group <?php if($project->status() == 0){echo 'hidden';} ?> block-open-project">
+							<label for="openProject">Accès des utilisateurs extérieur au projet</label>
+							<select id="openProject" name="openProject" class="form-control" disabled>
+								<option selected disabled>Sélectionnez l'accès par défaut</option>
+								<option value="1" <?php if($project->open() == 1){echo "selected";} ?>>Contributeur</option>
+								<option value="0" <?php if($project->open() == 0){echo "selected";} ?>>Observateur</option>
+							</select>
+						</div>
 						<div class="form-group">
 							<label for="descriptionProject">Description <em class="text-muted small">(180 caractères maximum)</em></label>
 							<textarea id="descriptionProject" name="descriptionProject" rows="3" class="form-control" maxlength="180"  disabled><?= $project->description() ?></textarea>
@@ -54,7 +62,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-lg-4 col-md-12">
+			<div class="col-xl-4 col-lg-12">
 				<h4>Paramètres avancés</h4>
 				<div class="jumbotron">
 					<form action="processDeleteProject" method="POST" id="form-delete-project">

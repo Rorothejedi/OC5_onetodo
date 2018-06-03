@@ -1,11 +1,9 @@
 <header>
 		<nav class="navbar navbar-light navbar_private fixed-top">
   			<div class="container-fluid">
-  				<div>
-  					<button id="sidebarCollapse" class="hamburger hamburger--slider is-active" type="button">
-						<span class="hamburger-box">
-						    <span class="hamburger-inner"></span>
-						</span>
+  				<div class="d-flex align-items-center">
+  					<button id="sidebarCollapse" class="btn btn-light rounded-circle mr-4" type="button">
+						<i class="fas fa-bars"></i>
 					</button>
 	    			<a class="navbar-brand logoDashboard" href="<?= \App\model\App::getDomainPath() ?>/dashboard">ONE TO DO</a>
   				</div>
@@ -13,6 +11,11 @@
     				<li class="nav-item icon-navbar" title="Créer un nouveau projet" data-toggle="tooltip" data-placement="bottom">
     					<a href="<?= \App\model\App::getDomainPath() ?>/nouveauProjet">
     						<i class="fas fa-plus icon_plus"></i>
+    					</a>
+    				</li>
+    				<li class="nav-item icon-navbar" title="Parcourir les projets ouverts" data-toggle="tooltip" data-placement="bottom">
+    					<a href="<?= \App\model\App::getDomainPath() ?>/projetsOuverts">
+    						<i class="fas fa-project-diagram icon_open_projects"></i>
     					</a>
     				</li>
     				<li class="nav-item text-center icon-navbar" title="Voir les messages" data-toggle="tooltip" data-placement="bottom">

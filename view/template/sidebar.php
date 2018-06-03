@@ -35,8 +35,8 @@
 <nav id="sidebar">
     <ul class="list-unstyled components">
     	
-    	<li class="home-button">
-    		<a href="<?= \App\model\App::getDomainPath() ?>/dashboard"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Tableau de bord</a>
+    	<li class="home-button" style="<?php if ($link[0] == 'dashboard') {echo "background-color: white; border-bottom-left-radius: 1rem";} ?>">
+    		<a href="<?= \App\model\App::getDomainPath() ?>/dashboard" style="<?php if ($link[0] == 'dashboard') {echo "color: var(--second-color)";} ?>">Tableau de bord</a>
             <hr>
     	</li>	
 

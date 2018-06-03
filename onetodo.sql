@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 31 mai 2018 à 21:32
+-- Généré le :  Dim 03 juin 2018 à 20:40
 -- Version du serveur :  10.1.30-MariaDB
 -- Version de PHP :  7.2.2
 
@@ -42,7 +42,18 @@ INSERT INTO `access` (`id_user`, `id_project`, `access`) VALUES
 (74, 2, 2),
 (74, 19, 1),
 (74, 29, 1),
-(74, 30, 3);
+(74, 31, 1),
+(1, 2, 3),
+(77, 2, 3),
+(77, 19, 2),
+(75, 19, 3),
+(74, 33, 1),
+(79, 34, 1),
+(79, 35, 1),
+(74, 34, 3),
+(75, 34, 2),
+(79, 19, 2),
+(79, 31, 3);
 
 -- --------------------------------------------------------
 
@@ -84,7 +95,14 @@ INSERT INTO `conversation` (`id`) VALUES
 (79),
 (80),
 (81),
-(82);
+(82),
+(83),
+(84),
+(85),
+(86),
+(87),
+(88),
+(89);
 
 -- --------------------------------------------------------
 
@@ -119,7 +137,8 @@ INSERT INTO `message` (`id`, `id_conversation`, `id_user`, `content`, `date_rece
 (44, 79, 79, 'Salut ! Ca va bien ?', '2018-05-29 12:45:32'),
 (45, 79, 74, 'Oui, bien ! \r\nEt toi ?', '2018-05-29 12:46:44'),
 (46, 79, 79, 'Pas trop mal ;-)', '2018-05-29 12:50:32'),
-(47, 82, 74, 'test', '2018-05-29 15:51:33');
+(47, 82, 74, 'test', '2018-05-29 15:51:33'),
+(48, 83, 74, 'Salut !', '2018-06-01 11:51:02');
 
 -- --------------------------------------------------------
 
@@ -132,6 +151,7 @@ CREATE TABLE `project` (
   `name` varchar(40) NOT NULL,
   `link` varchar(40) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
+  `open` int(1) DEFAULT NULL,
   `color` varchar(10) DEFAULT '#306ba2',
   `description` tinytext,
   `wiki` longtext
@@ -141,11 +161,16 @@ CREATE TABLE `project` (
 -- Déchargement des données de la table `project`
 --
 
-INSERT INTO `project` (`id`, `name`, `link`, `status`, `color`, `description`, `wiki`) VALUES
-(2, 'Projet bis', 'projet-bis', 0, '#306ba2', NULL, NULL),
-(19, 'The harmony project', 'the-harmony-project', 1, '#ff8000', 'The most beautiful project in the world !', NULL),
-(29, 'Projet test', 'projet-test', 0, '#008080', 'Je test absolument tout ici !', '<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\">Partie 1 - Wiki</span></p>\r\n<p style=\"text-align: justify;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</p>\r\n<blockquote>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n</blockquote>\r\n<p style=\"padding-left: 30px;\">&nbsp;</p>\r\n<hr />\r\n<p>&nbsp;</p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\">Partie 2 - Le wiki deux</span></p>\r\n<ul>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.<br /><br /></li>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.<br /><br /></li>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</li>\r\n</ul>'),
-(30, 'Projet observation', 'projet-observation', 0, '#008000', NULL, NULL);
+INSERT INTO `project` (`id`, `name`, `link`, `status`, `open`, `color`, `description`, `wiki`) VALUES
+(2, 'Projet bis', 'projet-bis', 0, NULL, '#306ba2', NULL, NULL),
+(19, 'The harmony project', 'the-harmony-project', 1, 1, '#ff8000', 'The most beautiful project in the world !', NULL),
+(29, 'Projet test', 'projet-test', 0, NULL, '#008080', 'Je test absolument tout ici !', '<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\">Partie 1 - Wiki</span></p>\r\n<p style=\"text-align: justify;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</p>\r\n<blockquote>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n<p style=\"padding-left: 30px;\"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</em></p>\r\n</blockquote>\r\n<p style=\"padding-left: 30px;\">&nbsp;</p>\r\n<hr />\r\n<p>&nbsp;</p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\">Partie 2 - Le wiki deux</span></p>\r\n<ul>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.<br /><br /></li>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.<br /><br /></li>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate in, dolorem aut soluta hic, beatae expedita vel enim illo qui mollitia officia atque doloremque sapiente eius optio adipisci sed nobis.</li>\r\n</ul>'),
+(30, 'Projet observation', 'projet-observation', 0, NULL, '#008000', NULL, NULL),
+(31, 'Projet 123', 'projet-123', 1, 0, '#306ba2', 'description', NULL),
+(32, 'gfgfdgf', 'gfgfdgf', 0, NULL, '#808000', NULL, NULL),
+(33, 'Open project test', 'open-project-test', 1, 1, '#306ba2', NULL, NULL),
+(34, 'HappyTest project', 'happytest-project', 1, 1, '#008080', 'Test pour les projets ouverts comme contributeur !', NULL),
+(35, 'Test open project 2.0', 'test-open-project-2.0', 1, 0, '#ff8040', 'Test pour les projets ouverts comme observateur !', NULL);
 
 -- --------------------------------------------------------
 
@@ -180,10 +205,24 @@ INSERT INTO `seen` (`id_conversation`, `id_user`, `seen`) VALUES
 (78, 78, 0),
 (77, 1, 1),
 (79, 79, 1),
-(79, 74, 0),
+(79, 74, 1),
 (80, 74, 1),
 (81, 74, 1),
-(82, 1, 0);
+(82, 1, 0),
+(83, 74, 1),
+(83, 1, 0),
+(76, 78, 1),
+(84, 74, 1),
+(84, 77, 1),
+(85, 74, 1),
+(85, 77, 1),
+(86, 74, 1),
+(86, 77, 1),
+(87, 74, 1),
+(88, 74, 1),
+(88, 77, 1),
+(89, 74, 1),
+(89, 77, 1);
 
 -- --------------------------------------------------------
 
@@ -317,19 +356,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `conversation`
 --
 ALTER TABLE `conversation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT pour la table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT pour la table `task`

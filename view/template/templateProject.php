@@ -57,7 +57,7 @@
 		// Script permttant l'accès aux inputs de paramètres du projet.
 		$('.button-edit-project-disabled').click(function() 
 		{
-			$('#descriptionProject, #colorProject, #statusProject, #nameProject').removeAttr('disabled');
+			$('#descriptionProject, #colorProject, #statusProject, #nameProject, #openProject').removeAttr('disabled');
 			$('.button-edit-project').show();
 			$(this).hide();
 		});
@@ -91,6 +91,20 @@
 			$(this).hide();
 			$('.title-add-user').fadeIn('slow');
 			$('.block-add-user').slideToggle();
+		});
+
+		// Script permettant de faire apparaitre le select si le statut est ouvert.
+		$('#statusProject').change(function() {
+			var value = $("#statusProject option:selected").val();
+			if (value == 1) {
+				$('.block-open-project').slideDown();
+				$('#openProject').attr('required', 'required');
+			}
+			else
+			{
+				$('.block-open-project').slideUp();
+				$('#openProject').removeAttr('required');
+			}
 		});
 
 

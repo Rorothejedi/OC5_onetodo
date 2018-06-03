@@ -83,12 +83,13 @@ class ProjectManager
 	{
 		$data = App::getDb()->prepare('
 			INSERT INTO project
-				(name, link, status, color, description)
+				(name, link, status, open, color, description)
 			VALUES
-				(:name, :link, :status, :color, :description)',
+				(:name, :link, :status, :open, :color, :description)',
 			['name'       => $project->name(),
 			'link'        => $project->link(),
 			'status'      => $project->status(),
+			'open'		  => $project->open(),
 			'color'       => $project->color(),
 			'description' => $project->description()]
 		);
@@ -191,12 +192,13 @@ class ProjectManager
 	{
 		$data = App::getDb()->prepare('
 			UPDATE project
-			SET name = :name, link = :link, status = :status, color = :color, description = :description
+			SET name = :name, link = :link, status = :status, open = :open, color = :color, description = :description
 			WHERE id = :id',
 			['id'         => $id_project,
 			'name'        => $project->name(),
 			'link'        => $project->link(),
 			'status'      => $project->status(),
+			'open'		  => $project->open(),
 			'color'       => $project->color(),
 			'description' => $project->description()]
 		);
@@ -262,5 +264,43 @@ class ProjectManager
 			'id_user' => $id_user,
 			'id_project' => $project->id()]
 		);
+	}
+
+	public function getOpenProjects(User $user)
+	{
+		$data = App::getDb()->prepare('
+			SELECT a.id_project, p.name, p.link, p.open, p.color, p.description
+			FROM project p
+			INNER JOIN access a ON a.id_project = p.id
+			WHERE p.status = 1 
+			AND a.id_project NOT IN (
+				SELECT a.id_project
+				FROM access a
+				WHERE id_user = :id_user)
+			GROUP BY p.id',
+			['id_user' => $user->id()],
+		true, false, false);
+
+		return $data;
+	}
+
+	public function searchOpenProject(User $user, $search)
+	{
+		$data = App::getDb()->prepare('
+			SELECT a.id_project, p.name, p.link, p.open, p.color, p.description
+			FROM project p
+			INNER JOIN access a ON a.id_project = p.id
+			WHERE p.status = 1 
+			AND a.id_project NOT IN (
+				SELECT a.id_project
+				FROM access a
+				WHERE id_user = :id_user)
+			AND p.name LIKE "%":search"%"
+			GROUP BY p.id',
+			['id_user' => $user->id(),
+			'search'   => $search],
+		true, false, false);
+
+		return $data;
 	}
 }

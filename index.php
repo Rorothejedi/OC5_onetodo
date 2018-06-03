@@ -47,6 +47,8 @@ namespace App;
 	$router->get('/dashboard', "Private#displayDashboard");
 	$router->get('/parametres', "Private#displayUserSettings");
 	$router->get('/nouveauProjet', "Private#displayCreateProject");
+	$router->get('/projetsOuverts', "Private#displayOpenProjects");
+
 	$router->get('/messagerie', "Private#displayMessaging");
 	$router->get('/messagerie/talk', "Private#displayMessagingTalk");
 	// ---------   Process de la messagerie  --------
@@ -76,6 +78,7 @@ namespace App;
 	$router->post('/processEditUser', "Private#processEditUser");
 	$router->post('/processNewMessage', "Private#processNewMessage");
 	$router->post('/processNewProject', "Private#processNewProject");
+	$router->post('/processAddUserOpenProject', 'Private#processAddUserOpenProject');
 
 	// -- Partie projet
 	$router->post('/projet/:slug/processUserWithdrawProject', 'Project#processUserWithdrawProject');

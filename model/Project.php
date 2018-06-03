@@ -11,6 +11,7 @@ class Project
 	private $_name;
 	private $_link;
 	private $_status;
+	private $_open;
 	private $_color;
 	private $_description;
 	private $_wiki;
@@ -43,6 +44,7 @@ class Project
 	public function name() { 		return $this->_name; }
 	public function link() { 		return $this->_link; }
 	public function status() {		return $this->_status; }
+	public function open() {		return $this->_open; }
 	public function color() {		return $this->_color; }
 	public function description() { return $this->_description; }
 	public function wiki() { 		return $this->_wiki; }
@@ -74,6 +76,14 @@ class Project
 		if ($status == 0 || $status == 1) 
 		{
 			$this->_status = $status;
+		}
+	}
+
+	public function setOpen($open)
+	{
+		if ($open == null || $open == 0 || $open == 1) 
+		{
+			$this->_open = $open;
 		}
 	}
 

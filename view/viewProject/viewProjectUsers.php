@@ -94,13 +94,16 @@
 						    	?>
 						     	<td class="align-middle">
 						     		<?php 
-						     			if ($user->access == 2) 
+							     		if ($user->access == 1) {
+							     			echo 'Administrateur';
+							     		}
+						     			elseif ($user->access == 2) 
 						     			{
-						     				echo "Contributeur";
+						     				echo 'Contributeur';
 						     			}
 						     			elseif ($user->access == 3)
 						     			{
-						     				echo "Observateur";
+						     				echo 'Observateur';
 						     			}
 						     		?>
 						     	</td>

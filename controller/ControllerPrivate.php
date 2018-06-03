@@ -120,6 +120,29 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
+	 * Méthode d'affichage de la page contenant la liste de tous les projets ouverts.
+	 */
+	public function displayOpenProjects()
+	{
+		$projects       = $this->callUserProjects();
+		$userData       = $this->callUserData();
+		$notSeenMessage = $this->callNotSeenMessage();
+		$projectManager = new \App\model\ProjectManager();
+
+		if (isset($_GET['search']) && !empty($_GET['search'])) 
+		{
+			$search       = htmlspecialchars($_GET['search']);
+			$openProjects = $projectManager->searchOpenProject($userData, $search);
+		}
+		else
+		{
+			$openProjects = $projectManager->getOpenProjects($userData);
+		}
+
+		require('./view/viewPrivate/viewOpenProjects.php');
+	}
+
+	/**
 	 * /messagerie/talk
 	 * Méthode d'affichage de la messagerie interne (discussion privé entre deux ou plusieurs utilisateurs)
 	 */
@@ -453,6 +476,7 @@ class ControllerPrivate extends Alert
 			$projectName   = htmlspecialchars($_POST['projectName']);
 			$statusProject = (int) htmlspecialchars($_POST['statusProject']);
 			$colorProject  = htmlspecialchars($_POST['colorProject']);
+			$link          = strtolower(str_replace(' ', '-', $projectName));
 
 			if (!empty($_POST['descriptionProject'])) 
 			{
@@ -476,36 +500,58 @@ class ControllerPrivate extends Alert
 
 				if ($verifExistProjectName == 0) 
 				{
-					if ($statusProject === 0 || $statusProject === 1) 
+					if (preg_match('/#([a-f0-9]{3}){1,2}\b/i', $colorProject))
 					{
-						if (preg_match('/#([a-f0-9]{3}){1,2}\b/i', $colorProject))
+						if ($statusProject === 1) 
 						{
-							$link = strtolower(str_replace(' ', '-', $projectName));
+							$open = (int) htmlspecialchars($_POST['openProject']);
+
+							if ($open === 1 || $open === 0)
+							{
+								$newProject = new \App\model\Project([
+									'name'        => $projectName,
+									'link'		  => $link,
+									'status'      => $statusProject,
+									'open'		  => $open,
+									'color'       => $colorProject,
+									'description' => $descriptionProject
+								]);
+								goto executionNewProject;
+							}
+							else
+							{
+								$this->alert_failure('Le status de votre projet n\'est pas valide', 'nouveauProjet');
+							}
+						}
+						elseif ($statusProject === 0) 
+						{
 							$newProject = new \App\model\Project([
 								'name'        => $projectName,
 								'link'		  => $link,
 								'status'      => $statusProject,
+								'open' 		  => null,
 								'color'       => $colorProject,
 								'description' => $descriptionProject
 							]);
+
+							executionNewProject:
 
 							$projectManager->addProject($newProject);
 							$actualProject = $projectManager->getProject($newProject);
 							$projectManager->addUserInProject($_SESSION['user_id'], $actualProject->id(), 1);
 
-							$this->alert_success('Votre projet <strong>' . $projectName . '</strong> a bien été créer !');
-							// todo : A changer. Mettre l'url du nouveau projet
+							$this->alert_success('Votre projet <strong>' . $projectName . '</strong> a été créé avec succès !');
 							header('Location: ./dashboard');
 							exit();
 						}
 						else
 						{
-							$this->alert_failure('La couleur de votre projet n\'est pas valide', 'nouveauProjet');
+							$this->alert_failure('Le status de votre projet n\'est pas valide', 'nouveauProjet');
 						}
 					}
 					else
 					{
-						$this->alert_failure('Le status de votre projet n\'est pas valide', 'nouveauProjet');
+						$this->alert_failure('La couleur de votre projet n\'est pas valide', 'nouveauProjet');
 					}
 				}
 				else
@@ -521,6 +567,47 @@ class ControllerPrivate extends Alert
 		else
 		{
 			$this->alert_failure('Les informations transmises ne sont pas correctes', 'nouveauProjet');
+		}
+	}
+
+	public function processAddUserOpenProject()
+	{
+		$userData = $this->callUserData();
+
+		if (isset($_POST['id_open_project']) && !empty($_POST['id_open_project']) && isset($_POST['addOpenProject']) && $_POST['addOpenProject'] == 'addOpenProject')
+		{
+			$id_project = (int) htmlspecialchars($_POST['id_open_project']);
+
+			$openProject    = new \App\model\Project(['id' => $id_project]);
+			$projectManager = new \App\model\ProjectManager();
+			$project        = $projectManager->getProject($openProject);
+
+			if ($project->status() == 1) 
+			{
+				if ($project->open() == 0) 
+				{
+					$access = 3;
+					$accessName = 'observateur';
+				}
+				else 
+				{
+					$access = 2;
+					$accessName = 'contributeur';
+				}
+				$projectManager->addUserInProject($userData->id(), $project->id(), $access);
+
+				$this->alert_success('Vous venez de rejoindre avec succès <strong>' . $project->name() . '</strong> comme <em>' . $accessName . '</em> !');
+				header('Location: ./dashboard');
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Vous n\'êtes pas autorisé à rejoindre ce projet', 'projetsOuverts');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les informations transmises ne sont pas correctes', 'projetsOuverts');
 		}
 	}
 }

@@ -11,7 +11,7 @@
 		</nav>
 		<br>
 		<div class="row">
-			<div class="col-lg-8">
+			<div class="col-xl-8 col-lg-12">
 				<div class="jumbotron">
 					<div class="page-header">
 						<h5>Avant de commencer, dites-nous tout sur votre projet ...</h5>
@@ -24,7 +24,7 @@
 						</div>
 						<div class="form-row justify-content-between">
 							<div class="form-group col-lg-5">
-								<label for="statusProject">Status</label>
+								<label for="statusProject">Status</label><a href="#"><i class="fas fa-question-circle ml-2 text-dark" title="Chaque projet possède un status, il existe 2 types de statut" data-content="<p></p><ul><li><strong>Status privé</strong> : vous avez un contrôle total sur les utilisateurs qui rejoignent votre projet.</li><li><strong>Status ouvert</strong> : vous laissez la possibilité aux autres utilisateurs de la plateforme de se joindre à votre projet. Dans ce cas, vous devez choisir si vous leur laissez la possibilité de le modifier <em>(contributeur)</em> ou si vous leur laissez la simple possibilité de jeter un coup d'oeil <em>(observateur)</em>.</li></ul>" data-toggle="popover" data-html="true"></i></a>
 								<select id="statusProject" name="statusProject" class="form-control">
 									<option value="0" selected>Privé (par défaut)</option>
 									<option value="1">Ouvert</option>
@@ -48,6 +48,14 @@
 									<option>#ff8000</option>
 								</datalist>
 							</div>
+						</div>
+						<div class="form-group hidden block-open-project">
+							<label for="openProject">Choisissez l'accès des utilisateurs rejoignant votre projet</label>
+							<select id="openProject" name="openProject" class="form-control">
+								<option selected disabled>Sélectionnez l'accès par défaut</option>
+								<option value="1">Contributeur</option>
+								<option value="0">Observateur</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<label for="descriptionProject">Description <em class="text-muted small">(180 caractères maximum)</em></label>
