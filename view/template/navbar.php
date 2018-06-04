@@ -3,8 +3,8 @@
   			<div class="container-fluid">
   				<div class="d-flex align-items-center">
   					<button id="sidebarCollapse" class="btn btn-light rounded-circle mr-4" type="button">
-						<i class="fas fa-bars"></i>
-					</button>
+						  <i class="fas fa-bars"></i>
+					  </button>
 	    			<a class="navbar-brand logoDashboard" href="<?= \App\model\App::getDomainPath() ?>/dashboard">ONE TO DO</a>
   				</div>
     			<ul class="nav navbar-right">

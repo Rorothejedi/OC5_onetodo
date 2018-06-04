@@ -58,7 +58,7 @@
 						     	<?php 
 						     		if($access->access <= 1): 
 						     			if ($user->access <= 1):
-						     				echo '<td class="align-middle">Administrateur</td>';
+						     				echo '<td class="align-middle"><i class="fas fa-crown"></i> Fondateur</td>';
 						     	 		else: 
 						     	?>
 						     	<td class="align-middle" style="width: 400px; min-width: 200px">
@@ -95,7 +95,7 @@
 						     	<td class="align-middle">
 						     		<?php 
 							     		if ($user->access == 1) {
-							     			echo 'Administrateur';
+							     			echo '<i class="fas fa-crown"></i> Fondateur';
 							     		}
 						     			elseif ($user->access == 2) 
 						     			{

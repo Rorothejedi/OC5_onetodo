@@ -41,7 +41,6 @@
 		echo $cdnFontAwesomeJs;
 
 		// Call to JavaScript scripts
-		echo $scriptScroll; 
 		echo $scriptAlert;
 		echo $scriptGlobal;
 		echo $scriptSidebar;

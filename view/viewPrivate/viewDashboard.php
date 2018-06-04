@@ -55,11 +55,11 @@
 	  							<?php 
 		  							if ($project->status == 0) 
 		  							{
-		  								echo '<i class="fas fa-key" title="Projet privé"></i>';
+		  								echo '<i class="fas fa-lock" title="Projet privé"></i>';
 		  							}
 		  							else
 		  							{
-		  								echo '<i class="far fa-eye" title="Projet ouvert"></i>';
+		  								echo '<i class="fas fa-lock-open" title="Projet ouvert"></i>';
 		  							}
 	  							?>
 	  						</div>
@@ -112,11 +112,11 @@
 	  							<?php 
 		  							if ($project->status == 0) 
 		  							{
-		  								echo '<i class="fas fa-key" title="Projet privé"></i>';
+		  								echo '<i class="fas fa-lock" title="Projet privé"></i>';
 		  							}
 		  							else
 		  							{
-		  								echo '<i class="far fa-eye" title="Projet ouvert"></i>';
+		  								echo '<i class="fas fa-lock-open" title="Projet ouvert"></i>';
 		  							}
 	  							?>
 	  						</div>
@@ -162,11 +162,11 @@
 	  						<?php 
 	  							if ($project->status == 0) 
 	  							{
-	  								echo '<i class="fas fa-key" title="Projet privé"></i>';
+	  								echo '<i class="fas fa-lock" title="Projet privé"></i>';
 	  							}
 	  							else
 	  							{
-	  								echo '<i class="far fa-eye" title="Projet ouvert"></i>';
+	  								echo '<i class="fas fa-lock-open" title="Projet ouvert"></i>';
 	  							}
   							?>
 	  					</div>

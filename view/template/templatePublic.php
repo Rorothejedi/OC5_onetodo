@@ -6,7 +6,7 @@ Réalisé par Rodolphe Cabotiau
 Date de début de projet : 09/05/2018
 Date d'achèvement V1.0: ../06/2018
 
-Dernière mise à jour : 24/05/2018 
+Dernière mise à jour : 04/06/2018 
 
 -->
 
@@ -49,6 +49,12 @@ Dernière mise à jour : 24/05/2018
 		echo $favicon;
 	?>
 
+<!-- FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet"> 
+
+
+
 	<!-- Intégration ReCaptcha V2 -->
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
@@ -57,26 +63,27 @@ Dernière mise à jour : 24/05/2018
 
 	<header id="top" class="<?php if(isset($header_class)){echo $header_class;} ?>">
 		<nav class="navbar navbar-light bg-light justify-content-around fixed-top public_navbar">
-			<a class="navbar-brand" href="./">
-				<img class="logoHome" src="./public/img/logo.png" alt="" height="64px" width="200px" srcset="./public/img/logo.svg">
-			</a>
+			<div class="d-flex">
+				<a class="navbar-brand logoHome" href="./">ONE TO DO</a>
+				<p class="small"><em>Alpha 1.0</em></p>
+			</div>
+			
 			<div class="btn-group">
 				<?php 
 
 					if (!empty($_SESSION['user_id']) && !empty($_SESSION['user_username'])) 
 					{
-						echo '<a href="dashboard" class="btn btn-primary">Accéder au tableau de bord | <strong>' . $_SESSION['user_username'] . '</strong></a>';
+						echo '<a href="dashboard" class="btn btn-dark btn_small">Accéder au tableau de bord | <strong>' . $_SESSION['user_username'] . '</strong></a>';
 					}
 					else
 					{
-						echo '<a href="connexion" class="btn btn-outline-secondary">Se connecter</a>' .
-							 '<a href="inscription" class="btn btn-dark">Créer un compte</a>';
+						echo '<a href="connexion" class="btn btn-outline-secondary btn_small">Se connecter</a>' .
+							 '<a href="inscription" class="btn btn-dark btn_small">Créer un compte</a>';
 					}
-
-				?>
-			    
-			</div>
+				?>	    
+			</div>		
 		</nav>
+		<!-- <div class="line d-flex"></div> -->
 
 	<?php 
 		include('alerts.php');
@@ -93,7 +100,7 @@ Dernière mise à jour : 24/05/2018
 					<a class="text-right" href="mentions_legales">Mentions légales</a>
 				</div>
 				<div class="d-flex align-items-center">
-					<a class="text-center" href="https://www.linkedin.com/in/rodolphe-cabotiau-234824132/">Make with <i class="fas fa-heart fa-xs"></i></a>
+					<a class="text-center" href="https://www.linkedin.com/in/rodolphe-cabotiau-234824132/">Made with <i class="fas fa-heart fa-xs"></i></a>
 				</div>
 			</div>
 		</div>

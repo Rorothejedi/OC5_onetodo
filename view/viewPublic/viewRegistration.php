@@ -8,12 +8,12 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
-					<h1>Créer un compte OneToDo</h1>
+					<h1>Créer un compte <em>ONETODO</em></h1>
 					<p>ou <a href="connexion">se connecter à votre compte</a></p>
 					<form action="processRegistration" method="POST">
 						<div class="form-group">
 							<label for="username">Nom d'utilisateur</label>
-							<input id="username" type="text" class="form-control" name="username" value="<?php if(!empty($_SESSION['save_username'])){echo $_SESSION['save_username'];} ?>" required>
+							<input id="username" type="text" class="form-control" name="username" value="<?php if(!empty($_SESSION['save_username'])){echo $_SESSION['save_username'];} ?>" maxlength="25" required>
 							<small class="text-muted small_username">Veuillez saisir un nom d'utilisateur entre 2 et 25 caractères</small>
 						</div>
 						<div class="form-group">
