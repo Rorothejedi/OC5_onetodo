@@ -32,16 +32,16 @@
 	
 	$linkCustomScrollbar = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">';
 
-	//A définir !
-	$linkGoogleFont   = '';
+	$linkGoogleFont = '<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">' .
+					  '<link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet"> ';
 
 	// Development stylesheet and minify version
 	$stylesheet       = '<link href="' . \App\model\App::getDomainPath() . '/public/css/stylesheet.css" rel="stylesheet">'.
 						'<!-- <link href="' . \App\model\App::getDomainPath() . '/public/css/stylesheet.min.css" rel="stylesheet"> -->'.
 						'<link rel="stylesheet" href="' . \App\model\App::getDomainPath() . '/public/css/hamburger.css">';
 
-	$favicon          = '<!-- <link rel="shortcut icon" type="image/x-icon" href="./public/img/favicon.ico">  -->'.
-						'<!-- <link rel="icon" type="image/x-icon" href="./public/img/favicon.ico"> -->';
+	$favicon = '<link rel="icon" type="image/png" href="' . \App\model\App::getDomainPath() . '/public/img/favicon-32x32.png" sizes="32x32">' .
+			   '<link rel="icon" type="image/png" href="' . \App\model\App::getDomainPath() . '/public/img/favicon-16x16.png" sizes="16x16">';
 
 	/*---------------------------------------   CDN Calls   ------------------------------------------------*/
 

@@ -58,12 +58,6 @@ a.top {
 
 /*------------------------------------------   Homepage   -------------------------------------------------*/
 
-.line {
-	position: fixed;
-	width: 100%;
-	height: 3px;
-	background-color: var(--user-color);
-}
 .logoHome {
 	font-family: 'Waterlily', sans-serif;
 	color: var(--first-color) !important;

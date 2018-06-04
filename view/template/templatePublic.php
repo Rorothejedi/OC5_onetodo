@@ -47,13 +47,8 @@ Dernière mise à jour : 04/06/2018
 		echo $linkGoogleFont;
 		echo $stylesheet;
 		echo $favicon;
+		echo $linkGoogleFont;
 	?>
-
-<!-- FONTS -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
-<link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet"> 
-
-
 
 	<!-- Intégration ReCaptcha V2 -->
 	<script src='https://www.google.com/recaptcha/api.js'></script>
@@ -70,7 +65,6 @@ Dernière mise à jour : 04/06/2018
 			
 			<div class="btn-group">
 				<?php 
-
 					if (!empty($_SESSION['user_id']) && !empty($_SESSION['user_username'])) 
 					{
 						echo '<a href="dashboard" class="btn btn-dark btn_small">Accéder au tableau de bord | <strong>' . $_SESSION['user_username'] . '</strong></a>';
@@ -83,7 +77,6 @@ Dernière mise à jour : 04/06/2018
 				?>	    
 			</div>		
 		</nav>
-		<!-- <div class="line d-flex"></div> -->
 
 	<?php 
 		include('alerts.php');

@@ -17,6 +17,7 @@
 		echo $stylesheet;
 		echo $favicon;
 		echo $scriptTinymce;
+		echo $linkGoogleFont;
 	?>
 </head>
 

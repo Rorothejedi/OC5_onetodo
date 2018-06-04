@@ -16,6 +16,7 @@
 		echo $linkCustomScrollbar;
 		echo $stylesheet;
 		echo $favicon;
+		echo $linkGoogleFont;
 	?>
 </head>
 
