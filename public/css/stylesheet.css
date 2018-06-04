@@ -295,6 +295,8 @@ a.top {
 		margin-left: 0 !important;
 	}
 
+	
+
     .fa-layers, .fa-user-circle, .fa-plus {
 		font-size: 22px;
 	}
@@ -466,6 +468,7 @@ a:hover, a:focus {
 
 /*---------------------------------------------   Common : Projects   ---------------------------------------------------*/
 
+
 .fixed-top-2 {
 	width: calc(100% - 250px);
 	z-index: 1;
@@ -486,3 +489,36 @@ a:hover, a:focus {
 .formWithdrawProject {
 	padding-right: 13.5px;
 }
+
+/*---------------------------------------------   Home Projects   ---------------------------------------------------*/
+
+.tiles {
+	height: 200px;
+	color: white;
+	font-size: 17px;
+	transition: margin-bottom 0.5s, opacity 0.3s;
+}
+.tiles div p {
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+.tiles div  {
+	position: relative;
+	top: 20px;
+}
+.tiles div svg {
+	position: relative;
+	transition: all 0.5s;
+}
+
+.tiles:hover {
+	opacity: 0.9;
+}
+
+.tiles:hover div svg {
+	margin-bottom: 20px;
+}
+.tiles:hover div p {
+	opacity: 1;
+}
+
