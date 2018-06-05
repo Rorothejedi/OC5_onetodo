@@ -281,6 +281,7 @@ a.top {
 	height: calc(100vh - 55px);
 	background-color: var(--second-color);
 	transition: margin 0.3s;
+	font-size: 0.9rem;
 }
 #sidebar .sidebar-header {
     padding: 20px;
@@ -604,3 +605,12 @@ a:hover, a:focus {
 	opacity: 1;
 }
 
+
+
+
+
+
+
+
+
+/*---------------------------------------------------------------------   test   ------------------------------*/

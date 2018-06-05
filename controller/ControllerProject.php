@@ -111,9 +111,10 @@ class ControllerProject extends Alert
 	{
 		$access 		= $this->callAccessToProject();
 		$projects       = $this->callUserProjects();
+		$notSeenMessage = $this->callNotSeenMessage();
+
 		$project 		= $this->callProjectData();
 		$userData       = $this->callUserData();
-		$notSeenMessage = $this->callNotSeenMessage();
 		require('./view/viewProject/viewHomeProject.php');
 	}
 
@@ -121,19 +122,34 @@ class ControllerProject extends Alert
 	{
 		$access 		= $this->callAccessToProject();
 		$projects       = $this->callUserProjects();
+		$notSeenMessage = $this->callNotSeenMessage();
+
 		$project 		= $this->callProjectData();
 		$userData       = $this->callUserData();
-		$notSeenMessage = $this->callNotSeenMessage();
+
+		$todolistManager = new \App\model\TodolistManager();
+		$todolists       = $todolistManager->getTodolists($project);
+		$tasks           = $todolistManager->getTasks($project);
+
+
 		require('./view/viewProject/viewTodolist.php');
+
+
+
 	}
+
+
+
+
 
 	public function displayWiki($slug)
 	{
 		$access 		= $this->callAccessToProject();
 		$projects       = $this->callUserProjects();
+		$notSeenMessage = $this->callNotSeenMessage();
+
 		$project 		= $this->callProjectData();
 		$userData       = $this->callUserData();
-		$notSeenMessage = $this->callNotSeenMessage();
 		require('./view/viewProject/viewWiki.php');
 	}
 
@@ -141,9 +157,10 @@ class ControllerProject extends Alert
 	{
 		$access 		= $this->callAccessToProject();
 		$projects       = $this->callUserProjects();
+		$notSeenMessage = $this->callNotSeenMessage();
+
 		$project 		= $this->callProjectData();
 		$userData       = $this->callUserData();
-		$notSeenMessage = $this->callNotSeenMessage();
 
 		$projectManager = new \App\model\ProjectManager();
 		$users = $projectManager->getAllUsersProject($project);
@@ -155,9 +172,10 @@ class ControllerProject extends Alert
 	{
 		$access 		= $this->callAccessToProject();
 		$projects       = $this->callUserProjects();
+		$notSeenMessage = $this->callNotSeenMessage();
+
 		$project 		= $this->callProjectData();
 		$userData       = $this->callUserData();
-		$notSeenMessage = $this->callNotSeenMessage();
 		require('./view/viewProject/viewProjectSettings.php');
 	}
 
@@ -462,6 +480,89 @@ class ControllerProject extends Alert
 		else
 		{
 			$this->alert_failure('Les données transmises sont incorrectes', 'utilisateurs');
+		}
+	}
+
+	public function processAddTodolist()
+	{
+		$project  = $this->callProjectData();
+
+		if (isset($_POST['nameTodolist']) && !empty($_POST['nameTodolist']) 
+			&& isset($_POST['newTodolist']) && $_POST['newTodolist'] == 'newTodolist') 
+		{
+			$name = htmlspecialchars($_POST['nameTodolist']);
+			$todolistManager = new \App\model\TodolistManager();
+
+			$verifExistTodolist = $todolistManager->verifTodolistExist($project, $name);
+
+			if ($verifExistTodolist == 0) 
+			{
+				$todolistManager->addTodolist($project, $name);
+				header('Location: ./todolist');
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Cette todolist existe déjà sur ce projet', 'todolist');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'todolist');
+		}
+	}
+
+	public function processOrder()
+	{
+		$project  = $this->callProjectData();
+
+		if (isset($_POST['todolist_id']) && !empty($_POST['todolist_id']) 
+			&& isset($_POST['serializedOrder']) && !empty($_POST['serializedOrder'])) 
+		{
+			$todolist_id = (int) htmlspecialchars($_POST['todolist_id']);
+			$serializedData = htmlspecialchars($_POST['serializedOrder']);
+			$todolistManager = new \App\model\TodolistManager();
+			
+			$verifTodolist = $todolistManager->verifTodolistInProject($project, $todolist_id);
+
+			if ($verifTodolist == 1) 
+			{
+				$serial = explode(';', $serializedData);
+				$todolistManager->updateTaskOrder($todolist_id, serialize($serial));
+				header('Location: ./todolist');
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Vous ne pouvez pas modifier cette todolist', 'todolist');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'todolist');
+		}
+	}
+
+
+	public function processDoneTask()
+	{
+		$project  = $this->callProjectData();
+
+		if (isset($_POST['done_task_id']) && !empty($_POST['done_task_id']) 
+			&& isset($_POST['isDoneTask']))
+		{
+			$done_task_id = (int) htmlspecialchars($_POST['done_task_id']);
+			$done         = (int) htmlspecialchars($_POST['isDoneTask']);
+
+			$todolistManager = new \App\model\TodolistManager();
+		
+			$todolistManager->updateDoneTask($done, $done_task_id);
+			header('Location: ./todolist');
+			exit();
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'todolist');
 		}
 	}
 }

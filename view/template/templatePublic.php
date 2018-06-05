@@ -41,7 +41,7 @@ Dernière mise à jour : 04/06/2018
 	<meta name="description" content="<?= $title ?>">
 	<meta name="keywords" content="<?= $keywords ?>">
 
-	<!-- CSS Bootstrap / Icons FontAwesome / Google Fonts / Stylesheets / Favicon -->
+	<!-- CSS Bootstrap / Icons FontAwesome / Google Fonts / Stylesheet / Favicon -->
 	<?php 
 		echo $linkBootstrapCSS; 
 		echo $linkGoogleFont;

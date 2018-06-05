@@ -60,7 +60,7 @@ namespace App;
 
 	// -- Partie projet
 	$router->get('/projet/:slug/home', 'Project#displayHomeProject');
-	$router->get('/projet/:slug/tâches', 'Project#displayTodolist');
+	$router->get('/projet/:slug/todolist', 'Project#displayTodolist');
 	$router->get('/projet/:slug/wiki', 'Project#displayWiki');
 	$router->get('/projet/:slug/utilisateurs', 'Project#displayProjectUsers');
 	$router->get('/projet/:slug/parametres', 'Project#displayProjectSettings');
@@ -90,6 +90,14 @@ namespace App;
 
 	$router->post('/projet/:slug/processEditProject', 'Project#processEditProject');
 	$router->post('/projet/:slug/processDeleteProject', 'Project#processDeleteProject');
+
+	$router->post('/projet/:slug/processAddTodolist', 'Project#processAddTodolist');
+	$router->post('/projet/:slug/processOrder', 'Project#processOrder');
+	$router->post('/projet/:slug/processDoneTask', 'Project#processDoneTask');
+
+	
+
+	
 
 	//Route execution
 	$router->run(); 

@@ -11,7 +11,7 @@
 				<hr>
 			</div>
 			<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-4">
-				<a href="tâches">
+				<a href="todolist">
 					<div class=" tiles rounded d-flex align-items-center justify-content-center" style="background-color: <?= $project->color() ?>">
 						<div class="text-center">
 							<i class="fas fa-tasks fa-3x"></i>

@@ -476,7 +476,7 @@ class ControllerPrivate extends Alert
 			$projectName   = htmlspecialchars($_POST['projectName']);
 			$statusProject = (int) htmlspecialchars($_POST['statusProject']);
 			$colorProject  = htmlspecialchars($_POST['colorProject']);
-			$link          = strtolower(str_replace(' ', '-', $projectName));
+			$link          = mb_strtolower(str_replace(' ', '-', $projectName), 'UTF-8');
 
 			if (!empty($_POST['descriptionProject'])) 
 			{

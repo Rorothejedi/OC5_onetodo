@@ -12,7 +12,7 @@
 	<div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbarProject">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link <?php if($link[2] == 'tâches'){echo 'active';} ?>" href="<?= \App\model\App::getDomainPath(); ?>/projet/<?= $project->link() ?>/tâches">
+				<a class="nav-link <?php if($link[2] == 'todolist'){echo 'active';} ?>" href="<?= \App\model\App::getDomainPath(); ?>/projet/<?= $project->link() ?>/todolist">
 					Todolist
 				</a>
 			</li>

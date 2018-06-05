@@ -50,7 +50,7 @@ class ProjectManager
 
 	public function existProject($name)
 	{
-		$link = strtolower(str_replace(' ', '-', $name));
+		$link = mb_strtolower(str_replace(' ', '-', $name), 'UTF-8');
 		$data = App::getDb()->prepare('
 			SELECT * FROM project WHERE name = :name_project OR link = :link',
 			['name_project' => $name,
@@ -63,7 +63,7 @@ class ProjectManager
 
 	public function existOtherProject($name, $id_project)
 	{
-		$link = strtolower(str_replace(' ', '-', $name));
+		$link = mb_strtolower(str_replace(' ', '-', $name), 'UTF-8');
 		$data = App::getDb()->prepare('
 			SELECT * FROM project WHERE (name = :name_project OR link = :link) AND id != :id_project',
 			['name_project' => $name,

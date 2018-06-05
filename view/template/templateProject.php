@@ -19,6 +19,8 @@
 		echo $scriptTinymce;
 		echo $linkGoogleFont;
 	?>
+
+
 </head>
 
 <body>
@@ -32,10 +34,17 @@
 	    </section>
 	</div>
 
+
+
 	<?php
 		include('alerts.php');
 		// Call to CDN
 		echo $cdnJQuery;
+	?>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<!-- Resolve le conflit entre les tooltips bootstrap et jquery UI -->
+		<script>$.widget.bridge('uitooltip', $.ui.tooltip);</script>
+	<?php
 		echo $cdnPopper;
 		echo $cdnBoostrap;
 		echo $cdnCustomScrollbar;
@@ -51,9 +60,10 @@
 		echo $scriptTextarea;
 		echo $scriptProjectDescription;
 	?>
+	
 
 	<script>
-		
+
 		// Script permttant l'accès aux inputs de paramètres du projet.
 		$('.button-edit-project-disabled').click(function() 
 		{
@@ -108,6 +118,48 @@
 		});
 
 
+		// Dévoile le bloc permettant la création d'une Todolist
+		$('.button_create_todolist').click(function() 
+		{
+			$('.createNewTodolist').slideToggle();
+
+			if ($('.tileName').text() == 'Nouvelle todolist') 
+			{
+				$(".tileName").fadeOut(function() {
+  					$(this).text("Todolist")
+				}).fadeIn();
+				$('.tileNameBis').slideToggle();
+			}
+			else
+			{
+				$('.tileNameBis').slideToggle();
+				$(".tileName").fadeOut(function() {
+  					$(this).text("Nouvelle todolist")
+				}).fadeIn();
+			}
+		});
+
+		// Gère le drag & drop des todolists
+		$(function()
+		{
+			var id = $('.todolistCollapse').attr("id").split('-');
+
+		    $("#todolist-" + id[1]).sortable({
+				axis : 'y',
+				containment : '#todolist-' + id[1],
+				revert: true,
+
+				update : function(event, ui){
+					var changedList = this.id;
+					var order       = $(this).sortable('toArray');
+					var positions   = order.join(';');
+
+    				$('#serializedOrder').val(positions);
+    				$('#formOrder').submit();
+				}
+		    });
+			$("#todolist-" + id[1]).disableSelection();	
+		});
 
 	</script>
 
