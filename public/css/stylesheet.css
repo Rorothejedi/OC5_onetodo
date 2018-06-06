@@ -1,5 +1,3 @@
-
-/*Variables CSS*/
 :root {
 	--user-color  : #306BA2; /*Lapis Lazuli*/
 
@@ -12,10 +10,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Signika', sans-serif;
 }
 body {
-	font-family: 'Open Sans', sans-serif;
+	/*font-family: 'Open Sans', sans-serif;*/
 }
 p, a {
-	font-size: 0.9rem;
+	font-size: 0.95rem;
 }
 
 
@@ -69,7 +67,6 @@ a.top {
 .topHomeText h2 {
 	line-height: 43px
 }
-
 #top {
 	margin-top: 80px;
 }
@@ -87,7 +84,6 @@ a.top {
 .button-public-home {
 	font-family: 'Signika', sans-serif;
 }
-
 #sectionPresentation {
 	height: 500px;
 }
@@ -114,7 +110,6 @@ a.top {
 .link-public-home:hover p {
 	opacity: 0.8;
 }
-
 #sectionStatus {
 	min-height: 700px;
 	background-color: var(--user-color);
@@ -132,8 +127,6 @@ a.top {
 #sectionWebmaster {
 	min-height: 500px;
 }
-
-
 
 /*Footer*/
 .footer_element {
@@ -281,7 +274,7 @@ a.top {
 	height: calc(100vh - 55px);
 	background-color: var(--second-color);
 	transition: margin 0.3s;
-	font-size: 0.9rem;
+	font-size: 0.95rem;
 }
 #sidebar .sidebar-header {
     padding: 20px;
@@ -606,11 +599,35 @@ a:hover, a:focus {
 }
 
 
-
-
-
-
-
-
-
-/*---------------------------------------------------------------------   test   ------------------------------*/
+/*---------------------------------------------   Todolist Projects   ---------------------------------------------------*/
+.header-todolist {
+	background-color: var(--second-color);
+	width: 95%;
+	height: 50px;
+}
+.button-more-todolist {
+	background-color: var(--second-color) !important;
+}
+.button-more-task {
+	cursor: pointer; 
+	color: var(--main-color) !important;
+}
+.icon-plus-task {
+	color: var(--main-color);
+}
+.block-content-todolist {
+	width: 100%; 
+	padding-left: 3%;
+	margin-left: 2%;
+}
+.task-block-content {
+	background-color: lightgrey; 
+	width: 90%;
+	height: 40px;
+}
+.text-content-task {
+	font-size: 0.9rem;
+}
+.fakeCheckbox {
+	width: 20px;
+}

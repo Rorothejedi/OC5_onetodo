@@ -1,11 +1,10 @@
 <?php 
 	$title        = 'OneToDo | Mentions légales';
-	$header_class = 'topHome';
 	$current_url  = './';
 	ob_start();
 ?>
 
-	</head>
+	</header>
 	<!-- Legal notice generate with Subdelirium.com -->
 	<section class="notice_section">
 		<div class="container">

@@ -24,7 +24,6 @@
 							<textarea id="message" class="form-control" name="message" rows="7" required></textarea>
 						</div>
 						<div class="form-group">
-							<label for="captcha">Captcha</label>
 							<div id="captcha" class="g-recaptcha" data-sitekey="6Le4tVoUAAAAAI3c1XgIrRRfKafJwe1yFDYFoglI"></div>
 						</div>
 						<button type="submit" class="btn btn-primary btn-block btn-lg btn-submit">Envoyer</button>

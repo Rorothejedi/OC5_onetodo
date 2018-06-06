@@ -132,6 +132,7 @@ class ControllerProject extends Alert
 		$tasks           = $todolistManager->getTasks($project);
 
 
+
 		require('./view/viewProject/viewTodolist.php');
 
 
@@ -559,6 +560,114 @@ class ControllerProject extends Alert
 			$todolistManager->updateDoneTask($done, $done_task_id);
 			header('Location: ./todolist');
 			exit();
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'todolist');
+		}
+	}
+
+	public function processDeleteTodolist()
+	{
+		$project  = $this->callProjectData();
+
+		if (isset($_POST['todolist_id']) && !empty($_POST['todolist_id']) 
+			&& isset($_POST['deleteTodolist']) && $_POST['deleteTodolist'] == 'deleteTodolist')
+		{
+			$todolist_id = (int) htmlspecialchars($_POST['todolist_id']);
+			$todolistManager = new \App\model\TodolistManager();
+			
+			$verifTodolist = $todolistManager->verifTodolistInProject($project, $todolist_id);
+
+			if ($verifTodolist == 1) 
+			{
+				$todolistManager->deleteTodolist($todolist_id);
+				$this->alert_success('La todolist a été supprimée avec succès !');
+				header('Location: ./todolist');
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Vous ne pouvez pas modifier cette todolist', 'todolist');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'todolist');
+		}
+	}
+
+	public function processAddTask()
+	{
+		$project  = $this->callProjectData();
+
+		if (isset($_POST['todolist_id']) && !empty($_POST['todolist_id'])
+			&& isset($_POST['nameTask']) && !empty($_POST['nameTask'])
+			&& isset($_POST['addTask']) && $_POST['addTask'] == 'addTask')
+		{
+			$task_name   = htmlspecialchars($_POST['nameTask']);
+			$todolist_id = (int) htmlspecialchars($_POST['todolist_id']);
+
+			$todolistManager = new \App\model\TodolistManager();
+			$verifTodolist   = $todolistManager->verifTodolistInProject($project, $todolist_id);
+
+			if ($verifTodolist == 1) 
+			{
+				$lastId   = $todolistManager->addTask($todolist_id, $task_name);
+				$todolist = $todolistManager->getTodolist($todolist_id);
+				$oldOrder = unserialize($todolist->task_order);
+				if (is_array($oldOrder)) 
+				{
+					// array_unshift($oldOrder, $lastId->id);
+					$oldOrder[] = $lastId->id;
+					$newOrder   = serialize($oldOrder);
+				}
+				else
+				{
+					$order    = [$lastId->id];
+					$newOrder = serialize($order);
+				}	
+				$todolistManager->updateTaskOrder($todolist_id, $newOrder);
+
+				header('Location: ./todolist');
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Vous ne pouvez pas ajouter de tâche à cette todolist', 'todolist');
+			}
+		}
+		else
+		{
+			$this->alert_failure('Les données transmises sont incorrectes', 'todolist');
+		}
+	}
+
+	public function processDeleteTask()
+	{
+		$project  = $this->callProjectData();
+
+		if (isset($_POST['task_id']) && !empty($_POST['task_id'])
+			&& isset($_POST['todolist_id']) && !empty($_POST['todolist_id'])
+			&& isset($_POST['deleteTask']) && $_POST['deleteTask'] == 'deleteTask')
+		{
+			$task_id     = (int) htmlspecialchars($_POST['task_id']);
+			$todolist_id = (int) htmlspecialchars($_POST['todolist_id']);
+
+			$todolistManager = new \App\model\TodolistManager();
+			$verifTodolist   = $todolistManager->verifTodolistInProject($project, $todolist_id);
+
+			if ($verifTodolist == 1) 
+			{
+				$todolistManager->deleteTask($task_id);
+				$this->alert_success('La tâche a été supprimée avec succès !');
+				header('Location: ./todolist');
+				exit();
+			}
+			else
+			{
+				$this->alert_failure('Vous ne pouvez pas supprimer les tâches de cette todolist', 'todolist');
+			}
 		}
 		else
 		{

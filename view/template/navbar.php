@@ -36,11 +36,12 @@
           					<?= $avatar->generateGravatar() ?>
         				</a>
         				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?= \App\model\App::getDomainPath() ?>">
-                      <i class="fas fa-home"></i> Retour à l'accueil
-                    </a>
 				          	<a class="dropdown-item" href="<?= \App\model\App::getDomainPath() ?>/parametres">
                       <i class="fas fa-cog"></i> Paramètres
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="<?= \App\model\App::getDomainPath() ?>">
+                      <i class="fas fa-home"></i> Retour à l'accueil
                     </a>
 				          	<a class="dropdown-item" href="<?= \App\model\App::getDomainPath() ?>/disconnect">
                       <i class="fas fa-power-off"></i> Déconnexion

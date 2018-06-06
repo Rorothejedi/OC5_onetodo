@@ -15,13 +15,13 @@
 					<div class="mb-2">
 						<a href="inscription" class="d-flex align-items-center">
 							<i class="fas fa-check-square fa-2x mr-3"></i> 
-							<button class="btn btn-dark button-public-home">Inscrivez-vous</button>
+							<div class="btn btn-dark button-public-home">Inscrivez-vous</div>
 						</a>
 					</div>
 					<div>
 						<a href="connexion" class="d-flex align-items-center">
 							<i class="fas fa-square fa-2x mr-3"></i>
-							<button class="btn btn-dark button-public-home">Connectez-vous</button>
+							<div class="btn btn-dark button-public-home">Connectez-vous</div>
 						</a>
 					</div>
 					<hr>
@@ -35,6 +35,7 @@
 	</header>
 
 	<section id="sectionPresentation">
+		<h2 hidden>Présentation</h2>
 		<div class="container d-flex align-items-center">
 			<div class="row col-12 d-flex justify-content-around">
 				<a href="inscription" class="col-lg-4 col-md-6 text-center link-public-home">

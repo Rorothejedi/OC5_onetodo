@@ -5,7 +5,7 @@
 	</header>
 
 	<section class="section_connection">
-		<div class="container">
+		<div class="container pb-3">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
 					<h1>Créer un compte <em>ONETODO</em></h1>
@@ -27,6 +27,14 @@
 							<label for="confirm_password">Confimer le mot de passe</label>
 							<input id="confirm_password" type="password" class="form-control"  name="confirm_password" required>
 							<small class="text-muted small_pass">Veuillez saisir et confirmer le mot de passe que vous avez choisi, celui-ci doit contenir 8 caractères minimum, être composé de chiffres et de lettres minuscules et majuscules</small>
+						</div>
+						<div class="form-group">
+							<div class="form-check">
+							  	<label class="form-check-label">
+							    	<input type="checkbox" name="consent" class="form-check-input">
+							    	J'ai lu et j'accepte <a href="mentions_legales">la politique d'utilisation des données</a>
+							  	</label>
+							</div>
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary btn-lg btn-block">Créer un nouveau compte</button>

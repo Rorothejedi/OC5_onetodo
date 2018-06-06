@@ -142,24 +142,40 @@
 		// Gère le drag & drop des todolists
 		$(function()
 		{
-			var id = $('.todolistCollapse').attr("id").split('-');
-
-		    $("#todolist-" + id[1]).sortable({
+		    $(".todolistCollapse").sortable({
 				axis : 'y',
-				containment : '#todolist-' + id[1],
+				containment : "parent",
 				revert: true,
+				scrollSensitivity: 5,
+				scrollSpeed: 10,
 
 				update : function(event, ui){
+
 					var changedList = this.id;
 					var order       = $(this).sortable('toArray');
 					var positions   = order.join(';');
+					var id = $(this).attr("id").split('-');
 
-    				$('#serializedOrder').val(positions);
-    				$('#formOrder').submit();
+    				$('#serializedOrder-' + id[1]).val(positions);
+    				$('#formOrder-' + id[1]).submit();
 				}
 		    });
-			$("#todolist-" + id[1]).disableSelection();	
+			$(".todolistCollapse").disableSelection();
 		});
+
+	$(function()
+	{
+		$('.button_add_task').click(function(e) {
+			e.preventDefault();
+			var id = $(this).attr("id").split('-');
+			$('#block_add_task-' + id[1]).slideToggle();
+		});
+		$('.button_cancel_add_task').click(function(e){
+			e.preventDefault();
+			var id = $(this).attr("id").split('-');
+			$('#block_add_task-' + id[1]).slideToggle();
+		});
+	});
 
 	</script>
 

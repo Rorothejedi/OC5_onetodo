@@ -92,8 +92,11 @@ namespace App;
 	$router->post('/projet/:slug/processDeleteProject', 'Project#processDeleteProject');
 
 	$router->post('/projet/:slug/processAddTodolist', 'Project#processAddTodolist');
-	$router->post('/projet/:slug/processOrder', 'Project#processOrder');
+	$router->post('/projet/:slug/processDeleteTodolist', 'Project#processDeleteTodolist');
+	$router->post('/projet/:slug/processAddTask', 'Project#processAddTask');
+	$router->post('/projet/:slug/processDeleteTask', 'Project#processDeleteTask');
 	$router->post('/projet/:slug/processDoneTask', 'Project#processDoneTask');
+	$router->post('/projet/:slug/processOrder', 'Project#processOrder');
 
 	
 
