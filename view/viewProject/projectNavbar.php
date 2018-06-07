@@ -36,7 +36,7 @@
 			<?php endif; ?>
 		</ul>
 		<?php if($access->access >= 2): ?>
-		<form class="form-inline formWithdrawProject d-flex flex-row-reverse" action="processUserWithdrawProject" method="POST" id="withdraw-form">
+		<form class="form-inline formWithdrawProject d-flex flex-row-reverse withdraw-form" action="processUserWithdrawProject" method="POST">
 			<input type="hidden" name="withdrawProject" value="withdrawProject">
 			<button type="submit" class="btn rounded-circle" data-confirm-withdraw="Etes-vous vraiment sûr de vouloir quitter ce projet ?" data-toggle="tooltip" data-placement="left" data-trigger="hover" title="Quitter ce projet">
 				<i class="fas fa-times"></i>

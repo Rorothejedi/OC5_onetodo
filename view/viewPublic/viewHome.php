@@ -52,7 +52,7 @@
 				</a>
 				<a href="#sectionRole" class="col-lg-4 col-md-6 text-center link-public-home">
 					<i class="fas fa-crown fa-3x icon-public-home"></i>
-					<p class="mt-4">Choissisez votre rôle <br>ou celui des membres de votre équipe</p>	
+					<p class="mt-4">Choisissez votre rôle <br>ou celui des membres de votre équipe</p>	
 				</a>
 			</div>
 		</div>
@@ -107,7 +107,7 @@
 					<i class="fas fa-pencil-alt fa-2x"></i>
 				</div>
 				<div class="col-lg-10 d-flex align-items-center">
-					<p>Il est essentiel. Celui-ci va apporter son expertise sur tous les apects du projet qui ne relève pas de son administration.</p>
+					<p>Il est essentiel. Celui-ci va apporter son expertise sur tous les aspects du projet qui ne relèvent pas de son administration.</p>
 				</div>
 			</div>
 			<div class="row mt-5 pb-5">
@@ -116,7 +116,7 @@
 					<i class="fas fa-eye fa-2x"></i>
 				</div>
 				<div class="col-lg-10 d-flex align-items-center">
-					<p>Comme son nom l'indique, celui-ci... observe ! Il va pouvoir vérifier que le projet avance comme convenu ou simplement jeter un oeil par curiosité. A l'inverse des autres rôle, celui-ci n'a pas de rôle actif au sein du projet.</p>
+					<p>Comme son nom l'indique, celui-ci... observe ! Il va pouvoir vérifier que le projet avance comme convenu ou simplement jeter un oeil par curiosité. A l'inverse des autres rôles, celui-ci n'a pas de rôle actif au sein du projet.</p>
 				</div>
 			</div>
 			<br><br><br>
@@ -128,7 +128,7 @@
 			<div class="text-center pt-5 mt-5">
 				<h4 class="pt-5 pb-3">Qui est derrière <em>ONETODO</em> ?</h4>
 			</div>
-			<p class="mt-5 mb-5"><em>ONETODO</em> est une plateforme de gestion de projet réalisée par un étudiant dans le cadre d'un projet de fin de formation. <br><br> La plateforme oscille pour l'instant entre prototype et version alpha. Par conséquent, de futures fonctionnalités sont à l'études en attendant leurs éventuelles ajouts ultérieurs. <br><br>Si vous avez des idées pour améliorer la plateforme, n'hésitez pas à nous <a href="contact">en faire part</a> ! <br>De même, tous les développeurs intéréssés par ce projet sont les bienvenus pour <a href="https://github.com/Rorothejedi/projet_5_openclassrooms">apporter leur pierre à l'édifice</a> !<br></p>
+			<p class="mt-5 mb-5"><em>ONETODO</em> est une plateforme de gestion de projet réalisée par un étudiant dans le cadre d'un projet de fin de formation. <br><br> La plateforme oscille pour l'instant entre prototype et version alpha. Par conséquent, de futures fonctionnalités sont à l'étude en attendant leurs éventuels ajouts ultérieurs. <br><br>Si vous avez des idées pour améliorer la plateforme, n'hésitez pas à nous <a href="contact">en faire part</a> ! <br>De même, tous les développeurs intéressés par ce projet sont les bienvenus pour <a href="https://github.com/Rorothejedi/projet_5_openclassrooms" target="_blank">apporter leur pierre à l'édifice</a> !<br></p>
 		</div><br><br>
 	</section>
 

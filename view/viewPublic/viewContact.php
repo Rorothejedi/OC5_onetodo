@@ -9,7 +9,7 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<h1>Contact</h1>
-					<p>Pour nous contacter, quel que soit votre demande, vous pouvez remplir le formulaire de contact ci-dessous. <br> Nous vous répondrons à l'adresse email que vous avez renseigné le plus vite possible.</p>
+					<p>Pour nous contacter, quel que soit votre demande, vous pouvez remplir le formulaire de contact ci-dessous. <br> Nous vous répondrons à l'adresse email que vous avez renseignée le plus vite possible.</p>
 					<form action="processContact" method="POST">
 						<div class="form-group">
 							<label for="email">Email</label>

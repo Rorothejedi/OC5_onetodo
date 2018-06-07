@@ -88,7 +88,7 @@ Dernière mise à jour : 07/06/2018
 		<div class="footer_content">
 			<div class="container">
 				<div class="d-flex align-items-end">
-					<a class="text-left" href="https://github.com/Rorothejedi/projet_5_openclassrooms">Venez contribuer au projet !</a>
+					<a class="text-left" href="https://github.com/Rorothejedi/projet_5_openclassrooms" target="_blank">Venez contribuer au projet !</a>
 					<a class="text-center" href="contact">Contact</a>
 					<a class="text-right" href="mentions_legales">Mentions légales</a>
 				</div>
