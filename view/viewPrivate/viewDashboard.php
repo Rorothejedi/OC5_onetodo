@@ -28,7 +28,7 @@
 	
 		<nav aria-label="breadcrumb">
   			<ol class="breadcrumb">
-    			<li class="breadcrumb-item active" aria-current="Tableau de bord">Tableau de bord</li>
+    			<li class="breadcrumb-item active" aria-current="page">Tableau de bord</li>
   			</ol>
 		</nav>
 		<br>
@@ -46,7 +46,7 @@
 				if ($project->access == 1):
 		?>
 
-			<div class="col-lg-3 tiles_project">
+			<div class="col-xl-3 col-lg-4 col-sm-6 tiles_project">
 				<a href="projet/<?= $project->link ?>/home">
 					<div class="card" style="background-color: <?= $project->color ?>">
 	  					<div class="card-header d-flex justify-content-between">
@@ -103,7 +103,7 @@
 					if ($project->access == 2):
 			?>
 
-			<div class="col-lg-3 tiles_project">
+			<div class="col-xl-3 col-lg-4 col-sm-6 tiles_project">
 				<a href="projet/<?= $project->link ?>/home">
 					<div class="card" style="background-color: <?= $project->color ?>">
 	  					<div class="card-header d-flex justify-content-between">
@@ -154,7 +154,7 @@
 					if ($project->access == 3):
 			?>
 
-			<div class="col-lg-3 tiles_project">
+			<div class="col-xl-3 col-lg-4 col-sm-6 tiles_project">
 				<a href="projet/<?= $project->link ?>/home">
 					<div class="card" style="background-color: <?= $project->color ?>">
 	  					<div class="card-header d-flex justify-content-between">

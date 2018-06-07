@@ -7,13 +7,13 @@
 		<nav aria-label="breadcrumb">
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="dashboard">Tableau de bord</a></li>
-    			<li class="breadcrumb-item active" aria-current="Messagerie privée">Messagerie</li>
+    			<li class="breadcrumb-item active" aria-current="page">Messagerie</li>
   			</ol>
 		</nav>
 		<br>
 		<div class="row">
-			<div class="col-lg-9">
-				<div class="jumbotron messages_content">
+			<div class="col-xl-9">
+				<div class="jumbotron">
 					<div class="page-header">
 						<div>
 							<h5>Toutes vos conversations</h5>
@@ -52,7 +52,7 @@
 											echo substr($name, 0, -2);
 										?>
 									</div>
-									<small class="text-muted"><?= $conversation->date_reception ?></small>
+									<small class="text-muted d-none d-sm-block"><?= $conversation->date_reception ?></small>
 								</div>
 								<div class="d-flex justify-content-between">
 									<span class="text-muted">
@@ -67,7 +67,7 @@
 											} 
 										?>
 									</span>
-									<a href="deleteUserConversation?conv=<?= $conversation->id_conversation ?>" data-confirm="Etes-vous certain de vouloir vous retirer de cette conversation ?" class="delete_conversation_icon text-muted" data-toggle="tooltip" data-placement="left" title="Se retirer de la conversation">
+									<a href="deleteUserConversation?conv=<?= $conversation->id_conversation ?>" data-confirm="Etes-vous certain de vouloir vous retirer de cette conversation ?" class="d-none d-sm-block delete_conversation_icon text-muted" data-toggle="tooltip" data-placement="left" data-trigger="hover" title="Se retirer de la conversation">
 										<i class="fas fa-times-circle"></i>
 									</a>
 								</div>
@@ -77,7 +77,7 @@
 					<?php endforeach; ?>
 				</div>
 			</div>
-			<div class="col-lg-3">
+			<div class="col-xl-3">
 				<a href="newConversation" class="text-center">
 					<div class="jumbotron messages_content new_conversation_button">
 						<h5>Nouvelle conversation <i class="fas fa-plus-square"></i></h5>

@@ -9,13 +9,17 @@
 		<nav aria-label="breadcrumb">
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="dashboard">Tableau de bord</a></li>
-    			<li class="breadcrumb-item active" aria-current="Paramètres utilisateur">Paramètres</li>
+    			<li class="breadcrumb-item active" aria-current="page">Paramètres</li>
   			</ol>
 		</nav>
 		<br>
 		<div class="row">
-			<div class="col-lg-8 col-md-12">
+			<div class="col-xl-9 col-lg-12">
 				<div class="jumbotron">
+					<div>
+						<h5>Vos paramètres utilisateur</h5>
+						<hr>
+					</div>
 					<form action="processEditUser" method="POST" id="main-form">
 						<div class="form-group">
 							<div class="d-flex">

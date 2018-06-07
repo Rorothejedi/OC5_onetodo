@@ -2,6 +2,10 @@
 
 namespace App\controller;
 
+/**
+ * Class Alert
+ * Permet de générer des alertes utilisateur pour aider celui-ci dans ses démarches.
+ */
 class Alert
 {
 	protected function alert_success($message)

@@ -194,73 +194,80 @@ class ControllerPublic extends Alert
 			$password         = htmlspecialchars($_POST['password']);
 			$confirm_password = htmlspecialchars($_POST['confirm_password']);
 
-			if (strlen($username) >= 2 && strlen($username) <= 25)  
-	    	{
-	    		$_SESSION['save_username'] = $username;
+			if (isset($_POST['consent']) && !empty($_POST['consent'])) 
+			{
+				if (strlen($username) >= 2 && strlen($username) <= 25)  
+		    	{
+		    		$_SESSION['save_username'] = $username;
 
-		    	if (filter_var($email, FILTER_VALIDATE_EMAIL))
-			    {
-			    	$_SESSION['save_email'] = $email;
-
-			    	$userManager = new \App\model\UserManager();
-				    $checkExistUser = $userManager->existUser($username, $email);
-
-				    if ($checkExistUser == 0) 
+			    	if (filter_var($email, FILTER_VALIDATE_EMAIL))
 				    {
-				    	if (preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $password)) 
-				    	{
-				    		if ($password === $confirm_password)
-				    		{
-				    			// Hashage du mot de passe
-				    			$password = password_hash($password, PASSWORD_DEFAULT);
+				    	$_SESSION['save_email'] = $email;
 
-				    			// Génération d'une clé aléatoire de 16 caractères
-				    			$length = 16;
-				    			$token = bin2hex(random_bytes($length));
+				    	$userManager = new \App\model\UserManager();
+					    $checkExistUser = $userManager->existUser($username, $email);
 
-				    			// Ajout du nouvel utilisateur dans la base de données
-				    			$new_user = new \App\model\User([
-									'username' => $username,
-									'email'    => $email,
-									'password' => $password,
-									'token'    => $token
-				    			]);
-								$userManager->addUser($new_user);
+					    if ($checkExistUser == 0) 
+					    {
+					    	if (preg_match('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $password)) 
+					    	{
+					    		if ($password === $confirm_password)
+					    		{
+					    			// Hashage du mot de passe
+					    			$password = password_hash($password, PASSWORD_DEFAULT);
 
-								// Envoi du mail et affichage de la page de confirmation
-				    			$new_mail = new \App\model\Mail($email);
-				    			$new_mail->send_register_mail($username, $token);
+					    			// Génération d'une clé aléatoire de 16 caractères
+					    			$length = 16;
+					    			$token = bin2hex(random_bytes($length));
 
-								$_SESSION['save_username'] = null;
-								$_SESSION['save_email']    = null;
-				    			header('Location: ./confirmation_inscription');
-				    			exit;
-				    		}
-				    		else
-				    		{
-				    			$this->alert_failure('Les mots de passes renseignés doivent être identiques', 'inscription');
-				    		}
-				    	}
-				    	else
-				    	{
-				    		$this->alert_failure('Le mot de passe doit contenir au moins 8 caractères avec des chiffres et des lettres majuscules et minuscules', 'inscription');
-				    	}
+					    			// Ajout du nouvel utilisateur dans la base de données
+					    			$new_user = new \App\model\User([
+										'username' => $username,
+										'email'    => $email,
+										'password' => $password,
+										'token'    => $token
+					    			]);
+									$userManager->addUser($new_user);
+
+									// Envoi du mail et affichage de la page de confirmation
+					    			$new_mail = new \App\model\Mail($email);
+					    			$new_mail->send_register_mail($username, $token);
+
+									$_SESSION['save_username'] = null;
+									$_SESSION['save_email']    = null;
+					    			header('Location: ./confirmation_inscription');
+					    			exit;
+					    		}
+					    		else
+					    		{
+					    			$this->alert_failure('Les mots de passes renseignés doivent être identiques', 'inscription');
+					    		}
+					    	}
+					    	else
+					    	{
+					    		$this->alert_failure('Le mot de passe doit contenir au moins 8 caractères avec des chiffres et des lettres majuscules et minuscules', 'inscription');
+					    	}
+					    }
+					    else
+					    {
+							$_SESSION['save_username'] = null;
+							$_SESSION['save_email']    = null;
+					    	$this->alert_failure('Ce nom d\'utilisateur ou cette adresse email est déjà utilisé', 'inscription');
+					    }
 				    }
 				    else
 				    {
-						$_SESSION['save_username'] = null;
-						$_SESSION['save_email']    = null;
-				    	$this->alert_failure('Ce nom d\'utilisateur ou cette adresse email est déjà utilisé', 'inscription');
+				    	$this->alert_failure('Cette adresse email n\'est pas valide', 'inscription');
 				    }
-			    }
-			    else
-			    {
-			    	$this->alert_failure('Cette adresse email n\'est pas valide', 'inscription');
-			    }
+				}
+				else
+				{
+					$this->alert_failure('Le nom d\'utilisateur doit faire entre 2 et 25 caractères', 'inscription');
+				}
 			}
 			else
 			{
-				$this->alert_failure('Le nom d\'utilisateur doit faire entre 2 et 25 caractères', 'inscription');
+				$this->alert_failure('Pour que votre inscription soit prise en compte, vous devez consentir à notre politique concernant les données', 'inscription');
 			}
 		}
 		else
@@ -438,5 +445,4 @@ class ControllerPublic extends Alert
 			$this->alert_failure('Les données transmissent ne sont pas valides', 'nouveau_mot_de_passe&username=' . $_GET['username'] . '&key=' . $_GET['key']);
 		}
 	}
-
 }

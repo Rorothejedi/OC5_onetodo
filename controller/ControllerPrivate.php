@@ -16,7 +16,7 @@ class ControllerPrivate extends Alert
 		if (empty($_SESSION['user_id']) && empty($_SESSION['user_username'])) 
 		{ 
 			header('Location: ./connexion');
-			exit();
+			exit;
 		}
 	}
 
@@ -148,15 +148,15 @@ class ControllerPrivate extends Alert
 	 */
 	public function displayMessagingTalk()
 	{
-		$userData       = $this->callUserData();
-		$projects       = $this->callUserProjects();
+		$userData = $this->callUserData();
+		$projects = $this->callUserProjects();
 
 		if (isset($_GET['conv']) && !empty($_GET['conv'])) 
 		{
 			$id_conversation = (int) htmlspecialchars($_GET['conv']);
 
-			$messageManager  = new \App\model\MessageManager();
-			$accessConv      = $messageManager->getAccessUserConversation($userData, $id_conversation);
+			$messageManager = new \App\model\MessageManager();
+			$accessConv     = $messageManager->getAccessUserConversation($userData, $id_conversation);
 
 			if ($accessConv == 1) 
 			{
@@ -164,7 +164,7 @@ class ControllerPrivate extends Alert
 				$notSeenMessage = $this->callNotSeenMessage();
 
 				$users_conversation = $messageManager->getUsersConversations($id_conversation, $_SESSION['user_id']);
-				$main_contact_add = $messageManager->getMainContactAdd($userData, $id_conversation);
+				$main_contact_add   = $messageManager->getMainContactAdd($userData, $id_conversation);
 				$conversation       = $messageManager->getConversation($id_conversation);
 				require('./view/viewPrivate/viewMessagingTalk.php');
 			}
@@ -188,7 +188,7 @@ class ControllerPrivate extends Alert
 		session_destroy();
 		setcookie('auth', '', time() - 3600, null, null, false, true);
 		header('Location: ./');
-		exit();
+		exit;
 	}
 
 	/**
@@ -222,13 +222,13 @@ class ControllerPrivate extends Alert
 					else
 					{
 						$this->alert_failure('Les mots de passes renseignés doivent être identiques', 'parametres');
-						exit();
+						exit;
 					}
 				}
 				else
 				{
 					$this->alert_failure('Le mot de passe doit contenir au moins 8 caractères avec des chiffres et des lettres', 'parametres');
-					exit();
+					exit;
 				}
 			// Si les inputs pour modifier le mot de passe reste vide
 			}
@@ -241,8 +241,8 @@ class ControllerPrivate extends Alert
 			{
 				if (filter_var($email, FILTER_VALIDATE_EMAIL))
 	   			{
-	   				$userManager = new \App\model\UserManager();
-	   				$countUserData = $userManager->existUser($username, $email);
+					$userManager   = new \App\model\UserManager();
+					$countUserData = $userManager->existUser($username, $email);
 
 	   				if ($countUserData <= 1) 
 	   				{
@@ -259,7 +259,7 @@ class ControllerPrivate extends Alert
 
 						$this->alert_success('Vos informations ont bien été mises à jour !');
 						header('Location: ./parametres');
-						exit();
+						exit;
 	   				}
 	   				else
 	   				{
@@ -299,7 +299,7 @@ class ControllerPrivate extends Alert
 		{
 			if ((int) !empty($_GET['user'])) 
 			{
-				$id_user     = (int) htmlspecialchars($_GET['user']);
+				$id_user = (int) htmlspecialchars($_GET['user']);
 				
 				$userManager = new \App\Model\UserManager();
 				$id_exist    = $userManager->existIdUser($id_user);
@@ -308,7 +308,7 @@ class ControllerPrivate extends Alert
 				{
 					$messageManager->addUserConversation($id_new_conversation->id, $id_user);
 					header('Location: ./messagerie/talk?conv=' . $id_new_conversation->id);
-					exit();
+					exit;
 				}
 				else
 				{
@@ -356,7 +356,7 @@ class ControllerPrivate extends Alert
 						$messageManager->addUserConversation($id_conversation, $id_user);
 						$this->alert_success('L\'utilisateur a été ajouté à la conversation avec succès');
 						header('Location: ./messagerie/talk?conv=' . $id_conversation);
-						exit();
+						exit;
 					}
 					else
 					{
@@ -372,13 +372,13 @@ class ControllerPrivate extends Alert
 					{
 						$messageManager = new \App\model\MessageManager();
 
-						$user = new \App\model\User(['username' => $username]);
+						$user    = new \App\model\User(['username' => $username]);
 						$id_user = $userManager->getUser($user);
 
 						$messageManager->addUserConversation($id_conversation, $id_user->id());
 						$this->alert_success('L\'utilisateur a été ajouté à la conversation avec succès');
 						header('Location: ./messagerie/talk?conv=' . $id_conversation);
-						exit();
+						exit;
 					}
 					else
 					{
@@ -421,7 +421,7 @@ class ControllerPrivate extends Alert
 			{
 				$messageManager->addMessage($id_conversation, $_SESSION['user_id'], $content);
 				header('Location: messagerie/talk?conv=' . $id_conversation);
-				exit();
+				exit;
 			}
 			else
 			{
@@ -453,7 +453,7 @@ class ControllerPrivate extends Alert
 				$messageManager->deleteUserConversation($id_conversation, $userData);
 				$this->alert_success('Vous avez été retiré de cette conversation avec succès');
 				header('Location: ./messagerie');
-				exit();
+				exit;
 			}
 			else
 			{
@@ -466,6 +466,10 @@ class ControllerPrivate extends Alert
 		}
 	}
 
+	/**
+	 * /nouveauProjet
+	 * Permet la création d'un nouveau projet
+	 */
 	public function processNewProject()
 	{
 		if (isset($_POST['projectName']) && !empty($_POST['projectName'])
@@ -485,7 +489,7 @@ class ControllerPrivate extends Alert
 				if (strlen($descriptionProject) > 180) 
 				{
 					$this->alert_failure('La description de votre projet est trop longue (180 caractères maximum)', 'nouveauProjet');
-					exit();
+					exit;
 				}
 			}
 			else
@@ -542,7 +546,7 @@ class ControllerPrivate extends Alert
 
 							$this->alert_success('Votre projet <strong>' . $projectName . '</strong> a été créé avec succès !');
 							header('Location: ./dashboard');
-							exit();
+							exit;
 						}
 						else
 						{
@@ -570,6 +574,9 @@ class ControllerPrivate extends Alert
 		}
 	}
 
+	/**
+	 * Permet l'ajout de l'utilisateur en cours au projet ouvert qu'il a sélectionné (page projets ouverts).
+	 */
 	public function processAddUserOpenProject()
 	{
 		$userData = $this->callUserData();
@@ -598,7 +605,7 @@ class ControllerPrivate extends Alert
 
 				$this->alert_success('Vous venez de rejoindre avec succès <strong>' . $project->name() . '</strong> comme <em>' . $accessName . '</em> !');
 				header('Location: ./dashboard');
-				exit();
+				exit;
 			}
 			else
 			{

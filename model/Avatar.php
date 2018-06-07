@@ -68,7 +68,7 @@ class Avatar
 			if ($this->size === 80) 
 			{
 				$html = '<a href="https://www.gravatar.com/" target="_blank">' . 
-						'<i class="fas fa-user-circle user-circle-settings"></i>' .
+						'<i class="fas fa-user-circle user-circle-settings icon-user-responsive-80"></i>' .
 						'<small class="d-block">Ajouter un avatar</small>' .
 					'</a>';
 			}

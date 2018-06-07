@@ -21,7 +21,7 @@
 							<div class="col-lg-4">
 								<div class="form-group">
 									<select name="statusNewUserProject" class="form-control" required>
-										<option selected disabled>Status de l'utilisateur</option>
+										<option value="" selected disabled>Status de l'utilisateur</option>
 										<option value="2">Contributeur</option>
 										<option value="3">Observateur</option>
 									</select>
@@ -65,7 +65,7 @@
 									<form action="processChangeUserStatus" method="POST">
 										<input type="hidden" name="changeUserStatus" value="changeUserStatus">
 										<input type="hidden" name="id_user" value="<?= $user->id_user ?>">
-										<select name="changeStatus" id="select-change-access" class="form-control" style="max-width: 80%" onchange="this.form.submit()" disabled>
+										<select name="changeStatus" class="form-control select-change-access" style="max-width: 80%" onchange="this.form.submit()" disabled>
 											<option value="2" <?php if ($user->access == 2) {echo "selected";} ?>>Contributeur</option>
 											<option value="3" <?php if ($user->access == 3) {echo "selected";} ?>>Observateur</option>
 										</select>
@@ -77,10 +77,10 @@
 									?>
 						     	
 						     	<td class="align-middle text-center" style="width: 80px">
-									<form action="processRemoveUserProject" method="POST" id="withdraw-form">
+									<form action="processRemoveUserProject" method="POST" class="withdraw-form">
 										<input type="hidden" name="removeUser" value="removeUser">
 										<input type="hidden" name="id_user" value="<?= $user->id_user ?>">
-										<button class="btn btn-light rounded-circle btn-remove-user" data-confirm-withdraw="Voulez-vous vraiment retirer <?= $user->username ?> du projet ?" title="Retirer du projet" data-toggle="tooltip" disabled>
+										<button class="btn btn-light rounded-circle btn-remove-user" data-confirm-withdraw="Voulez-vous vraiment retirer <?= $user->username ?> du projet ?" title="Retirer du projet" data-toggle="tooltip" data-trigger="hover" disabled>
 											<i class="fas fa-times"></i>
 										</button>
 									</form>
@@ -130,7 +130,7 @@
 					<?php if ($access->access <= 1): ?> 
 					<br>
 					<div>
-						<button class="btn btn-dark button-edit-user-status">Modifier le status des utilisateurs du projet ?</button>
+						<button class="btn btn-dark button-edit-user-status btn_small">Modifier les status utilisateurs ?</button>
 						<p class="hidden text-edit-user-status font-italic">Vous pouvez maintenant gérer les utilisateurs du projet</p>
 					</div>
 					<?php endif; ?>

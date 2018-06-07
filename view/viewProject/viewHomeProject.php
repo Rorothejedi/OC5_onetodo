@@ -7,7 +7,7 @@
 	<div class="container-fluid">
 		<div class="row content-project">
 			<div class="col-xl-12">
-				<h4>Home - <?= $project->name() ?></h4>
+				<h4>Home - <em><?= $project->name() ?></em></h4>
 				<hr>
 			</div>
 			<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12 mb-4">

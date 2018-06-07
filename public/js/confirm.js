@@ -152,7 +152,7 @@ $(function()
 
 		$('#dataConfirmOK').click(function()
 		{
-			$('#withdraw-form').submit();
+			$('.withdraw-form').submit();
 		});
 
 		$('#dataConfirmModal').modal('show');

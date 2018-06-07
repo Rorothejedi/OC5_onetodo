@@ -7,7 +7,7 @@
 		<nav aria-label="breadcrumb">
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="dashboard">Tableau de bord</a></li>
-    			<li class="breadcrumb-item active" aria-current="Liste des projets ouverts">Tous les projets ouverts</li>
+    			<li class="breadcrumb-item active" aria-current="page">Tous les projets ouverts</li>
   			</ol>
 		</nav>
 		<br>

@@ -6,7 +6,7 @@ Réalisé par Rodolphe Cabotiau
 Date de début de projet : 09/05/2018
 Date d'achèvement V1.0: ../06/2018
 
-Dernière mise à jour : 04/06/2018 
+Dernière mise à jour : 07/06/2018 
 
 -->
 
@@ -112,11 +112,10 @@ Dernière mise à jour : 04/06/2018
 		echo $cdnFontAwesomeJs;
 
 		// Call to JavaScript scripts
+		echo $scriptPublicLoadingHome;
 		echo $scriptScroll;
 		echo $scriptAlert;
 		echo $scriptInputChecking;
-		echo $scriptGlobal;
 	?>
-
 </body>
 </html>

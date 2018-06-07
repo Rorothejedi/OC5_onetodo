@@ -8,13 +8,13 @@
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="../dashboard">Tableau de bord</a></li>
     			<li class="breadcrumb-item active"><a href="../messagerie">Messagerie</a></li>
-    			<li class="breadcrumb-item active" aria-current="Conversation privée">Conversation</li>
+    			<li class="breadcrumb-item active" aria-current="page">Conversation</li>
   			</ol>
 		</nav>
 		<br>
 		<div class="row">
-			<div class="col-lg-9">
-				<div class="jumbotron messages_content">
+			<div class="col-xl-9 col-lg-8">
+				<div class="jumbotron">
 					<div class="page-header">
 						
 					<?php if (count($users_conversation) == 0): ?>
@@ -147,7 +147,7 @@
 				</div>
 			</div>
 			<!-- Contacts -->
-			<div class="col-lg-3">
+			<div class="col-xl-3 col-lg-4">
 				<div class="jumbotron messages_content">
 					<div class="page-header">
 						<h5>Ajouter à la conversation</h5>

@@ -22,4 +22,22 @@ $(document).ready(function()
 			$('.charactersCountFillIn').addClass('hidden');
 		}
 	});
+
+
+	// Script permettant de faire apparaitre le select si le statut est ouvert.
+	$('#statusProject').change(function() 
+	{
+		var value = $("#statusProject option:selected").val();
+		if (value == 1) 
+		{
+			$('.block-open-project').slideDown();
+			$('#openProject').attr('required', 'required');
+		}
+		else
+		{
+			$('.block-open-project').slideUp();
+			$('#openProject').removeAttr('required');
+		}
+	});
+
 });

@@ -31,7 +31,7 @@
 						<div class="form-group">
 							<div class="form-check">
 							  	<label class="form-check-label">
-							    	<input type="checkbox" name="consent" class="form-check-input">
+							    	<input type="checkbox" name="consent" class="form-check-input" required>
 							    	J'ai lu et j'accepte <a href="mentions_legales">la politique d'utilisation des données</a>
 							  	</label>
 							</div>

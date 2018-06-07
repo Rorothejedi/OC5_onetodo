@@ -27,18 +27,13 @@
 
 	$linkBootstrapCSS    = '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">';
 	
-	//Font Awesome : Version 5.0.13 (Remplacé par le script JS qui charge les icônes en SVG (voir $cdnFontAwesomeJs))
-	// $linkFontAwesome     = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">';
-	
 	$linkCustomScrollbar = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">';
 
-	$linkGoogleFont = '<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">' .
-					  '<link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet"> ';
+	$linkGoogleFont = '<link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet"> ';
 
 	// Development stylesheet and minify version
-	$stylesheet       = '<link href="' . \App\model\App::getDomainPath() . '/public/css/stylesheet.css" rel="stylesheet">'.
-						'<!-- <link href="' . \App\model\App::getDomainPath() . '/public/css/stylesheet.min.css" rel="stylesheet"> -->'.
-						'<link rel="stylesheet" href="' . \App\model\App::getDomainPath() . '/public/css/hamburger.css">';
+	$stylesheet       = '<!--<link href="' . \App\model\App::getDomainPath() . '/public/css/stylesheet.css" rel="stylesheet">-->'.
+						'<link href="' . \App\model\App::getDomainPath() . '/public/css/stylesheet.min.css" rel="stylesheet">';
 
 	$favicon = '<link rel="icon" type="image/png" href="' . \App\model\App::getDomainPath() . '/public/img/favicon-32x32.png" sizes="32x32">' .
 			   '<link rel="icon" type="image/png" href="' . \App\model\App::getDomainPath() . '/public/img/favicon-16x16.png" sizes="16x16">';
@@ -46,21 +41,39 @@
 	/*---------------------------------------   CDN Calls   ------------------------------------------------*/
 
 	$cdnJQuery          = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>';
+	$cdnJQueryUI		= '<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>';
+	$jQueryUITouchPunch = '<script src="' . \App\model\App::getDomainPath() . '/public/vendor/jquery.ui.touch-punch.min.js"></script>';
 	$cdnPopper          = '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>';
 	$cdnBoostrap        = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>';
 	$cdnCustomScrollbar = '<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>';
 	$cdnFontAwesomeJs   = '<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>';
 
-	/*------------------------------------   Javascript files  ------------------------------------------------*/
+	/*------------------------------------   JavaScript files  ------------------------------------------------*/
 
 	$scriptScroll        = '<script src="' . \App\model\App::getDomainPath() . '/public/js/scroll.js"></script>';
 	$scriptAlert         = '<script src="' . \App\model\App::getDomainPath() . '/public/js/alert.js" async></script>';
 	$scriptInputChecking = '<script src="' . \App\model\App::getDomainPath() . '/public/js/inputChecking.js" async></script>';
-	$scriptGlobal        = '<script src="' . \App\model\App::getDomainPath() . '/public/js/global.js"></script>';
 	$scriptSidebar		 = '<script src="' . \App\model\App::getDomainPath() . '/public/js/sidebar.js"></script>';
 	$scriptConfirm		 = '<script src="' . \App\model\App::getDomainPath() . '/public/js/confirm.js"></script>'; 
 	$scriptTooltip       = '<script src="' . \App\model\App::getDomainPath() . '/public/js/tooltip.js"></script>';
+	$scriptPopover		 = '<script src="' . \App\model\App::getDomainPath() . '/public/js/popover.js"></script>';
 	$scriptTextarea		 = '<script src="' . \App\model\App::getDomainPath() . '/public/js/textarea.js"></script>';
-	$scriptProjectDescription = '<script src="' . \App\model\App::getDomainPath() . '/public/js/projectDescription.js"></script>';
 	$scriptTinymce = '<script src="' . \App\model\App::getDomainPath() . '/public/vendor/tinymce/tinymce.min.js"></script>' .
 					'<script src="' . \App\model\App::getDomainPath() . '/public/vendor/tinymce/initTinymce.js"></script>';
+
+	$scriptProject = '<script src="' . \App\model\App::getDomainPath() . '/public/js/project.js"></script>';
+
+	/*--------------------------------   JavaScript files : public part  ---------------------------------------------*/
+
+	$scriptPublicLoadingHome = '<script src="' . \App\model\App::getDomainPath() . '/public/js/scriptPublicLoadingHome.js"></script>';
+
+	/*--------------------------------   JavaScript files : private part  ---------------------------------------------*/
+
+	 $scriptPrivateOpenProjects = '<script src="' . \App\model\App::getDomainPath() . '/public/js/scriptPrivateOpenProjects.js"></script>';
+
+	/*--------------------------------   JavaScript files : project part  ---------------------------------------------*/
+
+	$scriptProjectTodolist = '<script src="' . \App\model\App::getDomainPath() . '/public/js/scriptProjectTodolist.js"></script>';
+	$scriptProjectWiki     = '<script src="' . \App\model\App::getDomainPath() . '/public/js/scriptProjectWiki.js"></script>';
+	$scriptProjectUsers    = '<script src="' . \App\model\App::getDomainPath() . '/public/js/scriptProjectUsers.js"></script>';
+	$scriptProjectSettings = '<script src="' . \App\model\App::getDomainPath() . '/public/js/scriptProjectSettings.js"></script>';

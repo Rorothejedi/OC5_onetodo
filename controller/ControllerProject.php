@@ -3,17 +3,18 @@ namespace App\controller;
 
 /**
  * Class ControllerProject
- * 
+ * Controller qui gère les views et les models de la partie projet du site (accueil projet, todolist, wiki et les paramètres du projet).
  */
 class ControllerProject extends Alert
 {
 	
 	public function __construct()
 	{
+		// Vérification de la connexion de l'utilisateur
 		if (empty($_SESSION['user_id']) && empty($_SESSION['user_username'])) 
 		{ 
-			header('Location: ./connexion');
-			exit();
+			header('Location: ../../connexion');
+			exit;
 		}
 		// Vérification du droit d'accéder au projet
 		if($this->verifProject() === 0)
@@ -36,6 +37,10 @@ class ControllerProject extends Alert
 		return $user;
 	}
 
+	/**
+	 * Permet de vérifier si l'utilisateur qui essaye d'accèder au projet à les droits pour y accèder.
+	 * @return int Renvoi 0 si l'utilisateur ne peux pas accèder à ce projet. 1 si celui-ci a les droits.
+	 */
 	private function verifProject()
 	{
 		$user = $this->initUser();
@@ -69,8 +74,8 @@ class ControllerProject extends Alert
 	}
 
 	/**
-	 * [callProjectData description]
-	 * @return [type] [description]
+	 * Permet de récupérer les données du projet en cours.
+	 * @return object Récupération d'un objet Projet contenant les données du projet en cours de consultation.
 	 */
 	private function callProjectData()
 	{
@@ -94,6 +99,10 @@ class ControllerProject extends Alert
 		return $notSeenMessage;
 	}
 
+	/**
+	 * Permet de récupérer les droits d'accès sur le projet en cours de consultation.
+	 * @return objet Renvoi un objet (fetch) contenant les droits du projet en cours.
+	 */
 	public function callAccessToProject()
 	{
 		$project  = $this->callProjectData();
@@ -118,6 +127,10 @@ class ControllerProject extends Alert
 		require('./view/viewProject/viewHomeProject.php');
 	}
 
+	/**
+	 * Permet l'affichage de la page de gestion des todolists.
+	 * @param  string $slug Contient le lien du projet en cours de consultation.
+	 */
 	public function displayTodolist($slug)
 	{
 		$access 		= $this->callAccessToProject();
@@ -131,18 +144,13 @@ class ControllerProject extends Alert
 		$todolists       = $todolistManager->getTodolists($project);
 		$tasks           = $todolistManager->getTasks($project);
 
-
-
 		require('./view/viewProject/viewTodolist.php');
-
-
-
 	}
 
-
-
-
-
+	/**
+	 * Permet l'affichage du wiki du projet.
+	 * @param  string $slug Contient le lien du projet en cours de consultation.
+	 */
 	public function displayWiki($slug)
 	{
 		$access 		= $this->callAccessToProject();
@@ -154,6 +162,10 @@ class ControllerProject extends Alert
 		require('./view/viewProject/viewWiki.php');
 	}
 
+	/**
+	 * Permet l'affichage de la page de gestion des utilisateurs du projet.
+	 * @param  string $slug Contient le lien du projet en cours de consultation.
+	 */
 	public function displayProjectUsers($slug)
 	{
 		$access 		= $this->callAccessToProject();
@@ -169,6 +181,10 @@ class ControllerProject extends Alert
 		require('./view/viewProject/viewProjectUsers.php');
 	}
 
+	/**
+	 * Permet l'affichage de la page des paramètres du projet (accessible uniquement au fondateur du projet).
+	 * @param  string $slug Contient le lien du projet en cours de consultation.
+	 */
 	public function displayProjectSettings($slug)
 	{
 		$access 		= $this->callAccessToProject();
@@ -183,7 +199,7 @@ class ControllerProject extends Alert
 	// ------- PROCESS -------
 	
 	/**
-	 * Permet de supprimer le projet sélectionné.
+	 * Permet de supprimer le projet sélectionné (page paramètres projet).
 	 */
 	public function processDeleteProject()
 	{
@@ -195,7 +211,7 @@ class ControllerProject extends Alert
 			$projectManager->deleteProject($project);
 			$this->alert_success('Le projet "<strong>' . $project->name() . '</strong>" a bien été supprimé');
 			header('Location: ' . \App\model\App::getDomainPath() . '/dashboard');
-			exit();
+			exit;
 		}
 		else
 		{
@@ -203,6 +219,9 @@ class ControllerProject extends Alert
 		}
 	}
 
+	/**
+	 * Permet d'éditer les paramètres du projet (page paramètres projet).
+	 */
 	public function processEditProject()
 	{
 		$project = $this->callProjectData();
@@ -217,7 +236,6 @@ class ControllerProject extends Alert
 			$colorProject  = htmlspecialchars($_POST['colorProject']);
 			$link          = strtolower(str_replace(' ', '-', $projectName));
 
-
 			if (!empty($_POST['descriptionProject'])) 
 			{
 				$descriptionProject = htmlspecialchars($_POST['descriptionProject']);
@@ -225,7 +243,7 @@ class ControllerProject extends Alert
 				if (strlen($descriptionProject) > 180) 
 				{
 					$this->alert_failure('La description de votre projet est trop longue (180 caractères maximum)', 'nouveauProjet');
-					exit();
+					exit;
 				}
 			}
 			else
@@ -281,7 +299,7 @@ class ControllerProject extends Alert
 
 							$this->alert_success('Votre projet "<strong>' . $projectName . '</strong>" a été modifié avec succès !');
 							header('Location: ' . \App\model\App::getDomainPath() . '/projet/' . $actualProject->link() .'/parametres');
-							exit();
+							exit;
 						}
 						else
 						{
@@ -310,7 +328,7 @@ class ControllerProject extends Alert
 	}
 
 	/**
-	 * Permet d'éditer le wiki d'un projet.
+	 * Permet d'éditer le wiki d'un projet (page wiki).
 	 */
 	public function processEditWiki()
 	{
@@ -325,7 +343,7 @@ class ControllerProject extends Alert
 
 			$this->alert_success('Le wiki a été édité avec succès !');
 			header('Location: ' . \App\model\App::getDomainPath() . '/projet/' . $project->link() .'/wiki');
-			exit();
+			exit;
 		}
 		else
 		{
@@ -334,7 +352,7 @@ class ControllerProject extends Alert
 	}
 
 	/**
-	 * Permet à un utilisateur de quitter un projet où il est observateur ou contributeur.
+	 * Permet à un utilisateur de quitter un projet où il est observateur ou contributeur (projets observateurs ou contributeurs).
 	 */
 	public function processUserWithdrawProject()
 	{
@@ -347,7 +365,7 @@ class ControllerProject extends Alert
 			$projectManager->withdrawProject($project, $userData->id());
 			$this->alert_success('Vous avez quitté le projet <strong>"' . $project->name() . '"</strong> avec succès');
 			header('Location: ../../dashboard');
-			exit();
+			exit;
 		}
 		else
 		{
@@ -360,7 +378,7 @@ class ControllerProject extends Alert
 	 */
 	public function processRemoveUserProject()
 	{
-		$project  = $this->callProjectData();
+		$project = $this->callProjectData();
 
 		if (isset($_POST['removeUser']) && $_POST['removeUser'] == 'removeUser'
 			&& isset($_POST['id_user']) && !empty($_POST['id_user']))
@@ -371,7 +389,7 @@ class ControllerProject extends Alert
 			$projectManager->withdrawProject($project, $id_user);
 			$this->alert_success('L\'utilisateur a été retiré du projet avec succès');
 			header('Location: ./utilisateurs');
-			exit();
+			exit;
 		}
 		else
 		{
@@ -399,7 +417,7 @@ class ControllerProject extends Alert
 				$projectManager->editUserAccess($project, $id_user, $access);
 				$this->alert_success('Le status de l\'utilisateur a été modifié avec succès');
 				header('Location: ./utilisateurs');
-				exit();
+				exit;
 			}
 			else
 			{
@@ -413,7 +431,7 @@ class ControllerProject extends Alert
 	}
 
 	/**
-	 * [processAddUserInProject description]
+	 * Permet d'ajouter un utilisateur au projet (s'il a un compte sur la plateforme) ou d'inviter une personne (via son adresse mail renseigné) à créer un compte sur la plateforme (s'il n'a pas de compte).
 	 */
 	public function processAddUserInProject()
 	{
@@ -450,7 +468,7 @@ class ControllerProject extends Alert
 						$projectManager->addUserInProject($userObject->id(), $project->id(), $access);
 						$this->alert_success('<strong>' . $userObject->username() . '</strong> a été affilié au projet avec succès !');
 						header('Location: ./utilisateurs');
-						exit();
+						exit;
 					}
 					else
 					{
@@ -465,7 +483,7 @@ class ControllerProject extends Alert
 						$new_mail->send_user_project_mail($userData->username(), $project->name(), $access);
 						$this->alert_success('Un mail a été envoyé à ' . $user . ' pour rejoindre la plateforme. <br>Ajoutez-le de nouveau au projet après son inscription pour l\'ajouter au projet.');
 						header('Location: ./utilisateurs');
-						exit();
+						exit;
 					}
 					else
 					{
@@ -484,23 +502,26 @@ class ControllerProject extends Alert
 		}
 	}
 
+	/**
+	 * Permet de créer une nouvelle todolist (page todolist).
+	 */
 	public function processAddTodolist()
 	{
-		$project  = $this->callProjectData();
+		$project = $this->callProjectData();
 
 		if (isset($_POST['nameTodolist']) && !empty($_POST['nameTodolist']) 
 			&& isset($_POST['newTodolist']) && $_POST['newTodolist'] == 'newTodolist') 
 		{
 			$name = htmlspecialchars($_POST['nameTodolist']);
-			$todolistManager = new \App\model\TodolistManager();
 
+			$todolistManager    = new \App\model\TodolistManager();
 			$verifExistTodolist = $todolistManager->verifTodolistExist($project, $name);
 
 			if ($verifExistTodolist == 0) 
 			{
 				$todolistManager->addTodolist($project, $name);
 				header('Location: ./todolist');
-				exit();
+				exit;
 			}
 			else
 			{
@@ -513,25 +534,27 @@ class ControllerProject extends Alert
 		}
 	}
 
+	/**
+	 * Permet d'enregistrer l'ordre des tâches réorganisées par l'utilisateur avec le drag & drop (page todolist).
+	 */
 	public function processOrder()
 	{
-		$project  = $this->callProjectData();
+		$project = $this->callProjectData();
 
 		if (isset($_POST['todolist_id']) && !empty($_POST['todolist_id']) 
 			&& isset($_POST['serializedOrder']) && !empty($_POST['serializedOrder'])) 
 		{
-			$todolist_id = (int) htmlspecialchars($_POST['todolist_id']);
-			$serializedData = htmlspecialchars($_POST['serializedOrder']);
+			$todolist_id     = (int) htmlspecialchars($_POST['todolist_id']);
+			$serializedData  = htmlspecialchars($_POST['serializedOrder']);
 			$todolistManager = new \App\model\TodolistManager();
-			
-			$verifTodolist = $todolistManager->verifTodolistInProject($project, $todolist_id);
+			$verifTodolist   = $todolistManager->verifTodolistInProject($project, $todolist_id);
 
 			if ($verifTodolist == 1) 
 			{
 				$serial = explode(';', $serializedData);
 				$todolistManager->updateTaskOrder($todolist_id, serialize($serial));
 				header('Location: ./todolist');
-				exit();
+				exit;
 			}
 			else
 			{
@@ -544,10 +567,12 @@ class ControllerProject extends Alert
 		}
 	}
 
-
+	/**
+	 * Permet d'enregisitrer qu'une tâche à été indiquée comme étant terminée ou non (checkbox cochée ou non)(page todolist).
+	 */
 	public function processDoneTask()
 	{
-		$project  = $this->callProjectData();
+		$project = $this->callProjectData();
 
 		if (isset($_POST['done_task_id']) && !empty($_POST['done_task_id']) 
 			&& isset($_POST['isDoneTask']))
@@ -559,7 +584,7 @@ class ControllerProject extends Alert
 		
 			$todolistManager->updateDoneTask($done, $done_task_id);
 			header('Location: ./todolist');
-			exit();
+			exit;
 		}
 		else
 		{
@@ -567,9 +592,12 @@ class ControllerProject extends Alert
 		}
 	}
 
+	/**
+	 * Permet d'effacer une todolist (page todolist).
+	 */
 	public function processDeleteTodolist()
 	{
-		$project  = $this->callProjectData();
+		$project = $this->callProjectData();
 
 		if (isset($_POST['todolist_id']) && !empty($_POST['todolist_id']) 
 			&& isset($_POST['deleteTodolist']) && $_POST['deleteTodolist'] == 'deleteTodolist')
@@ -584,7 +612,7 @@ class ControllerProject extends Alert
 				$todolistManager->deleteTodolist($todolist_id);
 				$this->alert_success('La todolist a été supprimée avec succès !');
 				header('Location: ./todolist');
-				exit();
+				exit;
 			}
 			else
 			{
@@ -597,9 +625,12 @@ class ControllerProject extends Alert
 		}
 	}
 
+	/**
+	 * Permet d'ajouter une tâche à une todolist (page todolist).
+	 */
 	public function processAddTask()
 	{
-		$project  = $this->callProjectData();
+		$project = $this->callProjectData();
 
 		if (isset($_POST['todolist_id']) && !empty($_POST['todolist_id'])
 			&& isset($_POST['nameTask']) && !empty($_POST['nameTask'])
@@ -628,9 +659,8 @@ class ControllerProject extends Alert
 					$newOrder = serialize($order);
 				}	
 				$todolistManager->updateTaskOrder($todolist_id, $newOrder);
-
 				header('Location: ./todolist');
-				exit();
+				exit;
 			}
 			else
 			{
@@ -643,9 +673,12 @@ class ControllerProject extends Alert
 		}
 	}
 
+	/**
+	 * Permet de supprimer une tâche d'une todolist (page todolist).
+	 */
 	public function processDeleteTask()
 	{
-		$project  = $this->callProjectData();
+		$project = $this->callProjectData();
 
 		if (isset($_POST['task_id']) && !empty($_POST['task_id'])
 			&& isset($_POST['todolist_id']) && !empty($_POST['todolist_id'])
@@ -662,7 +695,7 @@ class ControllerProject extends Alert
 				$todolistManager->deleteTask($task_id);
 				$this->alert_success('La tâche a été supprimée avec succès !');
 				header('Location: ./todolist');
-				exit();
+				exit;
 			}
 			else
 			{

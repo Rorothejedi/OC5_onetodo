@@ -2,7 +2,8 @@
 	$link = explode('/', $_GET['url']);
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top fixed-top-2" style="background-color: <?= $project->color() ?>;">
+<h2 hidden><?= $project->name() ?></h2>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top fixed-top-2 border-bottom border-white" style="background-color: <?= $project->color() ?>;">
 	<a class="navbar-brand" href="<?= \App\model\App::getDomainPath(); ?>/projet/<?= $project->link() ?>/home">
 		<?= $project->name() ?>
 	</a>
@@ -35,9 +36,9 @@
 			<?php endif; ?>
 		</ul>
 		<?php if($access->access >= 2): ?>
-		<form class="form-inline formWithdrawProject" action="processUserWithdrawProject" method="POST" id="withdraw-form">
+		<form class="form-inline formWithdrawProject d-flex flex-row-reverse" action="processUserWithdrawProject" method="POST" id="withdraw-form">
 			<input type="hidden" name="withdrawProject" value="withdrawProject">
-			<button type="submit" class="btn rounded-circle" data-confirm-withdraw="Etes-vous vraiment sûr de vouloir quitter ce projet ?" data-toggle="tooltip" data-placement="left" title="Quitter ce projet">
+			<button type="submit" class="btn rounded-circle" data-confirm-withdraw="Etes-vous vraiment sûr de vouloir quitter ce projet ?" data-toggle="tooltip" data-placement="left" data-trigger="hover" title="Quitter ce projet">
 				<i class="fas fa-times"></i>
 			</button>
 		</form>

@@ -45,9 +45,9 @@
 						<div class="form-group <?php if($project->status() == 0){echo 'hidden';} ?> block-open-project">
 							<label for="openProject">Accès des utilisateurs extérieur au projet</label>
 							<select id="openProject" name="openProject" class="form-control" disabled>
-								<option selected disabled>Sélectionnez l'accès par défaut</option>
-								<option value="1" <?php if($project->open() == 1){echo "selected";} ?>>Contributeur</option>
-								<option value="0" <?php if($project->open() == 0){echo "selected";} ?>>Observateur</option>
+								<option <?php if(is_null($project->open())){echo "selected";} ?> disabled>Sélectionnez l'accès par défaut</option>
+								<option value="1" <?php if($project->open() == '1'){echo "selected";} ?>>Contributeur</option>
+								<option value="0" <?php if($project->open() == '0' ){echo "selected";} ?>>Observateur</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -57,7 +57,7 @@
 							<br class="charactersCountFillIn">
 						</div>
 						<br>
-						<button type="button" class="btn btn-dark button-edit-project-disabled">Modifier les informations concernant le projet ?</button>
+						<button type="button" class="btn btn-dark button-edit-project-disabled btn_small">Modifier les informations du projet ?</button>
 						<button type="submit" class="btn btn-primary button-edit-project hidden" data-confirm="Etes-vous sûr de vouloir modifier les informations relatives à votre projet ?">Modifier les informations</button>
 					</form>
 				</div>
@@ -68,7 +68,7 @@
 					<form action="processDeleteProject" method="POST" id="form-delete-project">
 						<div class="form-group">
 							<input type="hidden" name="deleteProject" value="deleteProject">
-							<button type="submit" class="btn btn-danger" data-confirm-delete="">Supprimer définitivement ce projet</button>
+							<button type="submit" class="btn btn-danger btn_small" data-confirm-delete="">Supprimer définitivement ce projet</button>
 						</div>
 					</form>
 				</div>

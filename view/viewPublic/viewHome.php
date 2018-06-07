@@ -3,31 +3,35 @@
 	$header_class = 'topHome';
 	ob_start();
 ?>
-
-		<div class="container d-flex align-items-center" style="height: 100%">
-			<div class="row">
-				<div class="topHomeText col-12">
-					<h2>Gérez <em>facilement</em> et <em>gratuitement</em> <br>
-						vos projets solo ou en équipe <br>
-						avec un maximum d'efficacité !
-					</h2>
-					<br>
-					<div class="mb-2">
-						<a href="inscription" class="d-flex align-items-center">
+		<div class="loading_home d-flex justify-content-center align-items-center">
+			<i class="fas fa-circle-notch fa-spin fa-3x"></i>
+		</div>
+		<div class="background_header">
+			<div class="container d-flex align-items-center">
+				<div class="row">
+					<div class="topHomeText col-12">
+						<h2>Gérez <em>facilement</em> et <em>gratuitement</em> <br>
+							vos projets solo ou en équipe <br>
+							avec un maximum d'efficacité !
+						</h2>
+						<br>
+						<div class="mb-2">
+							<a href="inscription" class="d-flex align-items-center">
+								<i class="fas fa-check-square fa-2x mr-3"></i> 
+								<div class="btn btn-dark button-public-home">Inscrivez-vous</div>
+							</a>
+						</div>
+						<div>
+							<a href="connexion" class="d-flex align-items-center">
+								<i class="fas fa-square fa-2x mr-3"></i>
+								<div class="btn btn-dark button-public-home">Connectez-vous</div>
+							</a>
+						</div>
+						<hr>
+						<div class="d-flex align-items-center">
 							<i class="fas fa-check-square fa-2x mr-3"></i> 
-							<div class="btn btn-dark button-public-home">Inscrivez-vous</div>
-						</a>
-					</div>
-					<div>
-						<a href="connexion" class="d-flex align-items-center">
-							<i class="fas fa-square fa-2x mr-3"></i>
-							<div class="btn btn-dark button-public-home">Connectez-vous</div>
-						</a>
-					</div>
-					<hr>
-					<div class="d-flex align-items-center">
-						<i class="fas fa-check-square fa-2x mr-3"></i> 
-						<h4>Rejoignez-nous !</h4>
+							<h4>Rejoignez-nous !</h4>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -36,7 +40,7 @@
 
 	<section id="sectionPresentation">
 		<h2 hidden>Présentation</h2>
-		<div class="container d-flex align-items-center">
+		<div class="container d-flex align-items-center justify-content-center">
 			<div class="row col-12 d-flex justify-content-around">
 				<a href="inscription" class="col-lg-4 col-md-6 text-center link-public-home">
 					<i class="fas fa-users fa-3x icon-public-home"></i>
