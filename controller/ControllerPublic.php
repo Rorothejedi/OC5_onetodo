@@ -118,7 +118,7 @@ class ControllerPublic extends Alert
 					$this->alert_success('Votre message a bien été transmis !');
 
 					header('Location: ./contact');
-					exit();
+					exit;
 			    }
 			    else
 			    {
@@ -152,7 +152,7 @@ class ControllerPublic extends Alert
 			$userManager = new \App\model\UserManager();
 			$courentUser = $userManager->getUser($user);
 
-			if ($courentUser->confirm_register() === 0)
+			if ($courentUser->confirm_register() == '0')
 			{
 				if ($token == $courentUser->token()) 
 				{
@@ -303,7 +303,7 @@ class ControllerPublic extends Alert
 
 				if (password_verify($password, $connectData->password())) 
 				{
-					if ($connectData->confirm_register() === 0) 
+					if ($connectData->confirm_register() == '0') 
 					{
 						// Envoi du mail et alerte de confirmation
 				    	$new_mail = new \App\model\Mail($connectData->email());
@@ -323,7 +323,7 @@ class ControllerPublic extends Alert
 							setcookie('auth', $connectData->id() . '---' . sha1($connectData->username() . $connectData->password() . $_SERVER['REMOTE_ADDR']), time() + 3600 * 24 * 365, null, null, false, true);
 						}
 						header('Location: ./dashboard');
-						exit();
+						exit;
 					}
 				}
 				else

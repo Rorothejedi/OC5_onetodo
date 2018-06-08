@@ -20,7 +20,7 @@ class Mail
 	 * Contient l'adresse mail d'envoi par défaut du site.
 	 * @var string
 	 */
-	private $from      = 'no-reply@cabotiau.com';
+	private $from = 'no-reply@cabotiau.com';
 	/**
 	 * Contient le mot de passe de l'adresse mail d'envoi par défaut du site.
 	 * @var string
@@ -31,7 +31,7 @@ class Mail
 	 * Contient l'adresse mail de contact du site.
 	 * @var string
 	 */
-	private $from_contact      = 'ecrire@cabotiau.com';
+	private $from_contact = 'ecrire@cabotiau.com';
 	/**
 	 * Contient le mot de passe de l'adresse mail de contact du site.
 	 * @var string
@@ -69,9 +69,9 @@ class Mail
 			</head>
 			<body>
 				<h2>Bienvenue sur ONETODO !</h2>
-				<p>Merci de nous rejoindre, mais avant cela il vous reste une ultime étape !<br> Pour accèder à votre espace et commencer à profiter de nos services, merci de confirmer votre inscription.</p>
+				<p>Merci de nous rejoindre <em>" . $username . "</em>, mais avant cela il vous reste une ultime étape !<br> Pour accèder à votre espace et commencer à profiter de nos services, merci de confirmer votre inscription.</p>
 				<br>
-				<a href='http://localhost/projet_5_openclassrooms/validation_inscription&username=" . urlencode($username) . "&key=". urlencode($key) ."' style='background-color:#306BA2; padding:7px; border-radius:3px; color:white; text-decoration:none'>Confirmer l'inscription</a>
+				<a href='https://rodolphe.cabotiau.com/projet_5_openclassrooms/validation_inscription&username=" . urlencode($username) . "&key=". urlencode($key) ."' style='background-color:#306BA2; padding:7px; border-radius:3px; color:white; text-decoration:none'>Confirmer l'inscription</a>
 				<br><br>
 				<small>Cet email est automatique, merci de ne pas y répondre.</small>
 			</body>
@@ -98,7 +98,7 @@ class Mail
 			<body>
 				<p>Cliquez sur le bouton ci-dessous pour accèder à la page vous permettant de réinitialiser votre mot de passe.</p>
 				<br>
-				<a href='http://localhost/projet_5_openclassrooms/nouveau_mot_de_passe&username=" . urlencode($username) . "&key=". urlencode($key) ."' style='background-color:#306BA2; padding:7px; border-radius:3px; color:white; text-decoration:none'>Réinitialiser mot de passe</a>
+				<a href='https://rodolphe.cabotiau.com/projet_5_openclassrooms/nouveau_mot_de_passe&username=" . urlencode($username) . "&key=". urlencode($key) ."' style='background-color:#306BA2; padding:7px; border-radius:3px; color:white; text-decoration:none'>Réinitialiser mot de passe</a>
 				<br><br>
 				<small>Cet email est automatique, merci de ne pas y répondre.</small>
 			</body>
@@ -166,9 +166,9 @@ class Mail
 				<br>
 				<p><strong>' . $username . '</strong> vous a invité à rejoindre le projet "<strong>' . $project . '</strong>" en tant ' . $access . 
 				'<p>Malheureusement, vous n\'êtes pas encore inscrit sur notre plateforme...</p>
-				<p><a href="http://localhost/projet_5_openclassrooms/inscription">Inscrivez-vous dès maintenant</a> pour gérer vos projets et contribuer à ceux de vos partenaires.</p>
+				<p><a href="https://rodolphe.cabotiau.com/projet_5_openclassrooms/inscription">Inscrivez-vous dès maintenant</a> pour gérer vos projets et contribuer à ceux de vos partenaires.</p>
 				<br>
-				<p>A très bientôt sur <a href="http://localhost/projet_5_openclassrooms/">ONETODO</a> !</p>
+				<p>A très bientôt sur <a href="https://rodolphe.cabotiau.com/projet_5_openclassrooms/">ONETODO</a> !</p>
 				<br>
 				<small>Cet email est automatique, merci de ne pas y répondre.</small>
 			</body>
@@ -188,11 +188,8 @@ class Mail
 	 */
 	private function configurationMail($subject, $message, $from, $pass, $recipient)
 	{
-	
-		//Load Composer's autoloader
-		require 'vendor/autoload.php';
-
-		try {
+		try 
+		{
 			$mail = new PHPMailer(true);
 
 		    //Server settings

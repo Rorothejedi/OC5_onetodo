@@ -12,6 +12,7 @@
 /vendor/nikic
 /vendor/phpcollection
 /vendor/phpdocumentor
+/vendor/phpoption
 /vendor/pimple
 /vendor/psr
 /vendor/seld

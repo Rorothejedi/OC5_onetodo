@@ -1,9 +1,8 @@
 <?php
 namespace App;
-
-	// Autoloader
-	require 'model/Autoloader.php';
-	\App\model\Autoloader::register();
+	
+	//Load Composer's autoloader
+	require 'vendor/autoload.php';
 
 	// Vérification de l'existence de la session
 	if(session_id() == "") session_start();
@@ -43,24 +42,18 @@ namespace App;
 	$router->get('/mot_de_passe_oublie', "Public#displayForgottenPassword");
 	$router->get('/nouveau_mot_de_passe', "Public#displayNewPassword");
 
-
-	$router->get('/documentation', "Public#displayDocumentation");
-
-
 	// -- Partie privée
 	$router->get('/dashboard', "Private#displayDashboard");
 	$router->get('/parametres', "Private#displayUserSettings");
 	$router->get('/nouveauProjet', "Private#displayCreateProject");
 	$router->get('/projetsOuverts', "Private#displayOpenProjects");
-
+	$router->get('/disconnect', "Private#disconnect");
 	$router->get('/messagerie', "Private#displayMessaging");
 	$router->get('/messagerie/talk', "Private#displayMessagingTalk");
-	// ---------   Process de la messagerie  --------
-		$router->get('/newConversation', "Private#newConversation");
-		$router->get('/addUserConversation', "Private#addUserConversation");
-		$router->get('/deleteUserConversation', "Private#processDeleteUserConversation");
-	// ---------------------------------------------
-	$router->get('/disconnect', "Private#disconnect");
+	// ---------   process messagerie  --------
+	$router->get('/newConversation', "Private#newConversation");
+	$router->get('/addUserConversation', "Private#addUserConversation");
+	$router->get('/deleteUserConversation', "Private#processDeleteUserConversation");
 
 	// -- Partie projet
 	$router->get('/projet/:slug/home', 'Project#displayHomeProject');
@@ -89,22 +82,15 @@ namespace App;
 	$router->post('/projet/:slug/processRemoveUserProject', 'Project#processRemoveUserProject');
 	$router->post('/projet/:slug/processChangeUserStatus', 'Project#processChangeUserStatus');
 	$router->post('/projet/:slug/processAddUserInProject', 'Project#processAddUserInProject');
-	
 	$router->post('/projet/:slug/processEditWiki', 'Project#processEditWiki');
-
 	$router->post('/projet/:slug/processEditProject', 'Project#processEditProject');
 	$router->post('/projet/:slug/processDeleteProject', 'Project#processDeleteProject');
-
 	$router->post('/projet/:slug/processAddTodolist', 'Project#processAddTodolist');
 	$router->post('/projet/:slug/processDeleteTodolist', 'Project#processDeleteTodolist');
 	$router->post('/projet/:slug/processAddTask', 'Project#processAddTask');
 	$router->post('/projet/:slug/processDeleteTask', 'Project#processDeleteTask');
 	$router->post('/projet/:slug/processDoneTask', 'Project#processDoneTask');
 	$router->post('/projet/:slug/processOrder', 'Project#processOrder');
-
-	
-
-	
 
 	//Route execution
 	$router->run(); 

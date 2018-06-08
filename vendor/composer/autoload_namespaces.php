@@ -22,4 +22,5 @@ return array(
     'Cilex\\Provider\\Console' => array($vendorDir . '/cilex/console-service-provider/src'),
     'Cilex\\Provider' => array($vendorDir . '/phpdocumentor/phpdocumentor/src'),
     'Cilex' => array($vendorDir . '/cilex/cilex/src'),
+    'App\\' => array($baseDir . '/'),
 );
