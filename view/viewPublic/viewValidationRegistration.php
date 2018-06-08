@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Validation de l\'inscription';
+	$title = 'Validation de l\'inscription';
 	ob_start();
 ?>
 

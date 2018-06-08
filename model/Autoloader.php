@@ -2,7 +2,6 @@
 namespace App\model;
 
 /**
- * Class Autoloader
  * Charge les fichiers correspondant aux différentes class lorsque celle-ci sont appellée de façon automatique
  */
 class Autoloader

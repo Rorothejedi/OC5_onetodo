@@ -1,14 +1,17 @@
 <?php
 namespace App\model;
 
-
 /**
- * Class TodolistManager
- * 
+ * Gére toutes les requêtes relatives à la page todolist et aux todolists en général.
  */
 class TodolistManager
 {
 	
+	/**
+	 * Permet d'obtenir la liste complète des todolists d'un projet.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @return array            Renvoi un tableau (fetchAll) contenant toutes les données de la requête. 
+	 */
 	public function getTodolists(Project $project)
 	{
 		$data = App::getDb()->prepare('
@@ -22,6 +25,11 @@ class TodolistManager
 		return $data;
 	}
 
+	/**
+	 * Permet d'obtenir la liste complète des tâches d'un projet.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @return array            Renvoi un tableau (fetchAll) contenant toutes les données de la requête. 
+	 */
 	public function getTasks(Project $project)
 	{
 		$data = App::getDb()->prepare('
@@ -35,6 +43,11 @@ class TodolistManager
 		return $data;
 	}
 
+	/**
+	 * Permet d'obtenir une todolist d'après son identifiant.
+	 * @param  int    $todolist_id Identifiant de la todolist à recupérer.
+	 * @return object              Retourne un fetch avec les données d'une todolist.
+	 */
 	public function getTodolist($todolist_id)
 	{
 		$data = App::getDb()->prepare('
@@ -47,6 +60,11 @@ class TodolistManager
 		return $data;
 	}
 
+	/**
+	 * Permet d'obtenir une tâche d'après son identifiant.
+	 * @param  int    $task_id Identifiant de la tâche à recupérer.
+	 * @return object          Retourne un fetch avec les données d'une tâche.
+	 */
 	public function getTask($task_id)
 	{
 		$data = App::getDb()->prepare('
@@ -59,6 +77,11 @@ class TodolistManager
 		return $data;
 	}
 
+	/**
+	 * Permet d'ajouter une todolist à un projet.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @param string  $todolist_name Nom de la todolist à ajouter.
+	 */
 	public function addTodolist(Project $project, $todolist_name)
 	{
 		$data = App::getDb()->prepare('
@@ -70,7 +93,11 @@ class TodolistManager
 			'name' => $todolist_name]);
 	}
 
-
+	/**
+	 * Permet d'ajouter une tâche à une todolist.
+	 * @param int    $todolist_id Identifiant de la todolist à laquelle ajouter la nouvelle tâche.
+	 * @param string $task_name   Nom de la tâche à ajouter.
+	 */
 	public function addTask($todolist_id, $task_name)
 	{
 		$data = App::getDb()->prepare('
@@ -90,6 +117,12 @@ class TodolistManager
 		return $lastId;
 	}
 
+	/**
+	 * Permet de vérifier l'existence du todolist.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @param  string  $todolist_name Nom de la todolist à vérifier.
+	 * @return int                    Retourne le nombre de résulat.
+	 */
 	public function verifTodolistExist(Project $project, $todolist_name)
 	{
 		$data = App::getDb()->prepare('
@@ -103,6 +136,12 @@ class TodolistManager
 		return $data;
 	}
 
+	/**
+	 * Permet de vérifier qu'une todolist est bien dans le projet en cours de consultation.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @param  int     $todolist_id Identifiant de la todolist à vérifier.
+	 * @return int                    Retourne le nombre de résulat.
+	 */
 	public function verifTodolistInProject(Project $project, $todolist_id)
 	{
 		$data = App::getDb()->prepare('
@@ -117,10 +156,9 @@ class TodolistManager
 	}
 
 	/**
-	 * [updateTaskOrder description]
-	 * @param  [type] $todolist_id [description]
-	 * @param  [type] $order       [description]
-	 * @return [type]              [description]
+	 * Permet de mettre à jour l'ordre des lequel les tâches sont positionnées au sein d'une todolist.
+	 * @param  int $todolist_id Identifiant de la todolist à mettre à jour.
+	 * @param  string $order       Données sérialisée contenant un tableau donnant l'ordre des identifiants des tâches.
 	 */
 	public function updateTaskOrder($todolist_id, $order)
 	{
@@ -224,5 +262,4 @@ class TodolistManager
 			['task_id' => $task_id]
 		);
 	}
-
 }

@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Connexion';
+	$title = 'Connexion';
 	ob_start();
 ?>
 	</header>

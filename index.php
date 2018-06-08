@@ -43,6 +43,10 @@ namespace App;
 	$router->get('/mot_de_passe_oublie', "Public#displayForgottenPassword");
 	$router->get('/nouveau_mot_de_passe', "Public#displayNewPassword");
 
+
+	$router->get('/documentation', "Public#displayDocumentation");
+
+
 	// -- Partie privée
 	$router->get('/dashboard', "Private#displayDashboard");
 	$router->get('/parametres', "Private#displayUserSettings");

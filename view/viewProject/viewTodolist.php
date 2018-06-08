@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Liste(s) des tâches';
+	$title = 'Liste(s) des tâches';
 	ob_start();
 	require('projectNavbar.php');
 ?>

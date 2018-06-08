@@ -2,7 +2,6 @@
 namespace App\model;
 
 /**
- * Class UserManager
  * Permet de gérer les requêtes concernant les utilisateurs (ajout, récupération, suppression, ect).
  */
 class UserManager

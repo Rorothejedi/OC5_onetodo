@@ -9,7 +9,7 @@
 
 <head>
    	<?php 
-   		echo '<title>' . $title . '</title>';
+   		echo '<title>ONETODO | ' . $title . '</title>';
    		echo $meta;
 		echo $linkBootstrapCSS; 
 		echo $linkGoogleFont;

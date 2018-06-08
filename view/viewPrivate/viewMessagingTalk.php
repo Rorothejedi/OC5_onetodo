@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Messagerie (conversation)';
+	$title = 'Conversation';
 	ob_start();
 ?>
 

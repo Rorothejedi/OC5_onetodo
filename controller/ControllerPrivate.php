@@ -104,7 +104,7 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
-	 * Méthode d'affichage de la messagerie interne (toutes les discussions)
+	 * Méthode d'affichage de la messagerie interne (toutes les discussions).
 	 */
 	public function displayMessaging()
 	{
@@ -143,7 +143,6 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
-	 * /messagerie/talk
 	 * Méthode d'affichage de la messagerie interne (discussion privé entre deux ou plusieurs utilisateurs)
 	 */
 	public function displayMessagingTalk()
@@ -180,8 +179,8 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
-	 * /disconnect
-	 * Permet de déconnecter un utilisateur.
+	 * Permet de déconnecter un utilisateur de la session en cours.
+	 * Supprime la session en cours ainsi que le cookie de session.
 	 */
 	public function disconnect()
 	{
@@ -192,8 +191,8 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
-	 * /parametres
-	 * Permet l'édition des données concernant l'utilisdateur par celui-ci (nom d'utilisateur, email, mot de passe).
+	 * Permet l'édition des données concernant l'utilisateur par celui-ci (nom d'utilisateur, email, mot de passe).
+	 * L'adresse email ainsi indiquée va interagir avec Gravatar (si l'utilisateur possède un compte Gravatar, c'est cette adresse mail qui fournira l'avatar).
 	 */
 	public function processEditUser()
 	{
@@ -283,7 +282,6 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
-	 * /messagerie
 	 * Permet de créer une nouvelle conversation (vérification des données reçues, vérification de l'utilisateur).
 	 * Si une données utilisateur est transmise, sa vérification est effectuée.
 	 * S'il n'y a pas de données utilisateur, la conversation est créer sans y ajouter d'utilisateur.
@@ -327,8 +325,7 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
-	 * /messagerie/talk
-	 * Permet d'ajouter un utilisateur (avec son pseudo (barre de recherche) ou son id) à une conversation déjà existante.
+	 * Permet d'ajouter un utilisateur (avec son pseudo (via la barre de recherche) ou son id) à une conversation déjà existante.
 	 */
 	public function addUserConversation()
 	{
@@ -402,7 +399,6 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
-	 * /messagerie/talk
 	 * Permet d'ajouter un nouveau message à une conversation.
 	 */
 	public function processNewMessage()
@@ -435,7 +431,6 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
-	 * /messagerie
 	 * Permet de retirer l'utilisateur en cours de la conversation qu'il a sélectionnée.
 	 */
 	public function processDeleteUserConversation()
@@ -467,8 +462,7 @@ class ControllerPrivate extends Alert
 	}
 
 	/**
-	 * /nouveauProjet
-	 * Permet la création d'un nouveau projet
+	 * Permet la création d'un nouveau projet (Nom du projet (obligatoire), status (obligatoire), couleur (facultative) et description(facultative)).
 	 */
 	public function processNewProject()
 	{

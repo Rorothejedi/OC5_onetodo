@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Nouveau projet';
+	$title = 'Nouveau projet';
 	ob_start();
 ?>
 	<div class="container-fluid">

@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Utilisateurs du projet';
+	$title = 'Utilisateurs du projet';
 	ob_start();
 	require('projectNavbar.php');
 ?>

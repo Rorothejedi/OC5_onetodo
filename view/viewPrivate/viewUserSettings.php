@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Paramètres utilisateur';
+	$title = 'Paramètres utilisateur';
 	ob_start();
 
 	$avatar = new \App\model\Avatar($userData->email(), 80);

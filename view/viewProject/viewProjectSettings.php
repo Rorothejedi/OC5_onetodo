@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Paramètres du projet';
+	$title = 'Paramètres du projet';
 	ob_start();
 	require('projectNavbar.php');
 ?>

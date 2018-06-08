@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Confirmation de l\'inscription';
+	$title = 'Confirmation de l\'inscription';
 	ob_start();
 ?>
 

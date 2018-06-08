@@ -2,8 +2,7 @@
 namespace App\model;
 
 /**
- * Class ProjectManager
- * 
+ * Gére toutes les requêtes concernant les projets.
  */
 class ProjectManager
 {
@@ -48,6 +47,11 @@ class ProjectManager
 		return new \App\model\Project($data);
 	}
 
+	/**
+	 * Permet de vérifier si un projet du même nom existe déjà.
+	 * @param  string $name Nom du projet à vérifier.
+	 * @return int          Entier désignant le nombre de résultat que compte la requête, s'il n'y en a aucun, c'est qu'il n'y a aucun projet du même nom.
+	 */
 	public function existProject($name)
 	{
 		$link = mb_strtolower(str_replace(' ', '-', $name), 'UTF-8');
@@ -60,7 +64,12 @@ class ProjectManager
 		return $data;
 	}
 
-
+	/**
+	 * Permet de vérifier si d'autres projets ne porte pas le même nom que le projet en cours de consultation.
+	 * @param  string $name       Nom du projet à vérifier.
+	 * @param  int    $id_project Identifiant du projet à vérifier.
+	 * @return int          Entier désignant le nombre de résultat que compte la requête, s'il n'y en a aucun, c'est qu'il n'y a aucun projet du même nom.
+	 */
 	public function existOtherProject($name, $id_project)
 	{
 		$link = mb_strtolower(str_replace(' ', '-', $name), 'UTF-8');
@@ -73,7 +82,6 @@ class ProjectManager
 
 		return $data;
 	}
-
 
 	/**
 	 * Permet de créer un nouveau projet.
@@ -135,10 +143,10 @@ class ProjectManager
 	}
 
 	/**
-	 * undefined
+	 * Permet de vérifier si un utilisateur est déjà présent ou non au sein d'un projet.
 	 * @param  User    $user    Objet contenant les informations de l'utilisateur en cours.
 	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
-	 * @return undefined
+	 * @return int 				Renvoi le nombre de résultat.
 	 */
 	public function verifUserProject(User $user, Project $project)
 	{
@@ -254,6 +262,12 @@ class ProjectManager
 		return $data;
 	}
 
+	/**
+	 * Permet de mettre à jour les droits d'accès à un projet d'un utilisateur.
+	 * @param  Project $project Objet contenant les informations du projet en cours de consultation.
+	 * @param  int     $id_user Identifiant le l'utilisateur.
+	 * @param  int     $access  Nouvel accès à accorder.
+	 */
 	public function editUserAccess(Project $project, $id_user, $access)
 	{
 		$data = App::getDb()->prepare('
@@ -266,6 +280,11 @@ class ProjectManager
 		);
 	}
 
+	/**
+	 * Permet d'obtenir la liste de tous les projets ouverts.
+	 * @param  User    $user  Objet contenant les informations de l'utilisateur en cours.
+	 * @return array          Renvoi un tableau (fetchAll) contenant toutes les informations concernants les projets ouverts (sauf wiki).
+	 */
 	public function getOpenProjects(User $user)
 	{
 		$data = App::getDb()->prepare('
@@ -284,6 +303,12 @@ class ProjectManager
 		return $data;
 	}
 
+	/**
+	 * Permet d'effectuer une recherche sur la liste des projets ouverts.
+	 * @param  User    $user   Objet contenant les informations de l'utilisateur en cours.
+	 * @param  string  $search Chaine de caractère à rechercher comme nom de projet.
+	 * @return array           Renvoi un tableau (fetchAll) contenant toutes les informations concernants les projets ouverts (sauf wiki).
+	 */
 	public function searchOpenProject(User $user, $search)
 	{
 		$data = App::getDb()->prepare('

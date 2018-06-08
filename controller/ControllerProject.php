@@ -2,12 +2,14 @@
 namespace App\controller;
 
 /**
- * Class ControllerProject
  * Controller qui gère les views et les models de la partie projet du site (accueil projet, todolist, wiki et les paramètres du projet).
  */
 class ControllerProject extends Alert
 {
 	
+	/**
+	 * Permet de vérifier si l'utilisateur est bien connecté pour accéder à la partie projet et s'il possède l'autorisation de voir le projet qu'il consulte.
+	 */
 	public function __construct()
 	{
 		// Vérification de la connexion de l'utilisateur
@@ -25,7 +27,7 @@ class ControllerProject extends Alert
 
 	/**
 	 * Instancie l'objet User avec les données de l'utilisateur en cours.
-	 * @return Object User
+	 * @return Object User Retourne l'objet contenant les toutes les données de l'utilisateur en cours. 
 	 */
 	private function initUser()
 	{

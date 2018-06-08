@@ -1,5 +1,5 @@
 <?php 
-	$title        = 'OneToDo | Mentions légales';
+	$title        = 'Mentions légales';
 	$current_url  = './';
 	ob_start();
 ?>

@@ -1,4 +1,10 @@
-# OneToDo - Gérez facilement vos projets !
+﻿# ONETODO - Gérez facilement vos projets !
+
+Documentation technique (models, controllers)
+
+https://rodolphe.cabotiau.com/projet_5_openclassrooms/output/namespaces/App.html
+
+<hr>
 
 Schéma de navigation
 

@@ -8,9 +8,23 @@ namespace App\model;
  */
 class Avatar
 {
+	/**
+	 * Contient l'email de l'utilisateur à transmettre à Gravatar.
+	 * @var string
+	 */
 	private $email;
+
+	/**
+	 * Contient la taille de l'avatar souhaité en pixel.
+	 * @var int
+	 */
 	private $size;
 
+	/**
+	 * Construit l'objet Avatar.
+	 * @param string $email Email de l'utilisateur à transmettre à Gravatar.
+	 * @param int    $size  Taille de l'avatar souhaité en pixel.
+	 */
 	public function __construct($email, $size)
 	{
 		$this->email = $email;

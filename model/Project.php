@@ -2,8 +2,7 @@
 namespace App\model;
 
 /**
- * Class Project
- * 
+ * Constitue l'objet Projet tel qu'il est conçu dans le champ "projet" de la base de données.
  */
 class Project
 {
@@ -16,13 +15,19 @@ class Project
 	private $_description;
 	private $_wiki;
 
-	// Constructeur
+	/**
+	 * Permet d'hydrater l'objet dès sa construction.
+	 * @param object $data Objet contenant certaines informations concernant un projet.
+	 */
 	public function __construct($data)
 	{
 		$this->hydrate($data);
 	}
 
-	// Méthode d'hydratation
+	/**
+	 * Méthode d'hydratation
+	 * @param  objet $data Objet contenant certaines informations concernant un projet.
+	 */
 	public function hydrate($data)
 	{
 		foreach ($data as $key => $value)
@@ -49,12 +54,20 @@ class Project
 	public function description() { return $this->_description; }
 	public function wiki() { 		return $this->_wiki; }
 
-	// Liste des setters
+	// Liste des setters 
+	/**
+	 * Setter : Vérification de l'id du projet.
+	 * @param int $id Identifiant du projet.
+	 */
 	public function setId($id)
 	{
 		$this->_id = (int) $id;
 	}
 
+	/**
+	 * Setter : Vérification du nom du projet.
+	 * @param string $name Nom du projet.
+	 */
 	public function setName($name)
 	{
 		if (is_string($name) && strlen($name) <= 35)
@@ -63,6 +76,10 @@ class Project
 		}
 	}
 
+	/**
+	 * Setter : Vérification du lien du projet.
+	 * @param string $link Lien du projet.
+	 */
 	public function setLink($link)
 	{
 		if (is_string($link))
@@ -71,6 +88,10 @@ class Project
 		}
 	}
 
+	/**
+	 * Setter : Vérification du status du projet (ouvert ou fermé).
+	 * @param int $status Status du projet.
+	 */
 	public function setStatus($status)
 	{
 		if ($status == 0 || $status == 1) 
@@ -79,6 +100,10 @@ class Project
 		}
 	}
 
+	/**
+	 * Setter : Vérification du niveau d'ouverture du projet.
+	 * @param int $open Niveau d'ouverture du projet.
+	 */
 	public function setOpen($open)
 	{
 		if ($open == null || $open == 0 || $open == 1) 
@@ -88,7 +113,8 @@ class Project
 	}
 
 	/**
-	 * Vérification que la couleur ajouté est bien en héxadécimal (#09AAFF)
+	 * Setter : Vérification que la couleur ajouté est bien en héxadécimal (#09AAFF)
+	 * @param string $color Code hexadécimal de la couleur du projet.
 	 */
 	public function setColor($color)
 	{
@@ -98,6 +124,10 @@ class Project
 		}
 	}
 
+	/**
+	 * Setter : Vérification de la description du projet.
+	 * @param string $description Description du projet.
+	 */
 	public function setDescription($description)
 	{
 		if (is_string($description) && strlen($description) <= 180) 
@@ -106,6 +136,10 @@ class Project
 		}
 	}
 
+	/**
+	 * Setter : Vérification du wiki du projet.
+	 * @param string $wiki Wiki du projet.
+	 */
 	public function setWiki($wiki)
 	{
 		if (is_string($wiki)) 

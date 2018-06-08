@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Tous les projets ouverts';
+	$title = 'Tous les projets ouverts';
 	ob_start();
 ?>
 

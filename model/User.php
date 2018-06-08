@@ -2,8 +2,7 @@
 namespace App\model;
 
 /**
- * Class User
- * 
+ * Constitue l'objet User tel qu'il est conçu dans le champ "user" de la base de données.
  */
 class User
 {
@@ -14,13 +13,19 @@ class User
 	private $_confirm_register;
 	private $_token;
 
-	// Constructeur
+	/**
+	 * Permet d'hydrater l'objet dès sa construction.
+	 * @param object $data Objet contenant certaines informations concernant un projet.
+	 */
 	public function __construct($data)
 	{
 		$this->hydrate($data);
 	}
 
-	// Méthode d'hydratation
+	/**
+	 * Méthode d'hydratation
+	 * @param  objet $data Objet contenant certaines informations concernant un projet.
+	 */
 	public function hydrate($data)
 	{
 		foreach ($data as $key => $value)

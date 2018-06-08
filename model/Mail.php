@@ -1,15 +1,48 @@
 <?php 
 namespace App\model;
 
+//Import des classes PHPMailer dans le namespace global.
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 /**
- * Class Mail
  * Permet les envois de mails dans les cas d'inscription et de mot de passe oubliés
  */
 class Mail
 {
+	/**
+	 * Contient l'adresse email de l'utilisateur qui doit recevoir le message à transmettre.
+	 * @var string
+	 */
 	private $email;
-	private $from         = 'rorotestazerty@gmail.com';
-	private $contact_mail = 'rodolphe.cabotiau@gmail.com';
+	
+	/**
+	 * Contient l'adresse mail d'envoi par défaut du site.
+	 * @var string
+	 */
+	private $from      = 'no-reply@cabotiau.com';
+	/**
+	 * Contient le mot de passe de l'adresse mail d'envoi par défaut du site.
+	 * @var string
+	 */
+	private $from_pass = '5uF3zdUradUR';
+
+	/**
+	 * Contient l'adresse mail de contact du site.
+	 * @var string
+	 */
+	private $from_contact      = 'ecrire@cabotiau.com';
+	/**
+	 * Contient le mot de passe de l'adresse mail de contact du site.
+	 * @var string
+	 */
+	private $from_contact_pass = 'VbZWgSa7bHc7';
+
+	/**
+	 * Contient l'adresse mail du webmaster du site.
+	 * @var string
+	 */
+	private $webmaster_mail = 'rodolphe.cabotiau@gmail.com';
 
 	/**
 	 * Transmet les variables passé en argument aux attributs de la classe
@@ -20,7 +53,6 @@ class Mail
 		$this->email = $email;
 	}
 
-	//A modifier lors de la mise en ligne (adresse from et lien du mail)
 	/**
 	 * Permet l'envoi d'un mail à l'utilisateur pour qu'il puisse activer son compte
 	 * @param  string $email 	Nom d'utilisateur
@@ -29,12 +61,6 @@ class Mail
 	public function send_register_mail($username, $key)
 	{
 		$subject = "ONETODO | Confirmation d'inscription";
-
-		$headers = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'From: ONETODO ' . $this->from . "\r\n";
-		$headers .= 'Reply-To: ' . $this->from . "\r\n";
-		$headers .= 'Content-type:text/html;charset=UTF-8' . "\r\n";
-		$headers .= 'X-Mailer: PHP/' . phpversion();
 
 		$message = "
 		<html>
@@ -52,7 +78,7 @@ class Mail
 		</html>
 		";
 		
-		mail($this->email, $subject, $message, $headers);
+		$this->configurationMail($subject, $message, $this->from, $this->from_pass, $this->email);
 	}
 
 	/**
@@ -63,12 +89,6 @@ class Mail
 	public function send_forgot_pass_mail($username, $key)
 	{
 		$subject = "ONETODO | Réinitialisation du mot de passe";
-
-		$headers = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'From: ONETODO ' . $this->from . "\r\n";
-		$headers .= 'Reply-To: ' . $this->from . "\r\n";
-		$headers .= 'Content-type:text/html;charset=UTF-8' . "\r\n";
-		$headers .= 'X-Mailer: PHP/' . phpversion();
 
 		$message = "
 		<html>
@@ -85,19 +105,17 @@ class Mail
 		</html>
 		";
 		
-		mail($this->email, $subject, $message, $headers);
+		$this->configurationMail($subject, $message, $this->from, $this->from_pass, $this->email);
 	}
 
-	
+	/**
+	 * Permet l'envoi d'un mail de contact contenant le mail, le sujet et le message d'un utilisateur à transmettre au webmaster.
+	 * @param  string $title   Sujet du mail à envoyer.
+	 * @param  string $content Contenu du mail à envoyer.
+	 */
 	public function send_contact_mail($title, $content)
 	{
 		$subject = "Contact ONETODO | " . $title;
-
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'From: Contact ONETODO ' . $this->from . "\r\n";
-		$headers .= 'Reply-To: ' . $this->from . "\r\n";
-		$headers .= 'Content-type:text/html;charset=UTF-8' . "\r\n";
-		$headers .= 'X-Mailer: PHP/' . phpversion();
 
 		$message = "
 		<html>
@@ -115,28 +133,27 @@ class Mail
 			</body>
 		</html>
 		";
-
-		mail($this->contact_mail, $subject, $message, $headers);
+	
+		$this->configurationMail($subject, $message, $this->from_contact, $this->from_contact_pass, $this->webmaster_mail);
 	}
 
-	// todo :Adresse du lien à modifier lors de la mise en ligne
+	/**
+	 * Permet l'envoi d'un mail à un utilisateur pas encore inscript sur le site et dont le mail a été indiqué par le fondateur d'un projet.
+	 * @param  string $username Nom d'utilisateur du fondateur du projet qui souhaite inviter le destinataire du mail.
+	 * @param  string $project  Nom du projet dans lequel le destinataire est invité.
+	 * @param  int    $access   Accès auquel le fondateur du projet a invité le destinataire du mail (contributeur ou observateur).
+	 */
 	public function send_user_project_mail($username, $project, $access)
 	{
 		$subject = 'ONETODO | Invitation au projet "' . $project . '"';
 
-		$headers = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'From: ONETODO ' . $this->from . "\r\n";
-		$headers .= 'Reply-To: ' . $this->from . "\r\n";
-		$headers .= 'Content-type:text/html;charset=UTF-8' . "\r\n";
-		$headers .= 'X-Mailer: PHP/' . phpversion();
-
 		if ($access == 2) 
 		{
-			$access = "que contributeur <small>(participez activement au projet)</small> !</p>";
+			$access = "que contributeur <small>(pour participer activement au projet)</small> !</p>";
 		} 
 		else
 		{
-			$access = "qu'observateur <small>(consultez les avancées du projet)</small> !</p>";
+			$access = "qu'observateur <small>(pour consulter les avancées du projet)</small> !</p>";
 		}
 
 		$message = '
@@ -158,6 +175,60 @@ class Mail
 		</html>
 		';
 		
-		mail($this->email, $subject, $message, $headers);
+		$this->configurationMail($subject, $message, $this->from, $this->from_pass, $this->email);
+	}
+
+	/**
+	 * Méthode utilisant PHPMailer permettant l'envoi de mail.
+	 * @param  string $subject   Sujet du mail à envoyer.
+	 * @param  string $message   Message du mail à envoyer.
+	 * @param  string $from      Adresse de l'envoyeur du mail.
+	 * @param  string $pass      Mot de passe de l'adresse mail de l'envoyeur.
+	 * @param  string $recipient Adresse mail du destinataire du mail.
+	 */
+	private function configurationMail($subject, $message, $from, $pass, $recipient)
+	{
+	
+		//Load Composer's autoloader
+		require 'vendor/autoload.php';
+
+		try {
+			$mail = new PHPMailer(true);
+
+		    //Server settings
+		    // $mail->SMTPDebug = 2;
+		    $mail->isSMTP();
+			$mail->Host       = 'smtp.phpnet.org';
+			$mail->SMTPSecure = 'ssl';
+			$mail->SMTPAuth   = true;
+			$mail->Port       = 465;
+
+			$mail->SMTPOptions = array(
+                'ssl' => array(
+					'verify_peer'       => false,
+					'verify_peer_name'  => false,
+					'allow_self_signed' => true
+                )
+            );
+
+			$mail->Username   = $from;
+			$mail->Password   = $pass;
+
+		    //Recipients
+		    $mail->setFrom($from, 'ONETODO');
+		    $mail->addAddress($recipient);
+
+		    //Content
+		    $mail->CharSet = 'UTF-8';
+		    $mail->isHTML(true);
+		    $mail->Subject = $subject;
+		    $mail->Body    = $message;
+
+		    $mail->Send();
+		} 
+		catch (Exception $e) 
+		{
+		    echo 'Le message n\'a pas pu être envoyé. Erreur: ', $mail->ErrorInfo;
+		}
 	}
 }

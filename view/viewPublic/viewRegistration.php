@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Inscription';
+	$title = 'Inscription';
 	ob_start();
 ?>
 	</header>

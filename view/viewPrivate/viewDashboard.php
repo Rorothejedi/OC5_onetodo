@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Tableau de bord';
+	$title = 'Tableau de bord';
 	ob_start();
 
 	$myProjectContent         = false;

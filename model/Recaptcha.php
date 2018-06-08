@@ -2,7 +2,6 @@
 namespace App\model;
 
 /**
- * Class Recaptcha
  * Permet l'envoi et la récupération des données permettant de vérifier qu'un utilisateur est bien humain pour éviter tout risque de spam par un robot. 
  */
 class Recaptcha

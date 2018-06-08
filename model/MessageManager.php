@@ -2,8 +2,7 @@
 namespace App\model;
 
 /**
- * Class MessageManager
- * Gére toutes les requêtes relative à la messagerie, au messages et aux conversation.
+ * Gére toutes les requêtes relatives à la messagerie, aux messages et aux conversations.
  */
 class MessageManager
 {
@@ -248,7 +247,7 @@ class MessageManager
 	}
 
 	/**
-	 * Enleve l'utilisateur en cours de la conversation sélectionné.
+	 * Enlève l'utilisateur en cours de la conversation sélectionnée.
 	 * @param  int    $id_conversation Identifiant de la conversation auquelle l'accès à l'utilisateur doit être supprimé.
 	 * @param  User   $user            Objet User désignant l'utilisateur en cours nécessaire pour récupérer l'identifiant de celui-ci.
 	 */

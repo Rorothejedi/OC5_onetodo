@@ -4,9 +4,9 @@ OneTodo - Gérez vos projets en toute simplicité !
 
 Réalisé par Rodolphe Cabotiau
 Date de début de projet : 09/05/2018
-Date d'achèvement V1.0: ../06/2018
+Date d'achèvement V1.0: 08/06/2018
 
-Dernière mise à jour : 07/06/2018 
+Dernière mise à jour : 08/06/2018 
 
 -->
 
@@ -18,14 +18,14 @@ Dernière mise à jour : 07/06/2018
 <html lang="fr">
 
 <head>
-	<title><?= $title ?></title>
+	<title>ONETODO | <?= $title ?></title>
 	<?= $meta ?>
 
   	<!-- Tags Open Graph -->
 	<meta property="og:title" content="<?= $title ?>">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="<?= $urlAdress ?>">
-	<meta property="og:image" content="<?= $urlAdress ?>img/imgOpenGraph.jpg">
+	<meta property="og:image" content="<?= $urlAdress ?>/public/img/imgOpenGraph.jpg">
 	<meta property="og:description" content="<?= $catchword ?>"/>
 	<meta property="og:locale" content="fr_FR" />
 
@@ -35,23 +35,21 @@ Dernière mise à jour : 07/06/2018
 	<meta name="twitter:title" content="<?= $title ?>">
 	<meta name="twitter:description" content="<?= $catchword ?>">
 	<meta name="twitter:creator" content="<?= $twitterTag ?>">
-	<meta name="twitter:image" content="<?= $urlAdress ?>img/imgTwitterCard.jpg">
+	<meta name="twitter:image" content="<?= $urlAdress ?>/public/img/imgTwitterCard.jpg">
 
 	<!-- Tags Google -->
 	<meta name="description" content="<?= $title ?>">
 	<meta name="keywords" content="<?= $keywords ?>">
 
-	<!-- CSS Bootstrap / Icons FontAwesome / Google Fonts / Stylesheet / Favicon -->
+	<!-- CSS Bootstrap / Icons FontAwesome / Google Fonts / Stylesheet / Favicon / reCaptcha V2-->
 	<?php 
 		echo $linkBootstrapCSS; 
 		echo $linkGoogleFont;
 		echo $stylesheet;
 		echo $favicon;
 		echo $linkGoogleFont;
+		echo $reCaptcha;
 	?>
-
-	<!-- Intégration ReCaptcha V2 -->
-	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -93,7 +91,7 @@ Dernière mise à jour : 07/06/2018
 					<a class="text-right" href="mentions_legales">Mentions légales</a>
 				</div>
 				<div class="d-flex align-items-center">
-					<a class="text-center" href="https://www.linkedin.com/in/rodolphe-cabotiau-234824132/">Made with <i class="fas fa-heart fa-xs"></i></a>
+					<a class="text-center" href="https://www.linkedin.com/in/rodolphe-cabotiau-234824132/" target="_blank">Made with <i class="fas fa-heart fa-xs"></i></a>
 				</div>
 			</div>
 		</div>

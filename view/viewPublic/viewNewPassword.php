@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Nouveau mot de passe';
+	$title = 'Nouveau mot de passe';
 	ob_start();
 ?>
 	</header>

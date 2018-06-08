@@ -1,5 +1,5 @@
 <?php 
-	$title = 'OneToDo | Wiki projet';
+	$title = 'Wiki projet';
 	ob_start();
 	require('projectNavbar.php');
 ?>
