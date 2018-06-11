@@ -1,6 +1,5 @@
 <?php
 namespace App\model;
-
 /**
  * Permet l'envoi et la récupération des données permettant de vérifier qu'un utilisateur est bien humain pour éviter tout risque de spam par un robot. 
  */
@@ -11,13 +10,10 @@ class Recaptcha
 	 * @var string
 	 */
 	private $secret;
-
-
 	function __construct($secret)
 	{
 		$this->secret = $secret;
 	}
-
 	/**
 	 * Soumet l'url contenant la clé secrète ainsi que la réponse de Google.
 	 * @param  string $code Contient la valeur du POST avec la réponse de Google sur lavalidité du captcha.
@@ -29,9 +25,7 @@ class Recaptcha
 		{
 			return false;
 		}
-
 		$url = "https://www.google.com/recaptcha/api/siteverify?secret=" . $this->secret . "&response=" . $code;
-
 		if (function_exists('curl_version')) 
 		{
 			$curl = curl_init($url);
@@ -45,12 +39,10 @@ class Recaptcha
 		{
 			$response = file_get_contents($url);
 		}
-
 		if (empty($response) || is_null($response))
 		{
 			return false;
 		}
-
 		$json = json_decode($response);
 		return $json->success;
 	}

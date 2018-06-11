@@ -105,7 +105,9 @@ class ControllerPublic extends Alert
 			$subject = htmlspecialchars($_POST['subject']);
 			$message = htmlspecialchars($_POST['message']);
 
-			$captcha = new \App\model\Recaptcha('6Le4tVoUAAAAAFRSaFMwnF-GjrPktffvmJnIwNlz');
+			$secret = 'Clé secrète de google';
+
+			$captcha = new \App\model\Recaptcha($secret);
 
 			if($captcha->checkCode($_POST['g-recaptcha-response']) === true) 
 			{
