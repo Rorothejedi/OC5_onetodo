@@ -2,7 +2,7 @@
 
 Documentation technique (models, controllers)
 
-https://rodolphe.cabotiau.com/projet_5_openclassrooms/output/namespaces/App.html
+https://oc5.rodolphe-cabotiau.com/output/namespaces/App.html
 
 <hr>
 
